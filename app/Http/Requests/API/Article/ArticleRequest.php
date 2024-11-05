@@ -3,6 +3,7 @@
 namespace App\Http\Requests\API\Article;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\MinWords;
 
 class ArticleRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title' => 'required|string|min:3|max:100',
-            'content' => 'required|string|min:10',
+            'content' => ['required', 'string', new MinWords(400)],
             'author_id' => 'required|numeric|exists:authors,id',
             'category_id' => 'required|numeric|exists:categories,id',
         ];
