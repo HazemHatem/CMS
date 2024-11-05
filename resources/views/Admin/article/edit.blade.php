@@ -1,0 +1,75 @@
+@extends('Admin.app')
+
+@section('title' , $article->title)
+
+@section('content')
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Article</h3>
+                    </div>
+                    <form action="{{ route('Admin.article.update', $article->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ $article->title }}" placeholder="Enter title">
+                                @error('title')
+                                <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Content</label>
+                                <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" placeholder="Enter content">{{ $article->content }}</textarea>
+                                @error('content')
+                                <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
+                                    <option value="draft" {{ $article->status == 'draft' ? 'selected' : '' }}>Draft</option>
+                                    <option value="published" {{ $article->status == 'published' ? 'selected' : '' }}>Published</option>
+                                    <option value="unpublished" {{ $article->status == 'unpublished' ? 'selected' : '' }}>Unpublished</option>
+                                </select>
+                                @error('status')
+                                <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="category_id">Category</label>
+                                <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" id="category_id">
+                                    @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" {{ $article->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="author_id">Author</label>
+                                <select name="author_id" class="form-control @error('author_id') is-invalid @enderror" id="author_id">
+                                    @foreach ($authors as $author)
+                                    <option value="{{ $author->id }}" {{ $article->author_id == $author->id ? 'selected' : '' }}>{{ $author->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('author_id')
+                                <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
