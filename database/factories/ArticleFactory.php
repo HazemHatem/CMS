@@ -20,7 +20,7 @@ class ArticleFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
-            'content' => fake()->paragraphs(2, true),
+            'content' => fake()->paragraphs(20, true),
             'category_id' => Category::inRandomOrder()->first()->id,
             'author_id' => Author::inRandomOrder()->first()->id,
             'status' => fake()->randomElement(['draft', 'published', 'unpublished']),
