@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Author\AuthorController;
 use App\Http\Controllers\Admin\Article\ArticleController;
+use App\Http\Controllers\Admin\Comment\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::prefix('Admin')->as('Admin.')->group(function () {
         Route::resource('category', CategoryController::class);
         Route::resource('author', AuthorController::class);
         Route::resource('article', ArticleController::class);
+        Route::resource('comment', CommentController::class);
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::resource('user', UserController::class);
         Route::resource('admin', AdminController::class);
