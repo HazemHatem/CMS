@@ -12,12 +12,21 @@
                     <div class="card-header">
                         <h3 class="card-title">Author Details</h3>
                     </div>
+                    <div class="card-header">
+                        <div class="image float-right">
+                            <img class="profile-user-img img-fluid img-circle" src="{{ FileHelper::userimage($author->image) }}" alt="{{ $author->name }}">
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
                                     <th style="width: 10px">Name</th>
                                     <td>{{ $author->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>{{ $author->description }}</td>
                                 </tr>
                                 <tr>
                                     <th>Created At</th>

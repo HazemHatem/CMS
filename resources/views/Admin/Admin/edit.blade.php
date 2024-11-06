@@ -49,18 +49,17 @@
                             <span class="alert alert-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="role_id" value="4" id="flexCheckDefault" @if($admin->role->name == 'manager') checked @endif>
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Manager
-                        </label>
-                        @error('role_id')
-                        <span class="alert alert-danger">{{ $message }}</span>
-                        @enderror
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="role_id" value="4" id="flexCheckDefault" @if($admin->role->name == 'manager') checked @endif>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Manager
+                            </label>
+                            @error('role_id')
+                            <span class="alert alert-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-
                     <div class="box-footer mt-3">
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>

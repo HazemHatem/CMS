@@ -23,6 +23,8 @@ class AuthorRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:100',
+            'description' => 'required|string|min:10',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }
 }

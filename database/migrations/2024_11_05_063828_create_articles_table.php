@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', ['draft', 'published', 'unpublished'])->default('draft');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('author_id')->constrained('authors')->cascadeOnDelete();
+            $table->string('image')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->onUpdate('current_timestamp()');
         });

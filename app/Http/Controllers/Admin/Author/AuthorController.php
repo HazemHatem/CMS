@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Author;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Http\Requests\Admin\Author\AuthorRequest;
+use Illuminate\Support\Facades\Storage;
 
 class AuthorController extends Controller
 {
@@ -30,7 +31,11 @@ class AuthorController extends Controller
      */
     public function store(AuthorRequest $request)
     {
-        Author::create($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('authors/', 'public');
+        }
+        Author::create($data);
         return redirect()->route('Admin.author.index')->with('success', 'Author created successfully');
     }
 
@@ -55,7 +60,12 @@ class AuthorController extends Controller
      */
     public function update(AuthorRequest $request, Author $author)
     {
-        $author->update($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $this->deleteAuthorImage($author);
+            $data['image'] = $request->file('image')->store('authors/', 'public');
+        }
+        $author->update($data);
         return redirect()->route('Admin.author.index')->with('success', 'Author updated successfully');
     }
 
@@ -66,5 +76,12 @@ class AuthorController extends Controller
     {
         $author->delete();
         return redirect()->route('Admin.author.index')->with('success', 'Author deleted successfully');
+    }
+
+    protected function deleteAuthorImage(Author $author)
+    {
+        if ($author->image) {
+            Storage::disk('public')->delete($author->image);
+        }
     }
 }

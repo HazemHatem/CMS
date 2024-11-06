@@ -17,6 +17,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -25,6 +27,10 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $author->name }}</td>
+                                    <td>{{ $author->description }}</td>
+                                    <td>
+                                        <img class="profile-user-img img-fluid img-circle" src="{{ FileHelper::userimage($author->image) }}" alt="{{ $author->name }}">
+                                    </td>
                                     <td>
                                         <a href="{{ route('Admin.author.show' , $author->id) }}" class="btn btn-info"><i class="fas fa-eye"></i> Show</a>
                                         <a href="{{ route('Admin.author.edit' , $author->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>

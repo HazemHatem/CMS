@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Http\Requests\API\Article\ArticleRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -26,7 +27,11 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request): JsonResponse
     {
-        $article = Article::create($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('articles/', 'public');
+        }
+        $article = Article::create($data);
         return response()->json([
             'success' => true,
             'message' => 'Article created successfully',
@@ -47,7 +52,12 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article): JsonResponse
     {
-        $article->update($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $this->deleteArticleImage($article);
+            $data['image'] = $request->file('image')->store('articles/', 'public');
+        }
+        $article->update($data);
         return response()->json([
             'success' => true,
             'message' => 'Article updated successfully',
@@ -65,5 +75,12 @@ class ArticleController extends Controller
             'success' => true,
             'message' => 'Article deleted successfully'
         ]);
+    }
+
+    private function deleteArticleImage(Article $article): void
+    {
+        if ($article->image) {
+            Storage::disk('public')->delete($article->image);
+        }
     }
 }

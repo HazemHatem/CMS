@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\Admin\Category\CategoryRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -31,7 +31,11 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        Category::create($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('categories/', 'public');
+        }
+        Category::create($data);
         return redirect()->route('Admin.category.index')->with('success', 'Category created successfully');
     }
 
@@ -56,7 +60,12 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $this->deleteCategoryImage($category);
+            $data['image'] = $request->file('image')->store('categories/', 'public');
+        }
+        $category->update($data);
         return redirect()->route('Admin.category.index')->with('success', 'Category updated successfully');
     }
 
@@ -67,5 +76,12 @@ class CategoryController extends Controller
     {
         $category->delete();
         return redirect()->route('Admin.category.index')->with('success', 'Category deleted successfully');
+    }
+
+    public function deleteCategoryImage(Category $category)
+    {
+        if ($category->image) {
+            Storage::disk('public')->delete($category->image);
+        }
     }
 }
