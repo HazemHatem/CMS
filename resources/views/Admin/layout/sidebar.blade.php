@@ -100,6 +100,30 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">COMMENTS</li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link {{request()->routeIs('Admin.comment.*') ? 'active' : ''}}">
+                        <i class="fa-solid fa-comments"></i>
+                        <p>
+                            Comments
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('Admin.comment.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>All Comments</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('Admin.comment.create')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create Comment</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-header">USERS</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link {{request()->routeIs('Admin.user.*') ? 'active' : ''}}">

@@ -24,7 +24,6 @@ class ProfileController extends Controller
     }
 
 
-
     /**
      * Update the specified user's profile.
      *

@@ -19,10 +19,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::whereIn('role_id', [3, 4])
-            ->orderBy('updated_at', 'desc')
+        $admins = User::whereIn('role_id', [3, 4])
+            ->latest('updated_at')
             ->paginate(10);
-        $admins = $users;
         return view('Admin.Admin.index', compact('admins'));
     }
 
