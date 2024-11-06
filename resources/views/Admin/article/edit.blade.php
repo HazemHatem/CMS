@@ -16,6 +16,18 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="exampleInputFile">Image</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror" id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile">Update image</label>
+                                    </div>
+                                </div>
+                                @error('image')
+                                <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ $article->title }}" placeholder="Enter title">
                                 @error('title')

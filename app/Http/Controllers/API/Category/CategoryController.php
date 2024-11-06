@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\API\Category\CategoryRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,11 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request): JsonResponse
     {
-        $category = Category::create($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('categories/', 'public');
+        }
+        $category = Category::create($data);
         return response()->json([
             'success' => true,
             'message' => 'Category created successfully',
@@ -50,7 +55,12 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category): JsonResponse
     {
-        $category->update($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $category->deleteCategoryImage();
+            $data['image'] = $request->file('image')->store('categories/', 'public');
+        }
+        $category->update($data);
         return response()->json([
             'success' => true,
             'message' => 'Category updated successfully',
@@ -68,5 +78,12 @@ class CategoryController extends Controller
             'success' => true,
             'message' => 'Category deleted successfully'
         ]);
+    }
+
+    public function deleteCategoryImage(Category $category)
+    {
+        if ($category->image) {
+            Storage::disk('public')->delete($category->image);
+        }
     }
 }

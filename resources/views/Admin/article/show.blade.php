@@ -12,6 +12,11 @@
                     <div class="card-header">
                         <h3 class="card-title">Article Details</h3>
                     </div>
+                    <div class="card-header">
+                        <div class="image float-right">
+                            <img class="profile-user-img img-fluid img-circle" src="{{ FileHelper::userimage($article->image) }}" alt="{{ $article->name }}">
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <tbody>

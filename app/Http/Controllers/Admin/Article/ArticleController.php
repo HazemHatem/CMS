@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Article\ArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Author;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -34,7 +35,11 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        Article::create($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('articles/', 'public');
+        }
+        Article::create($data);
         return redirect()->route('Admin.article.index')->with('success', 'Article created successfully');
     }
 
@@ -61,7 +66,12 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article)
     {
-        $article->update($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $this->deleteArticleImage($article);
+            $data['image'] = $request->file('image')->store('articles/', 'public');
+        }
+        $article->update($data);
         return redirect()->route('Admin.article.index')->with('success', 'Article updated successfully');
     }
 
@@ -72,5 +82,12 @@ class ArticleController extends Controller
     {
         $article->delete();
         return redirect()->route('Admin.article.index')->with('success', 'Article deleted successfully');
+    }
+
+    protected function deleteArticleImage(Article $article)
+    {
+        if ($article->image) {
+            Storage::disk('public')->delete($article->image);
+        }
     }
 }

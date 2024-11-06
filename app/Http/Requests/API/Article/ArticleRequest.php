@@ -27,6 +27,7 @@ class ArticleRequest extends FormRequest
             'content' => ['required', 'string', new MinWords(400)],
             'author_id' => 'required|numeric|exists:authors,id',
             'category_id' => 'required|numeric|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }
 }

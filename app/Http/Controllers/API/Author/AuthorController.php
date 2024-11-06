@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Http\Requests\API\Author\AuthorRequest;
+use Illuminate\Support\Facades\Storage;
 
 class AuthorController extends Controller
 {
@@ -26,7 +27,11 @@ class AuthorController extends Controller
      */
     public function store(AuthorRequest $request): JsonResponse
     {
-        $author = Author::create($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('authors/', 'public');
+        }
+        $author = Author::create($data);
         return response()->json([
             'success' => true,
             'message' => 'Author created successfully',
@@ -50,7 +55,12 @@ class AuthorController extends Controller
      */
     public function update(AuthorRequest $request, Author $author): JsonResponse
     {
-        $author->update($request->validated());
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $this->deleteAuthorImage($author);
+            $data['image'] = $request->file('image')->store('authors/', 'public');
+        }
+        $author->update($data);
         return response()->json([
             'success' => true,
             'message' => 'Author updated successfully',
@@ -68,5 +78,12 @@ class AuthorController extends Controller
             'success' => true,
             'message' => 'Author deleted successfully'
         ]);
+    }
+
+    private function deleteAuthorImage(Author $author): void
+    {
+        if ($author->image) {
+            Storage::disk('public')->delete($author->image);
+        }
     }
 }
