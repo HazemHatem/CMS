@@ -37,6 +37,10 @@
                                     <td>{{ $article->status }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Views</th>
+                                    <td>{{ $article->views }}</td>
+                                </tr>
+                                <tr>
                                     <th>Content</th>
                                     <td>{{ $article->content }}</td>
                                 </tr>

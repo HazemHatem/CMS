@@ -44,6 +44,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article): JsonResponse
     {
+        $article->incrementViews();
         return response()->json($article);
     }
 

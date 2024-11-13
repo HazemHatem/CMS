@@ -48,6 +48,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        $article->incrementViews();
         return view('Admin.article.show', compact('article'));
     }
 
