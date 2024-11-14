@@ -24,6 +24,7 @@ class ArticleFactory extends Factory
             'category_id' => Category::inRandomOrder()->first()->id,
             'author_id' => Author::inRandomOrder()->first()->id,
             'status' => fake()->randomElement(['draft', 'published', 'unpublished']),
+            'views' => fake()->randomNumber(5),
         ];
     }
 }

@@ -14,6 +14,7 @@ class Article extends Model
         'content',
         'status',
         'image',
+        'views',
         'category_id',
         'author_id',
     ];
@@ -31,5 +32,10 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function incrementViews()
+    {
+        $this->increment('views');
     }
 }
