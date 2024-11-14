@@ -33,6 +33,6 @@ class RegisterController extends Controller
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
         Auth::login(User::create($data));
-        return redirect()->route('home.index')->with('success', 'Account created successfully');
+        return redirect()->route('home')->with('success', 'Account created successfully');
     }
 }

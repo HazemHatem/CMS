@@ -5,7 +5,7 @@ namespace App\Http\Controllers\site\category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoriesControllerSite extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -13,6 +13,5 @@ class CategoriesControllerSite extends Controller
     public function __invoke(Request $request)
     {
         return view('web.site.pages.categories.index');
-
     }
 }

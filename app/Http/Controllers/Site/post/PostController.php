@@ -5,7 +5,7 @@ namespace App\Http\Controllers\site\post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PostControllerSite extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,6 @@ class PostControllerSite extends Controller
     public function index()
     {
         return view('web.site.pages.post.index');
-
     }
 
     /**
