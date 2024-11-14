@@ -5,7 +5,7 @@ namespace App\Http\Controllers\site\home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HomeControllerSite extends Controller
+class HomeController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -13,6 +13,5 @@ class HomeControllerSite extends Controller
     public function __invoke()
     {
         return view('web.site.pages.home.index');
-  
     }
 }
