@@ -1,6 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\site\category\CategoriesControllerSite;
+use App\Http\Controllers\site\contact\ControllerControllerSite;
+  use App\Http\Controllers\site\home\HomeControllerSite;
+  use App\Http\Controllers\site\post\PostControllerSite;
+  use App\Models\Author;
+  use App\Models\User;
+  use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home.index');
+
+Route::prefix('CMS')->group(function () {
+ 
+    Route::get('/home', HomeControllerSite::class)->name('home');
+    Route::get('/categories',  CategoriesControllerSite::class)->name('categories');
+    Route::resource('/post', PostControllerSite::class);
+    Route::resource('/contact',  ControllerControllerSite::class);
+    // Route::resource('/login',  LoginControllerSite::class);
+
+
+  });
+
+ 

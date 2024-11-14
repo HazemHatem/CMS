@@ -19,7 +19,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('home.index') }}">{{ env('APP_NAME') }}</a>
+            <a href="{{ route('home') }}">{{ env('APP_NAME') }}</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">

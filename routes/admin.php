@@ -40,6 +40,10 @@ Route::prefix('Admin')->as('Admin.')->group(function () {
         Route::resource('admin', AdminController::class);
         Route::get('/contact', ContactController::class)->name('contact');
         Route::resource('profile', ProfileController::class);
-        Route::patch('/profile/{profile}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
+        Route::patch('/profile/{profile}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');   
     });
+   
 });
+
+
+
