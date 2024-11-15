@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\Admin\Category\CategoryRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\Search\SearchRequest;
 
 class CategoryController extends Controller
 {
@@ -76,6 +77,14 @@ class CategoryController extends Controller
     {
         $category->delete();
         return redirect()->route('Admin.category.index')->with('success', 'Category deleted successfully');
+    }
+
+
+    public function search(SearchRequest $request)
+    {
+        $search = $request->validated()['search'];
+        $categories = Category::where('name', 'like', '%' . $search . '%')->latest('updated_at')->paginate(10);
+        return view('Admin.Category.index', compact('categories'));
     }
 
     public function deleteCategoryImage(Category $category)

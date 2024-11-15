@@ -24,7 +24,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title' => 'required|string|min:3|max:100',
-            'content' => ['required', 'string', new MinWords(400)],
+            'content' => ['required', 'string', new MinWords(200)],
             'author_id' => 'required|numeric|exists:authors,id',
             'category_id' => 'required|numeric|exists:categories,id',
             'status' => 'required|string|in:published,unpublished,draft',

@@ -10,6 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Users</h3>
+                    @include('Admin.layout.forms.search', ['url' => route('Admin.user.search')])
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
@@ -45,11 +46,7 @@
                         </tbody>
                     </table>
                 </div>
-                @if ( $users->hasPages() )
-                <div class="card-footer">
-                    {{ $users->links() }}
-                </div>
-                @endif
+                @include('Admin.layout.pagination.pagination' , ['data' => $users])
             </div>
         </div>
     </div>
@@ -57,10 +54,5 @@
 @endsection
 
 @push('before-scripts')
-<script>
-    var success = "{{ session('success') }}";
-    if (success) {
-        alert(success);
-    }
-</script>
+@include('Admin.layout.message.success')
 @endpush

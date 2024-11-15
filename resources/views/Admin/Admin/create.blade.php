@@ -17,39 +17,29 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}" placeholder="Enter name">
-                                @error('name')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'name'])
                             </div>
                             <div class="form-group">
                                 <label for="email">Email address</label>
                                 <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}" placeholder="Enter email">
-                                @error('email')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'email'])
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
                                 <input type="text" name="phone" class="form-control" id="phone" value="{{ old('phone') }}" placeholder="Enter phone">
-                                @error('phone')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'phone'])
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}" placeholder="Password">
-                                @error('password')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'password'])
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="role_id" value="4" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Manager
                                 </label>
-                                @error('role_id')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'role_id'])
                             </div>
                         </div>
                         <div class="card-footer">

@@ -17,9 +17,7 @@
                             <div class="form-group">
                                 <label for="content">Content</label>
                                 <input type="text" name="content" class="form-control @error('content') is-invalid @enderror" id="content" value="{{ old('content') }}" placeholder="Enter content">
-                                @error('content')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'content'])
                             </div>
                             <div class="form-group">
                                 <label for="article_id">Article</label>
@@ -28,9 +26,7 @@
                                     <option value="{{ $article->id }}">{{ $article->title }}</option>
                                     @endforeach
                                 </select>
-                                @error('article_id')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'article_id'])
                             </div>
                             <div class="form-group">
                                 <label for="user_id">User</label>
@@ -39,9 +35,7 @@
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('user_id')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'user_id'])
                             </div>
                         </div>
                         <div class="card-footer">

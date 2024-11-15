@@ -10,6 +10,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Messages</h3>
+                        @include('Admin.layout.forms.search', ['url' => route('Admin.contact.search')])
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -37,11 +38,7 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ( $contacts->hasPages() )
-                    <div class="card-footer">
-                        {{ $contacts->links() }}
-                    </div>
-                    @endif
+                    @include('Admin.layout.pagination.pagination' , ['data' => $contacts])
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Http\Requests\Admin\Author\AuthorRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\Search\SearchRequest;
 
 class AuthorController extends Controller
 {
@@ -76,6 +77,13 @@ class AuthorController extends Controller
     {
         $author->delete();
         return redirect()->route('Admin.author.index')->with('success', 'Author deleted successfully');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $search = $request->validated()['search'];
+        $authors = Author::where('name', 'like', '%' . $search . '%')->latest('updated_at')->paginate(12);
+        return view('Admin.author.index', compact('authors'));
     }
 
     protected function deleteAuthorImage(Author $author)

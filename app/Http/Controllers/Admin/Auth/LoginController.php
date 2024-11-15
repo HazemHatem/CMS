@@ -33,13 +33,16 @@ class LoginController extends Controller
      */
     public function authenticate(LoginRequest $request)
     {
-        $credentials = $request->validated();
-        if (Auth::guard()->attempt($credentials)) {
+        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember');
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
             if (Gate::allows('admin') || Gate::allows('manager')) {
                 return redirect()->intended('/Admin');
             }
             Auth::guard()->logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
             return back()->withErrors([
                 'email' => 'You do not have permission to access this section.',
             ])->onlyInput('email');

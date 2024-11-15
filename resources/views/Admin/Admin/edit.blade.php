@@ -16,25 +16,19 @@
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ $admin->name }}" placeholder="Enter name">
-                            @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            @include('Admin.layout.message.erorr', ['name' => 'name'])
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}" placeholder="Enter email">
-                            @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            @include('Admin.layout.message.erorr', ['name' => 'email'])
                         </div>
 
                         <div class="form-group">
                             <label for="phone">Phone</label>
                             <input type="text" class="form-control" id="phone" name="phone" value="{{ $admin->phone }}" placeholder="Enter phone">
-                            @error('phone')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            @include('Admin.layout.message.erorr', ['name' => 'phone'])
                         </div>
 
                         <div class="form-group">
@@ -45,9 +39,7 @@
                                     <label class="custom-file-label" for="exampleInputFile">Update image</label>
                                 </div>
                             </div>
-                            @error('image')
-                            <span class="alert alert-danger">{{ $message }}</span>
-                            @enderror
+                            @include('Admin.layout.message.error', ['name' => 'image'])
                         </div>
 
                         <div class="form-check">
@@ -55,9 +47,7 @@
                             <label class="form-check-label" for="flexCheckDefault">
                                 Manager
                             </label>
-                            @error('role_id')
-                            <span class="alert alert-danger">{{ $message }}</span>
-                            @enderror
+                            @include('Admin.layout.message.erorr', ['name' => 'role_id'])
                         </div>
                     </div>
                     <div class="box-footer mt-3">
