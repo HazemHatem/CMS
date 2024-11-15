@@ -13,10 +13,22 @@
       <a class="nav-link" href="{{route("categories")}}">Categories</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{route('login')}}">About-us</a>
-    </li>
-    <li class="nav-item">
       <a class="nav-link" href="{{route('contact.index')}}">Contact-us</a>
+    </li>
+   
+    <li class="nav-item">
+      
+@if (Auth::check())
+<form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit" class="nav-link">Logout</button>
+</form>
+@else
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('login.index') }}">Login</a>
+    </li>
+@endif
+
     </li>
  
   </ul>

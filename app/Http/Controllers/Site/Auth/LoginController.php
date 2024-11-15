@@ -15,9 +15,9 @@ class LoginController extends Controller
      * @return \Illuminate\Contracts\View\View
      */
 
-    public function index()
+    public function login()
     {
-        return view('site.auth.login');
+        return view('web.site.pages.auth.login');
     }
 
 
@@ -31,13 +31,13 @@ class LoginController extends Controller
      * If successful, it regenerates the session and redirects the user to their intended destination.
      * If the authentication fails, it redirects back with an error message, retaining the email input.
      */
-    public function login(LoginRequest $request)
+    public function store(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('CMS/home');
         }
         return back()->withErrors([
             'email' => 'Email or password is incorrect',
