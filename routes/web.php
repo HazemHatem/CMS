@@ -5,6 +5,7 @@ use App\Http\Controllers\Site\Auth\RegisterController;
 use App\Http\Controllers\site\category\CategoriesController;
 use App\Http\Controllers\site\home\HomeController;
 use App\Http\Controllers\site\post\PostController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Contact\ContactController;
  
@@ -20,9 +21,8 @@ use App\Http\Controllers\Site\Contact\ContactController;
 |
 */
 
-
 Route::prefix('CMS')->group(function () {
-    
+     
     Route::get('/home', HomeController::class)->name('home');
     Route::get('/categories',  CategoriesController::class)->name('categories');
     Route::resource('/post', PostController::class);
