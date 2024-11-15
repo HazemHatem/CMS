@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\site\category\CategoriesControllerSite;
-use App\Http\Controllers\site\contact\ControllerControllerSite;
-  use App\Http\Controllers\site\home\HomeControllerSite;
-  use App\Http\Controllers\site\Login\LoginControllerSite;
-  use App\Http\Controllers\site\post\PostControllerSite;
-  use App\Models\Author;
-  use App\Models\User;
-  use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\site\category\CategoriesController;
+use App\Http\Controllers\site\home\HomeController;
+use App\Http\Controllers\site\post\PostController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Site\Contact\ContactController;
+ 
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +20,9 @@ use App\Http\Controllers\site\contact\ControllerControllerSite;
 
 
 Route::prefix('CMS')->group(function () {
- 
-    Route::get('/home', HomeControllerSite::class)->name('home');
-    Route::get('/categories',  CategoriesControllerSite::class)->name('categories');
-    Route::resource('/post', PostControllerSite::class);
-    Route::resource('/contact',  ControllerControllerSite::class);
-    Route::resource('/login',  LoginControllerSite::class);
-    Route::resource('/login',  LoginControllerSite::class);
-
-
-  });
-
- 
+    Route::get('/home', HomeController::class)->name('home');
+    Route::get('/categories',  CategoriesController::class)->name('categories');
+    Route::resource('/post', PostController::class);
+    Route::get('/contact',  [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact',  [ContactController::class, 'store'])->name('contact.store');
+});

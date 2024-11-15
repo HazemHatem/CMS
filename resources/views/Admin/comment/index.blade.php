@@ -10,6 +10,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Comments</h3>
+                        @include('Admin.layout.forms.search', ['url' => route('Admin.comment.search')])
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -43,11 +44,7 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ( $comments->hasPages() )
-                    <div class="card-footer">
-                        {{ $comments->links() }}
-                    </div>
-                    @endif
+                    @include('Admin.layout.pagination.pagination' , ['data' => $comments])
                 </div>
             </div>
         </div>
@@ -57,10 +54,5 @@
 
 
 @push('before-scripts')
-<script>
-    var success = "{{ session('success') }}";
-    if (success) {
-        alert(success);
-    }
-</script>
+@include('Admin.layout.message.success')
 @endpush

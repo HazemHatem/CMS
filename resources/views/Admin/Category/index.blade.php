@@ -10,6 +10,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Categories</h3>
+                        @include('Admin.layout.forms.search', ['url' => route('Admin.category.search')])
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -41,11 +42,7 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ( $categories->hasPages() )
-                    <div class="card-footer">
-                        {{ $categories->links() }}
-                    </div>
-                    @endif
+                    @include('Admin.layout.pagination.pagination' , ['data' => $categories])
                 </div>
             </div>
         </div>
@@ -55,10 +52,5 @@
 
 
 @push('before-scripts')
-<script>
-    var success = "{{ session('success') }}";
-    if (success) {
-        alert(success);
-    }
-</script>
+@include('Admin.layout.message.success')
 @endpush

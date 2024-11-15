@@ -10,6 +10,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">All Authors</h3>
+                        @include('Admin.layout.forms.search', ['url' => route('Admin.author.search')])
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -18,7 +19,6 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Description</th>
-                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -27,10 +27,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $author->name }}</td>
-                                    <td>{{ $author->description }}</td>
-                                    <td>
-                                        <img class="profile-user-img img-fluid img-circle" src="{{ FileHelper::userimage($author->image) }}" alt="{{ $author->name }}">
-                                    </td>
+                                    <td>{{ Str::words($author->description, 5) }}</td>
                                     <td>
                                         <a href="{{ route('Admin.author.show' , $author->id) }}" class="btn btn-info"><i class="fas fa-eye"></i> Show</a>
                                         <a href="{{ route('Admin.author.edit' , $author->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
@@ -45,11 +42,7 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ( $authors->hasPages() )
-                    <div class="card-footer">
-                        {{ $authors->links() }}
-                    </div>
-                    @endif
+                    @include('Admin.layout.pagination.pagination' , ['data' => $authors])
                 </div>
             </div>
         </div>
@@ -59,10 +52,5 @@
 
 
 @push('before-scripts')
-<script>
-    var success = "{{ session('success') }}";
-    if (success) {
-        alert(success);
-    }
-</script>
+@include('Admin.layout.message.success')
 @endpush

@@ -16,7 +16,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('site.contact.index');
+        return view('web.site.pages.contact_us.index');
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Search\SearchRequest;
 use App\Http\Requests\Site\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -107,5 +108,12 @@ class UserController extends Controller
         if ($user->image) {
             Storage::disk('public')->delete($user->image);
         }
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $search = $request->validated()['search'];
+        $users = User::where('name', 'like', '%' . $search . '%')->whereIn('role_id', [1, 2])->latest('updated_at')->paginate(10);
+        return view('Admin.User.index', compact('users'));
     }
 }

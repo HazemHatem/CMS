@@ -18,16 +18,12 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $author->name }}" placeholder="Enter name">
-                                @error('name')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.erorr', ['name' => 'name'])
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" id="description" value="{{ $author->description }}" placeholder="Enter description">
-                                @error('description')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.erorr', ['name' => 'description'])
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Image</label>
@@ -37,9 +33,7 @@
                                         <label class="custom-file-label" for="exampleInputFile">Update image</label>
                                     </div>
                                 </div>
-                                @error('image')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.erorr', ['name' => 'image'])
                             </div>
                         </div>
                         <div class="card-footer">

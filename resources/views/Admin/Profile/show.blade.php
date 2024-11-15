@@ -26,32 +26,22 @@
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                     </div>
                                 </div>
-                                @error('image')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'image'])
                             </div>
                             <div class="form-group mb-3">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter name" value="{{ Auth::user()->name }}">
-                                @error('name')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'name'])
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email" value="{{ Auth::user()->email }}">
-                                @error('email')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'email'])
                             </div>
                             <div class="form-group mb-3">
                                 <label for="phone">Phone</label>
                                 <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Enter phone" value="{{ Auth::user()->phone }}">
-                                @error('phone')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'phone'])
                             </div>
                             <div class="text-center mb-3">
                                 <button type="save" class="btn btn-primary">Save</button>
@@ -72,9 +62,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                @error('current_password')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'current_password'])
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password">Password</label>
@@ -86,9 +74,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                @error('password')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'password'])
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password_confirmation">Confirm Password</label>
@@ -100,9 +86,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                @error('password_confirmation')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'password_confirmation'])
                             </div>
                             <div class="text-center mb-3">
                                 <button type="submit" class="btn btn-primary">Reset</button>
@@ -118,52 +102,6 @@
 
 
 @push('before-scripts')
-<script>
-    var success = "{{ session('success') }}";
-    if (success) {
-        alert(success);
-    }
-
-    function togglePassword() {
-        const passwordInput = document.getElementById("password");
-        const toggleIcon = document.getElementById("toggleIcon");
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            toggleIcon.classList.remove("fa-eye");
-            toggleIcon.classList.add("fa-eye-slash");
-        } else {
-            passwordInput.type = "password";
-            toggleIcon.classList.remove("fa-eye-slash");
-            toggleIcon.classList.add("fa-eye");
-        }
-    }
-
-    function toggleCurrentPassword() {
-        const currentPasswordInput = document.getElementById("current_password");
-        const toggleIcon = document.getElementById("togglecurrentIcon");
-        if (currentPasswordInput.type === "password") {
-            currentPasswordInput.type = "text";
-            toggleIcon.classList.remove("fa-eye");
-            toggleIcon.classList.add("fa-eye-slash");
-        } else {
-            currentPasswordInput.type = "password";
-            toggleIcon.classList.remove("fa-eye-slash");
-            toggleIcon.classList.add("fa-eye");
-        }
-    }
-
-    function togglePasswordConfirmation() {
-        const passwordConfirmationInput = document.getElementById("password_confirmation");
-        const toggleIcon = document.getElementById("toggleConfirmationIcon");
-        if (passwordConfirmationInput.type === "password") {
-            passwordConfirmationInput.type = "text";
-            toggleIcon.classList.remove("fa-eye");
-            toggleIcon.classList.add("fa-eye-slash");
-        } else {
-            passwordConfirmationInput.type = "password";
-            toggleIcon.classList.remove("fa-eye-slash");
-            toggleIcon.classList.add("fa-eye");
-        }
-    }
-</script>
+@include('Admin.layout.message.success')
+<script src="{{ asset('dashboard/js/showpassword.js') }}"></script>
 @endpush

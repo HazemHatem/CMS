@@ -10,6 +10,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Articles</h3>
+                        @include('Admin.layout.forms.search', ['url' => route('Admin.article.search')])
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -28,8 +29,8 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $article->title }}</td>
-                                    <td>{{ $article->category->name }}</td>
-                                    <td>{{ $article->author->name }}</td>
+                                    <td><a href="{{route('Admin.category.show', $article->category->id)}}">{{ $article->category->name }}</a></td>
+                                    <td><a href="{{route('Admin.author.show', $article->author->id)}}">{{ $article->author->name }}</a></td>
                                     <td>{{ $article->status }}</td>
                                     <td>
                                         <a href="{{ route('Admin.article.show' , $article->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
@@ -45,11 +46,7 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ( $articles->hasPages() )
-                    <div class="card-footer">
-                        {{ $articles->links() }}
-                    </div>
-                    @endif
+                    @include('Admin.layout.pagination.pagination' , ['data' => $articles])
                 </div>
             </div>
         </div>
@@ -59,10 +56,5 @@
 
 
 @push('before-scripts')
-<script>
-    var success = "{{ session('success') }}";
-    if (success) {
-        alert(success);
-    }
-</script>
+@include('Admin.layout.message.success')
 @endpush
