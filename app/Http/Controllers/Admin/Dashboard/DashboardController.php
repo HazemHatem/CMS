@@ -19,7 +19,7 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $users = User::count();
+        $users = User::whereIn('role_id', [1, 2])->count();
         $messages = Contact::count();
         $articles = Article::count();
         $authors = Author::count();
