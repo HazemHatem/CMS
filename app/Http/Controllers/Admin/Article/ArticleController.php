@@ -71,6 +71,7 @@ class ArticleController extends Controller
         $data = $request->validated();
         if ($request->hasFile('image')) {
             $this->deleteArticleImage($article);
+
             $data['image'] = $request->file('image')->store('articles/', 'public');
         }
         $article->update($data);

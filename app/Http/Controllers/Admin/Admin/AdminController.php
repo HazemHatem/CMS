@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Admin\AdminRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\Search\SearchRequest;
+use Illuminate\Support\Facades\Gate;
 
 class AdminController extends Controller
 {
@@ -20,6 +21,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+        Gate::authorize('manager');
         $admins = User::whereIn('role_id', [3, 4])
             ->latest('updated_at')
             ->paginate(10);
@@ -34,6 +36,7 @@ class AdminController extends Controller
      */
     public function create()
     {
+        Gate::authorize('manager');
         return view('Admin.Admin.create');
     }
 
@@ -45,6 +48,7 @@ class AdminController extends Controller
      */
     public function store(RegisterRequest $request)
     {
+        Gate::authorize('manager');
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
         $data['role_id'] = $data['role_id'] ?? 3;
@@ -60,6 +64,7 @@ class AdminController extends Controller
      */
     public function show(User $admin)
     {
+        Gate::authorize('manager');
         return view('Admin.Admin.show', compact('admin'));
     }
 
@@ -71,6 +76,7 @@ class AdminController extends Controller
      */
     public function edit(User $admin)
     {
+        Gate::authorize('manager');
         return view('Admin.Admin.edit', compact('admin'));
     }
 
@@ -83,6 +89,7 @@ class AdminController extends Controller
      */
     public function update(AdminRequest $request, User $admin)
     {
+        Gate::authorize('manager');
         $data = $request->validated();
         if ($request->hasFile('image')) {
             $this->deleteAdminImage($admin);
@@ -101,6 +108,7 @@ class AdminController extends Controller
      */
     public function destroy(User $admin)
     {
+        Gate::authorize('manager');
         $this->deleteAdminImage($admin);
         $admin->delete();
         return redirect()->route('Admin.admin.index')->with('success', 'Admin deleted successfully');
@@ -121,6 +129,7 @@ class AdminController extends Controller
 
     public function search(SearchRequest $request)
     {
+        Gate::authorize('manager');
         $search = $request->validated()['search'];
         $admins = User::where('name', 'like', '%' . $search . '%')->whereIn('role_id', [3, 4])->latest('updated_at')->paginate(10);
         return view('Admin.Admin.index', compact('admins'));
