@@ -37,7 +37,7 @@ class LoginController extends Controller
         $remember = $request->has('remember');
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('CMS/home');
+            return redirect()->intended('/CMS');
         }
         return back()->withErrors([
             'email' => 'Email or password is incorrect',
@@ -53,7 +53,7 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        Auth::guard('web')->logout();
+        Auth::guard()->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
         return redirect()->route('login.index');

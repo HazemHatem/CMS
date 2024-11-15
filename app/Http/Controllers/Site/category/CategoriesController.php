@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\site\category;
+namespace App\Http\Controllers\Site\Category;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoriesController extends Controller
 {
@@ -12,6 +13,7 @@ class CategoriesController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('web.site.pages.categories.index');
+        $categories = Category::all();
+        return view('web.site.pages.categories.index', compact('categories'));
     }
 }

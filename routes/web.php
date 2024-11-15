@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\Site\Auth\LoginController;
 use App\Http\Controllers\Site\Auth\RegisterController;
-use App\Http\Controllers\site\category\CategoriesController;
-use App\Http\Controllers\site\home\HomeController;
-use App\Http\Controllers\site\post\PostController;
+use App\Http\Controllers\Site\Category\CategoriesController;
+use App\Http\Controllers\Site\Home\HomeController;
+use App\Http\Controllers\Site\Post\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Contact\ContactController;
- 
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,19 +22,18 @@ use App\Http\Controllers\Site\Contact\ContactController;
 
 
 Route::prefix('CMS')->group(function () {
-    
-    Route::get('/home', HomeController::class)->name('home');
+
+    Route::get('/', HomeController::class)->name('home');
     Route::get('/categories',  CategoriesController::class)->name('categories');
     Route::resource('/post', PostController::class);
 
- 
-Route::get('/login', [LoginController::class, 'login'])->name('login.index');
-Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
- 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/login', [LoginController::class, 'login'])->name('login.index');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+
+
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/register',  [RegisterController::class, 'register'])->name('register.register');
     Route::get('/contact',  [ContactController::class, 'index'])->name('contact.index');
     Route::post('/contact',  [ContactController::class, 'store'])->name('contact.store');
-
 });
