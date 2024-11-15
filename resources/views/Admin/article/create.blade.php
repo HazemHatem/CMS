@@ -17,16 +17,12 @@
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title') }}" placeholder="Enter title">
-                                @error('title')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'title'])
                             </div>
                             <div class="form-group">
                                 <label for="content">Content</label>
                                 <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" placeholder="Enter content">{{ old('content') }}</textarea>
-                                @error('content')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'content'])
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
@@ -35,9 +31,7 @@
                                     <option value="published">Published</option>
                                     <option value="unpublished">Unpublished</option>
                                 </select>
-                                @error('status')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'status'])
                             </div>
                             <div class="form-group">
                                 <label for="category_id">Category</label>
@@ -46,9 +40,7 @@
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('category_id')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'category_id'])
                             </div>
                             <div class="form-group">
                                 <label for="author_id">Author</label>
@@ -57,9 +49,7 @@
                                     <option value="{{ $author->id }}">{{ $author->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('author_id')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'author_id'])
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Image</label>
@@ -69,9 +59,7 @@
                                         <label class="custom-file-label" for="exampleInputFile">Update image</label>
                                     </div>
                                 </div>
-                                @error('image')
-                                <span class="alert alert-danger">{{ $message }}</span>
-                                @enderror
+                                @include('Admin.layout.message.error', ['name' => 'image'])
                             </div>
                         </div>
                         <div class="card-footer">
@@ -84,3 +72,17 @@
     </div>
 </section>
 @endsection
+
+
+@push('before-scripts')
+<script src="https://cdn.tiny.cloud/1/j4oi2sigysy4d2vt6ensqjvkoiisa0xxzan1m9oujlofoi2w/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#content',
+        plugins: 'lists link image table code',
+        toolbar: 'undo redo | bold italic | bullist numlist | link image | code',
+        menubar: true,
+        height: 400,
+    });
+</script>
+@endpush

@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Article;
 use App\Http\Requests\Admin\Comment\CommentRequest;
+use App\Http\Requests\Admin\Search\SearchRequest;
 
 class CommentController extends Controller
 {
@@ -72,5 +73,12 @@ class CommentController extends Controller
     {
         $comment->delete();
         return redirect()->route('Admin.comment.index')->with('success', 'Comment deleted successfully');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $search = $request->validated()['search'];
+        $comments = Comment::where('comment', 'like', '%' . $search . '%')->latest('updated_at')->paginate(12);
+        return view('Admin.comment.index', compact('comments'));
     }
 }

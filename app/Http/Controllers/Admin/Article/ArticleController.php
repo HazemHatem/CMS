@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Author;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\Search\SearchRequest;
 
 class ArticleController extends Controller
 {
@@ -90,5 +91,13 @@ class ArticleController extends Controller
         if ($article->image) {
             Storage::disk('public')->delete($article->image);
         }
+    }
+
+
+    public function search(SearchRequest $request)
+    {
+        $search = $request->validated()['search'];
+        $articles = Article::where('title', 'like', '%' . $search . '%')->latest('updated_at')->paginate(12);
+        return view('Admin.article.index', compact('articles'));
     }
 }

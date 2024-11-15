@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Auth\RegisterRequest;
 use App\Http\Requests\Admin\Admin\AdminRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\Search\SearchRequest;
 
 class AdminController extends Controller
 {
@@ -116,5 +117,12 @@ class AdminController extends Controller
         if ($admin->image) {
             Storage::disk('public')->delete($admin->image);
         }
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $search = $request->validated()['search'];
+        $admins = User::where('name', 'like', '%' . $search . '%')->whereIn('role_id', [3, 4])->latest('updated_at')->paginate(10);
+        return view('Admin.Admin.index', compact('admins'));
     }
 }

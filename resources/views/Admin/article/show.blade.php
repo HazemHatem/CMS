@@ -26,11 +26,11 @@
                                 </tr>
                                 <tr>
                                     <th>Category</th>
-                                    <td>{{ $article->category->name }}</td>
+                                    <td><a href="{{route('Admin.category.show', $article->category->id)}}">{{ $article->category->name }}</a></td>
                                 </tr>
                                 <tr>
                                     <th>Author</th>
-                                    <td>{{ $article->author->name }}</td>
+                                    <td><a href="{{route('Admin.author.show', $article->author->id)}}">{{ $article->author->name }}</a></td>
                                 </tr>
                                 <tr>
                                     <th>Status</th>
@@ -42,7 +42,7 @@
                                 </tr>
                                 <tr>
                                     <th>Content</th>
-                                    <td>{{ $article->content }}</td>
+                                    <td>{!! $article->content !!}</td>
                                 </tr>
                                 <tr>
                                     <th>Created At</th>

@@ -52,6 +52,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="input-group mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember" value="1">
+                            <label class="form-check-label" for="remember">
+                                Remember Me
+                            </label>
+                        </div>
+                        <span class="float-end">forget password?<a class="text-decoration-none" href="{{ route('password.request') }}"> reset password</a></span>
+                    </div>
                     <div>
                         <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                     </div>
@@ -59,7 +68,7 @@
             </div>
         </div>
     </div>
-
+    @include('Admin.layout.message.success')
     <!-- jQuery -->
     <script src="{{asset('dashboard/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
