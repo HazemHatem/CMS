@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="{{route('Admin.dashboard')}}" class="brand-link">
         <img src="{{asset('dashboard/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Clinic</span>
+        <span class="brand-text font-weight-light">{{ env('APP_NAME') }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -13,7 +13,7 @@
                 <img src="{{asset('dashboard/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{{ route('Admin.profile.show', Auth::id()) }}" class="d-block">{{ Auth::user()->name }}</a>
+                <a href="{{ route('Admin.profile.show', Auth::guard('admin')->user()->id) }}" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
             </div>
         </div>
 
@@ -189,7 +189,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('Admin.profile.show', Auth::id()) }}" class="nav-link">
+                            <a href="{{ route('Admin.profile.show', Auth::guard('admin')->user()->id) }}" class="nav-link">
                                 <i class="bi bi-person-circle"></i>
                                 <p>Profile</p>
                             </a>

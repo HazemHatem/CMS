@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Search\SearchRequest;
 use App\Http\Requests\Site\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\User\UserRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -17,11 +17,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::whereIn('role_id', [1, 2])
             ->latest('updated_at')
-            ->paginate(10);
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            })
+            ->paginate(10)
+            ->appends($request->all());
         return view('Admin.User.index', compact('users'));
     }
 
@@ -108,12 +112,5 @@ class UserController extends Controller
         if ($user->image) {
             Storage::disk('public')->delete($user->image);
         }
-    }
-
-    public function search(SearchRequest $request)
-    {
-        $search = $request->validated()['search'];
-        $users = User::where('name', 'like', '%' . $search . '%')->whereIn('role_id', [1, 2])->latest('updated_at')->paginate(10);
-        return view('Admin.User.index', compact('users'));
     }
 }

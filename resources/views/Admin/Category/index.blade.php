@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Categories</h3>
-                        @include('Admin.layout.forms.search', ['url' => route('Admin.category.search')])
+                        @include('Admin.layout.forms.search', ['url' => route('Admin.category.index')])
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">

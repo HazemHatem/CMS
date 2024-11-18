@@ -1,6 +1,6 @@
 @extends('Admin.app')
 
-@section('title' , Auth::user()->name)
+@section('title' , Auth::guard('admin')->user()->name)
 
 @section('content')
 <section class="content">
@@ -9,15 +9,15 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">{{ Auth::user()->name }}</h3>
+                        <h3 class="card-title">{{ Auth::guard('admin')->user()->name }}</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('Admin.profile.update', Auth::id()) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('Admin.profile.update', Auth::guard('admin')->id()) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group mb-3">
                                 <div class="text-center m-2 p-2">
-                                    <img class="profile-user-img img-fluid img-circle" src=" {{ FileHelper::userimage(Auth::user()->image) }}" alt="{{ Auth::user()->name }}">
+                                    <img class="profile-user-img img-fluid img-circle" src=" {{ FileHelper::userimage(Auth::guard('admin')->user()->image) }}" alt="{{ Auth::guard('admin')->user()->name }}">
                                 </div>
                                 <label for="exampleInputFile">Image</label>
                                 <div class="input-group">
@@ -30,17 +30,17 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="name">Name</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter name" value="{{ Auth::user()->name }}">
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter name" value="{{ Auth::guard('admin')->user()->name }}">
                                 @include('Admin.layout.message.error', ['name' => 'name'])
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email" value="{{ Auth::user()->email }}">
+                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email" value="{{ Auth::guard('admin')->user()->email }}">
                                 @include('Admin.layout.message.error', ['name' => 'email'])
                             </div>
                             <div class="form-group mb-3">
                                 <label for="phone">Phone</label>
-                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Enter phone" value="{{ Auth::user()->phone }}">
+                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Enter phone" value="{{ Auth::guard('admin')->user()->phone }}">
                                 @include('Admin.layout.message.error', ['name' => 'phone'])
                             </div>
                             <div class="text-center mb-3">
@@ -49,7 +49,7 @@
                         </form>
                     </div>
                     <div class="card-footer">
-                        <form action="{{ route('Admin.profile.change-password', Auth::id()) }}" method="POST">
+                        <form action="{{ route('Admin.profile.change-password', Auth::guard('admin')->id()) }}" method="POST">
                             @csrf
                             @method('PATCH')
                             <div class="form-group mb-3">

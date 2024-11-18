@@ -9,9 +9,8 @@ use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
-
     /**
-     * Display the login view for the admin area.
+     * Show the admin login form.
      *
      * @return \Illuminate\View\View
      */
@@ -20,51 +19,67 @@ class LoginController extends Controller
         return view('Admin.Auth.login');
     }
 
-
     /**
-     * Handle an authentication attempt.
+     * Handle admin authentication.
      *
      * @param  LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
-     *
-     * This method attempts to authenticate an admin user using the provided email and password.
-     * If successful, it regenerates the session and redirects the user to their intended destination, which is the admin dashboard.
-     * If the authentication fails, or the user does not have the necessary permissions, it redirects back with an error message, retaining the email input.
      */
     public function authenticate(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
-        if (Auth::attempt($credentials, $remember)) {
+
+        if (Auth::guard('admin')->attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            if (Gate::allows('admin') || Gate::allows('manager')) {
+
+            if ($this->authorizeAccess()) {
                 return redirect()->intended('/Admin');
             }
-            Auth::guard()->logout();
-            request()->session()->invalidate();
-            request()->session()->regenerateToken();
+
+            $this->performLogout($request);
             return back()->withErrors([
                 'email' => 'You do not have permission to access this section.',
             ])->onlyInput('email');
         }
+
         return back()->withErrors([
             'email' => 'Email or password is incorrect',
         ])->onlyInput('email');
     }
 
-
     /**
-     * Log out the authenticated admin user, invalidate the session,
-     * regenerate the session token, and redirect to the admin login page
-     * with a success message.
+     * Log out the authenticated admin user.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logout()
     {
-        Auth::guard()->logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
-        return redirect()->route('Admin.login.index')->with('success', 'You have been logged out successfully.');
+        $this->performLogout(request());
+        return redirect()->route('Admin.login.index')
+            ->with('success', 'You have been logged out successfully.');
+    }
+
+    /**
+     * Perform logout logic, invalidating the session and regenerating the token.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return void
+     */
+    protected function performLogout($request)
+    {
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    }
+
+    /**
+     * Authorize access for admin or manager roles.
+     *
+     * @return bool
+     */
+    protected function authorizeAccess()
+    {
+        return Gate::forUser(Auth::guard('admin')->user())->allows('admin') || Gate::forUser(Auth::guard('admin')->user())->allows('manager');
     }
 }
