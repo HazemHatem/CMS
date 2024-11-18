@@ -6,16 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Http\Requests\Admin\Author\AuthorRequest;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\Admin\Search\SearchRequest;
+use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $authors = Author::latest('updated_at')->paginate(12);
+        $authors = Author::latest('updated_at')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            })
+            ->paginate(12)
+            ->appends($request->all());
         return view('Admin.author.index', compact('authors'));
     }
 
@@ -77,13 +82,6 @@ class AuthorController extends Controller
     {
         $author->delete();
         return redirect()->route('Admin.author.index')->with('success', 'Author deleted successfully');
-    }
-
-    public function search(SearchRequest $request)
-    {
-        $search = $request->validated()['search'];
-        $authors = Author::where('name', 'like', '%' . $search . '%')->latest('updated_at')->paginate(12);
-        return view('Admin.author.index', compact('authors'));
     }
 
     protected function deleteAuthorImage(Author $author)

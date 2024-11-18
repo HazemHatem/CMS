@@ -7,16 +7,21 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Article;
 use App\Http\Requests\Admin\Comment\CommentRequest;
-use App\Http\Requests\Admin\Search\SearchRequest;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $comments = Comment::latest('updated_at')->paginate(12);
+        $comments = Comment::latest('updated_at')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                return $query->where('comment', 'like', '%' . $request->search . '%');
+            })
+            ->paginate(12)
+            ->appends($request->all());
         return view('Admin.comment.index', compact('comments'));
     }
 
@@ -73,12 +78,5 @@ class CommentController extends Controller
     {
         $comment->delete();
         return redirect()->route('Admin.comment.index')->with('success', 'Comment deleted successfully');
-    }
-
-    public function search(SearchRequest $request)
-    {
-        $search = $request->validated()['search'];
-        $comments = Comment::where('comment', 'like', '%' . $search . '%')->latest('updated_at')->paginate(12);
-        return view('Admin.comment.index', compact('comments'));
     }
 }

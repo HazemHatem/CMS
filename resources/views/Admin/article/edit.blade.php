@@ -73,3 +73,17 @@
     </div>
 </section>
 @endsection
+
+
+@push('before-scripts')
+<script src="https://cdn.tiny.cloud/1/j4oi2sigysy4d2vt6ensqjvkoiisa0xxzan1m9oujlofoi2w/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#content',
+        plugins: 'lists link image table code',
+        toolbar: 'undo redo | bold italic | bullist numlist | link image | code',
+        menubar: true,
+        height: 400,
+    });
+</script>
+@endpush

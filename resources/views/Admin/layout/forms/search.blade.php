@@ -1,6 +1,5 @@
 <div class="card-tools">
-    <form action="{{ $url }}" method="POST">
-        @csrf
+    <form action="{{ $url }}" method="GET">
         <div class="input-group input-group-sm" style="width: 150px;">
             @include('Admin.layout.message.error', ['name' => 'search'])
             <input type="text" name="search" class="form-control float-right" placeholder="Search">

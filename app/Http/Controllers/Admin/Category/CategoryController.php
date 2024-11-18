@@ -6,16 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\Admin\Category\CategoryRequest;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\Admin\Search\SearchRequest;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::latest('updated_at')->paginate(10);
+        $categories = Category::latest('updated_at')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            })
+            ->paginate(10)
+            ->appends($request->all());
         return view('Admin.Category.index', compact('categories'));
     }
 
@@ -79,13 +84,6 @@ class CategoryController extends Controller
         return redirect()->route('Admin.category.index')->with('success', 'Category deleted successfully');
     }
 
-
-    public function search(SearchRequest $request)
-    {
-        $search = $request->validated()['search'];
-        $categories = Category::where('name', 'like', '%' . $search . '%')->latest('updated_at')->paginate(10);
-        return view('Admin.Category.index', compact('categories'));
-    }
 
     public function deleteCategoryImage(Category $category)
     {
