@@ -1,6 +1,6 @@
 @extends('admin.app')
 
-@section('title' , 'Comments')
+@section('title' , 'Rules')
 
 @section('content')
 <section class="content">
@@ -9,8 +9,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Comments</h3>
-                        @include('Admin.layout.forms.search', ['url' => route('Admin.comment.index')])
+                        <h3 class="card-title">All Rules</h3>
+                        @include('Admin.layout.forms.search', ['url' => route('Admin.rule.index')])
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -18,29 +18,25 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Article</th>
-                                    <th>Content</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($comments as $comment)
+                                @foreach($rules as $rule)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $comment->user->name }}</td>
-                                    <td><a href="{{route('Admin.article.show', $comment->article->id)}}">{{ $comment->article->title }}</a></td>
-                                    <td>{{ Str::words($comment->content, 5) }}</td>
+                                    <td>{{ $rule->name }}</td>
                                     <td>
-                                        @include('Admin.layout.actions.show' , ['route' => 'Admin.comment.show' , 'id' => $comment->id])
-                                        @include('Admin.layout.actions.edit' , ['route' => 'Admin.comment.edit' , 'id' => $comment->id])
-                                        @include('Admin.layout.actions.delete' , ['route' => 'Admin.comment.destroy' , 'id' => $comment->id])
+                                        @include('Admin.layout.actions.show' , ['route' => 'Admin.rule.show' , 'id' => $rule->id])
+                                        @include('Admin.layout.actions.edit' , ['route' => 'Admin.rule.edit' , 'id' => $rule->id])
+                                        @include('Admin.layout.actions.delete' , ['route' => 'Admin.rule.destroy' , 'id' => $rule->id])
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                    @include('Admin.layout.pagination.pagination' , ['data' => $comments])
+                    @include('Admin.layout.pagination.pagination' , ['data' => $rules])
                 </div>
             </div>
         </div>

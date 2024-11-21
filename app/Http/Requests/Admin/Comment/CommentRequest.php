@@ -23,8 +23,7 @@ class CommentRequest extends FormRequest
     {
         return [
             'content' => 'required|string|min:3|max:255',
-            'user_id' => 'required|numeric|exists:users,id',
-            'article_id' => 'required|numeric|exists:articles,id',
+            'article_id' => 'required|exists:articles,id',
         ];
     }
 }

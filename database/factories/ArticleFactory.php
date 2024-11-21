@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Author;
 use App\Models\Category;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
@@ -21,10 +21,9 @@ class ArticleFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'content' => fake()->paragraphs(20, true),
-            'category_id' => Category::inRandomOrder()->first()->id,
-            'author_id' => Author::inRandomOrder()->first()->id,
+            'author_id' => fn() => User::where('rule_id', 2)->inRandomOrder()->first()->id,
             'status' => fake()->randomElement(['draft', 'published', 'unpublished']),
-            'views' => fake()->randomNumber(5),
+            'views' => fake()->randomNumber(2),
         ];
     }
 }

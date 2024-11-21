@@ -23,17 +23,17 @@
                                         <label class="custom-file-label" for="exampleInputFile">Update image</label>
                                     </div>
                                 </div>
-                                @include('Admin.partials.error', ['name' => 'image'])
+                                @include('Admin.layout.message.error', ['name' => 'image'])
                             </div>
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ $article->title }}" placeholder="Enter title">
-                                @include('Admin.partials.error', ['name' => 'title'])
+                                @include('Admin.layout.message.error', ['name' => 'title'])
                             </div>
                             <div class="form-group">
                                 <label for="content">Content</label>
                                 <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" placeholder="Enter content">{{ $article->content }}</textarea>
-                                @include('Admin.partials.error', ['name' => 'content'])
+                                @include('Admin.layout.message.error', ['name' => 'content'])
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
@@ -42,7 +42,7 @@
                                     <option value="published" {{ $article->status == 'published' ? 'selected' : '' }}>Published</option>
                                     <option value="unpublished" {{ $article->status == 'unpublished' ? 'selected' : '' }}>Unpublished</option>
                                 </select>
-                                @include('Admin.partials.error', ['name' => 'status'])
+                                @include('Admin.layout.message.error', ['name' => 'status'])
                             </div>
                             <div class="form-group">
                                 <label for="category_id">Category</label>
@@ -51,16 +51,7 @@
                                     <option value="{{ $category->id }}" {{ $article->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                                @include('Admin.partials.error', ['name' => 'category_id'])
-                            </div>
-                            <div class="form-group">
-                                <label for="author_id">Author</label>
-                                <select name="author_id" class="form-control @error('author_id') is-invalid @enderror" id="author_id">
-                                    @foreach ($authors as $author)
-                                    <option value="{{ $author->id }}" {{ $article->author_id == $author->id ? 'selected' : '' }}>{{ $author->name }}</option>
-                                    @endforeach
-                                </select>
-                                @include('Admin.partials.error', ['name' => 'author_id'])
+                                @include('Admin.layout.message.error', ['name' => 'category_id'])
                             </div>
                         </div>
                         <div class="card-footer">

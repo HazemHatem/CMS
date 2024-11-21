@@ -16,7 +16,11 @@ class CategorySeeder extends Seeder
     {
         Category::factory()
             ->count(8)
-            ->has(Article::factory()->count(10))
+            ->has(
+                Article::factory()
+                    ->count(10)
+                    ->hasComments(5)
+            )
             ->create();
     }
 }

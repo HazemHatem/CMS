@@ -16,19 +16,19 @@
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ $admin->name }}" placeholder="Enter name">
-                            @include('Admin.layout.message.erorr', ['name' => 'name'])
+                            @include('Admin.layout.message.error', ['name' => 'name'])
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}" placeholder="Enter email">
-                            @include('Admin.layout.message.erorr', ['name' => 'email'])
+                            @include('Admin.layout.message.error', ['name' => 'email'])
                         </div>
 
                         <div class="form-group">
                             <label for="phone">Phone</label>
                             <input type="text" class="form-control" id="phone" name="phone" value="{{ $admin->phone }}" placeholder="Enter phone">
-                            @include('Admin.layout.message.erorr', ['name' => 'phone'])
+                            @include('Admin.layout.message.error', ['name' => 'phone'])
                         </div>
 
                         <div class="form-group">
@@ -43,11 +43,11 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="role_id" value="4" id="flexCheckDefault" @if($admin->role->name == 'manager') checked @endif>
+                            <input class="form-check-input" type="checkbox" name="rule_id" value="4" id="flexCheckDefault" @if($admin->rule->name == 'manager') checked @endif>
                             <label class="form-check-label" for="flexCheckDefault">
                                 Manager
                             </label>
-                            @include('Admin.layout.message.erorr', ['name' => 'role_id'])
+                            @include('Admin.layout.message.error', ['name' => 'rule_id'])
                         </div>
                     </div>
                     <div class="box-footer mt-3">

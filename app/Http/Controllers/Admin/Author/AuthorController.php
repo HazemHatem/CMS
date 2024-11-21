@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin\Author;
 
 use App\Http\Controllers\Controller;
-use App\Models\Author;
 use App\Http\Requests\Admin\Author\AuthorRequest;
+use App\Http\Requests\Admin\Author\AuthorUpdateRequest;
+use App\Models\Rule;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,8 @@ class AuthorController extends Controller
      */
     public function index(Request $request)
     {
-        $authors = Author::latest('updated_at')
+        $authors = User::latest('updated_at')
+            ->where('rule_id', 2)
             ->when($request->filled('search'), function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })
@@ -38,17 +41,18 @@ class AuthorController extends Controller
     public function store(AuthorRequest $request)
     {
         $data = $request->validated();
+        $data['rule_id'] = 2;
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('authors/', 'public');
         }
-        Author::create($data);
+        User::create($data);
         return redirect()->route('Admin.author.index')->with('success', 'Author created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Author $author)
+    public function show(User $author)
     {
         return view('Admin.author.show', compact('author'));
     }
@@ -56,15 +60,16 @@ class AuthorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Author $author)
+    public function edit(User $author)
     {
-        return view('Admin.author.edit', compact('author'));
+        $rules = Rule::all();
+        return view('Admin.author.edit', compact('author', 'rules'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(AuthorRequest $request, Author $author)
+    public function update(AuthorUpdateRequest $request, User $author)
     {
         $data = $request->validated();
         if ($request->hasFile('image')) {
@@ -78,13 +83,13 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Author $author)
+    public function destroy(User $author)
     {
         $author->delete();
         return redirect()->route('Admin.author.index')->with('success', 'Author deleted successfully');
     }
 
-    protected function deleteAuthorImage(Author $author)
+    protected function deleteAuthorImage(User $author)
     {
         if ($author->image) {
             Storage::disk('public')->delete($author->image);

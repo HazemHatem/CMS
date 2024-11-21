@@ -28,15 +28,6 @@
                                 </select>
                                 @include('Admin.layout.message.error', ['name' => 'article_id'])
                             </div>
-                            <div class="form-group">
-                                <label for="user_id">User</label>
-                                <select name="user_id" class="form-control @error('user_id') is-invalid @enderror" id="user_id">
-                                    @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                                @include('Admin.layout.message.error', ['name' => 'user_id'])
-                            </div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>

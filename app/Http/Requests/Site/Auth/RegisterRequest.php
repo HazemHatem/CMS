@@ -28,7 +28,7 @@ class RegisterRequest extends FormRequest
             'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'phone' => 'required|numeric|digits_between:10,15|unique:users,phone',
-            'role_id' => 'nullable|numeric|in:1,2',
+            'rule_id' => 'nullable|in:1,2',
         ];
     }
 }

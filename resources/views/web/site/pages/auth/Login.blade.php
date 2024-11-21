@@ -48,8 +48,8 @@
                 <span class="error">{{$message}}</span>
                 @enderror
                 <div class="d-flex" style="margin-right: 120px;">
-                    <input type="checkbox" name="role_id" value="2" id="role_id" class="me-2">
-                    <label for="role_id" class="mt-1">Author</label>
+                    <input type="checkbox" name="rule_id" value="2" id="rule_id" class="me-2">
+                    <label for="rule_id" class="mt-1">Author</label>
                 </div>
                 <button>Sign-Up</button>
 

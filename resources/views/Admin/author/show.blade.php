@@ -25,8 +25,26 @@
                                     <td>{{ $author->name }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Email</th>
+                                    <td>{{ $author->email }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone</th>
+                                    <td>{{ $author->phone ?? '-' }}</td>
+                                </tr>
+                                <tr>
                                     <th>Description</th>
                                     <td>{{ $author->description }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Articles</th>
+                                    <td>
+                                        <ul class="list-group">
+                                            @foreach ($author->articles as $article)
+                                            <li class="list-group-item"><a href="{{route('Admin.article.show', $article->id)}}">{{ $article->title }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Created At</th>

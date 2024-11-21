@@ -21,7 +21,7 @@ class ContactController extends Controller
     {
         $contacts = Contact::latest('updated_at')
             ->when($request->filled('search'), function ($query) use ($request) {
-                return $query->where('name', 'like', '%' . $request->search . '%');
+                $query->where('name', 'like', '%' . $request->search . '%');
             })
             ->paginate(10)
             ->appends($request->all());

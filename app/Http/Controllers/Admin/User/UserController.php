@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\Auth\RegisterRequest;
 use App\Models\User;
+use App\Models\Rule;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\User\UserRequest;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::whereIn('role_id', [1, 2])
+        $users = User::where('rule_id', 1)
             ->latest('updated_at')
             ->when($request->filled('search'), function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
@@ -37,7 +38,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('Admin.User.edit', compact('user'));
+        $rules = Rule::all();
+        return view('Admin.User.edit', compact('user', 'rules'));
     }
 
     /**
@@ -54,8 +56,6 @@ class UserController extends Controller
             $this->deleteUserImage($user);
             $data['image'] = $request->file('image')->store('users/', 'public');
         }
-
-        $data['role_id'] = $data['role_id'] ?? 1;
         $user->update($data);
         return redirect()->route('Admin.user.index')->with('success', 'User updated successfully');
     }
@@ -103,6 +103,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->deleteUserImage($user);
         $user->delete();
         return redirect()->route('Admin.user.index')->with('success', 'User deleted successfully');
     }

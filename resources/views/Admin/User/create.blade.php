@@ -34,13 +34,6 @@
                                 <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}" placeholder="Password">
                                 @include('Admin.layout.message.error', ['name' => 'password'])
                             </div>
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="status" name="role_id" value="2">
-                                    <label for="status" class="custom-control-label">Author</label>
-                                </div>
-                                @include('Admin.layout.message.error', ['name' => 'role_id'])
-                            </div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>

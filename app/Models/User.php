@@ -24,9 +24,10 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'description',
         'phone',
         'image',
-        'role_id',
+        'rule_id',
     ];
 
     /**
@@ -59,9 +60,9 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function role()
+    public function rule()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Rule::class);
     }
 
     public function comments()
@@ -74,5 +75,11 @@ class User extends Authenticatable implements JWTSubject
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'author_id');
     }
 }
