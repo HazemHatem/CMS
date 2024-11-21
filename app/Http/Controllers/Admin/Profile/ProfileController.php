@@ -6,21 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\User\changePasswordRequest;
-use App\Http\Requests\Admin\User\UserRequest;
+use App\Http\Requests\Admin\Profile\ProfileRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
 
 class ProfileController extends Controller
 {
 
     /**
-     * Display the specified user's profile.
+     * Show the form for editing the profile.
      *
-     * @param \App\Models\User $user The user whose profile is to be displayed.
-     * @return \Illuminate\View\View The view displaying the user's profile.
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function index(Request $request)
     {
-        return view('Admin.Profile.show', compact('user'));
+        return view('Admin.Profile.index');
     }
 
 
@@ -31,7 +33,7 @@ class ProfileController extends Controller
      * @param \App\Models\User $user The user whose profile is to be updated.
      * @return \Illuminate\Http\RedirectResponse A redirect response back to the previous page with a success message.
      */
-    public function update(UserRequest $request, User $profile)
+    public function update(ProfileRequest $request, User $profile)
     {
         $data = $request->validated();
         if ($request->hasFile('image')) {

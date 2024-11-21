@@ -18,12 +18,22 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $author->name }}" placeholder="Enter name">
-                                @include('Admin.layout.message.erorr', ['name' => 'name'])
+                                @include('Admin.layout.message.error', ['name' => 'name'])
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ $author->email }}" placeholder="Enter email">
+                                @include('Admin.layout.message.error', ['name' => 'email'])
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" value="{{ $author->phone }}" placeholder="Enter phone">
+                                @include('Admin.layout.message.error', ['name' => 'phone'])
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" id="description" value="{{ $author->description }}" placeholder="Enter description">
-                                @include('Admin.layout.message.erorr', ['name' => 'description'])
+                                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="Enter description" value="{{ $author->description }}" cols="3"></textarea>
+                                @include('Admin.layout.message.error', ['name' => 'description'])
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Image</label>
@@ -33,7 +43,16 @@
                                         <label class="custom-file-label" for="exampleInputFile">Update image</label>
                                     </div>
                                 </div>
-                                @include('Admin.layout.message.erorr', ['name' => 'image'])
+                                @include('Admin.layout.message.error' , ['name' => 'image'])
+                            </div>
+                            <div class="form-group">
+                                <label for="rule_id">rule</label>
+                                <select name="rule_id" class="form-control @error('rule_id') is-invalid @enderror" id="rule_id">
+                                    @foreach ($rules as $rule)
+                                    <option value="{{ $rule->id }}" {{ $rule->id == $author->rule_id ? 'selected' : '' }}>{{ $rule->name }}</option>
+                                    @endforeach
+                                </select>
+                                @include('Admin.layout.message.error', ['name' => 'rule_id'])
                             </div>
                         </div>
                         <div class="card-footer">

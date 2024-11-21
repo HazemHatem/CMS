@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Author;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class AuthorRequest extends FormRequest
 {
@@ -22,9 +23,12 @@ class AuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3|max:100',
-            'description' => 'required|string|min:10',
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'phone' => 'required|numeric|digits_between:10,15|unique:users,phone',
+            'description' => 'nullable|string|min:15',
         ];
     }
 }

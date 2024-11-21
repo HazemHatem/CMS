@@ -33,13 +33,9 @@
                                     <td><a href="{{route('Admin.author.show', $article->author->id)}}">{{ $article->author->name }}</a></td>
                                     <td>{{ $article->status }}</td>
                                     <td>
-                                        <a href="{{ route('Admin.article.show' , $article->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('Admin.article.edit' , $article->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('Admin.article.destroy' , $article->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                        </form>
+                                        @include('Admin.layout.actions.show' , ['route' => 'Admin.article.show' , 'id' => $article->id])
+                                        @include('Admin.layout.actions.edit' , ['route' => 'Admin.article.edit' , 'id' => $article->id])
+                                        @include('Admin.layout.actions.delete' , ['route' => 'Admin.article.destroy' , 'id' => $article->id])
                                     </td>
                                 </tr>
                                 @endforeach

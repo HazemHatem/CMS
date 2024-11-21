@@ -4,21 +4,21 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Role;
+use App\Models\Rule;
 
-class RoleSeeder extends Seeder
+class RuleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $roles = [
+        $rules = [
             ['name' => 'user'],
             ['name' => 'author'],
             ['name' => 'admin'],
             ['name' => 'manager'],
         ];
-        Role::insert($roles);
+        Rule::insert($rules);
     }
 }

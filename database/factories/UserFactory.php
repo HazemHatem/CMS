@@ -26,10 +26,9 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'phone' => fake()->phoneNumber(),
+            'description' => fake()->text(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'password' => static::$password ??= Hash::make('Hazem@2005'),
         ];
     }
 
@@ -40,6 +39,27 @@ class UserFactory extends Factory
     {
         return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+
+    /**
+     * Create a user with an admin role.
+     */
+    public function admin()
+    {
+        return $this->state(fn(array $attributes) => [
+            'rule_id' => 3,
+        ]);
+    }
+
+    /**
+     * Create a user with an author role.
+     */
+    public function author()
+    {
+        return $this->state(fn(array $attributes) => [
+            'rule_id' => 2,
         ]);
     }
 }

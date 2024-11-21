@@ -18,7 +18,7 @@ class AdminController extends Controller
             ->when($request->filled('search'), function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })
-            ->whereIn('role_id', [3, 4])
+            ->whereIn('rule_id', [3, 4])
             ->paginate(12)
             ->appends($request->all());
 
@@ -34,7 +34,7 @@ class AdminController extends Controller
     {
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
-        $data['role_id'] = $data['role_id'] ?? 3;
+        $data['rule_id'] = $data['rule_id'] ?? 3;
 
         User::create($data);
 
@@ -59,9 +59,6 @@ class AdminController extends Controller
             $this->deleteAdminImage($admin);
             $data['image'] = $request->file('image')->store('admins/', 'public');
         }
-
-        $data['role_id'] = $data['role_id'] ?? 3;
-
         $admin->update($data);
 
         return redirect()->route('Admin.admin.index')->with('success', 'Admin updated successfully');
@@ -71,7 +68,6 @@ class AdminController extends Controller
     {
         $this->deleteAdminImage($admin);
         $admin->delete();
-
         return redirect()->route('Admin.admin.index')->with('success', 'Admin deleted successfully');
     }
 

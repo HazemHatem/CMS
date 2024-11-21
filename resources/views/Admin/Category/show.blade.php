@@ -29,6 +29,16 @@
                                     <td>{{ $category->description }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Articles</th>
+                                    <td>
+                                        <ul class="list-group">
+                                            @foreach ($category->articles as $article)
+                                            <li class="list-group-item"><a href="{{route('Admin.article.show', $article->id)}}">{{$article->title}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>Created At</th>
                                     <td>{{ $category->created_at }}</td>
                                 </tr>

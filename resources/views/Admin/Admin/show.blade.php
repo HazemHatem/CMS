@@ -26,7 +26,7 @@
                                 </tr>
                                 <tr>
                                     <th>Phone</th>
-                                    <td>{{ $admin->phone }}</td>
+                                    <td>{{ $admin->phone ?? '-' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Email</th>
@@ -34,7 +34,7 @@
                                 </tr>
                                 <tr>
                                     <th>Role</th>
-                                    <td>{{ $admin->role->name }}</td>
+                                    <td>{{ $admin->rule->name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Created At</th>

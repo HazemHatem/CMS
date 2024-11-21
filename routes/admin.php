@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Article\ArticleController;
 use App\Http\Controllers\Admin\Comment\CommentController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Admin\Rule\RuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +48,6 @@ Route::prefix('Admin')->as('Admin.')->group(function () {
         Route::get('/contact', ContactController::class)->name('contact');
         Route::resource('profile', ProfileController::class);
         Route::patch('/profile/{profile}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
+        Route::resource('rule', RuleController::class);
     });
 });

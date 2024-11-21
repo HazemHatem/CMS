@@ -29,13 +29,9 @@
                                     <td>{{ $category->name }}</td>
                                     <td>{{ Str::words($category->description, 7) }}</td>
                                     <td>
-                                        <a href="{{ route('Admin.category.show' , $category->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('Admin.category.edit' , $category->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('Admin.category.destroy' , $category->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                        </form>
+                                        @include('Admin.layout.actions.show' , ['route' => 'Admin.category.show' , 'id' => $category->id])
+                                        @include('Admin.layout.actions.edit' , ['route' => 'Admin.category.edit' , 'id' => $category->id])
+                                        @include('Admin.layout.actions.delete' , ['route' => 'Admin.category.destroy' , 'id' => $category->id])
                                     </td>
                                 </tr>
                                 @endforeach

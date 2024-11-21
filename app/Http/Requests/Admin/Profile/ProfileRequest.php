@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\API\Auth;
+namespace App\Http\Requests\Admin\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class RegisterRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +23,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()],
-            'phone' => 'required|numeric|digits_between:10,15|unique:users,phone',
-            'rule_id' => 'nullable|in:1,2',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $this->profile->id,
+            'email' => 'required|email|unique:users,email,' . $this->profile->id,
         ];
     }
 }

@@ -18,6 +18,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Email</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
@@ -27,15 +28,12 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $author->name }}</td>
+                                    <td>{{ $author->email }}</td>
                                     <td>{{ Str::words($author->description, 5) }}</td>
                                     <td>
-                                        <a href="{{ route('Admin.author.show' , $author->id) }}" class="btn btn-info"><i class="fas fa-eye"></i> Show</a>
-                                        <a href="{{ route('Admin.author.edit' , $author->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
-                                        <form action="{{ route('Admin.author.destroy' , $author->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                                        </form>
+                                        @include('Admin.layout.actions.show' , ['route' => 'Admin.author.show' , 'id' => $author->id])
+                                        @include('Admin.layout.actions.edit' , ['route' => 'Admin.author.edit' , 'id' => $author->id])
+                                        @include('Admin.layout.actions.delete' , ['route' => 'Admin.author.destroy' , 'id' => $author->id])
                                     </td>
                                 </tr>
                                 @endforeach

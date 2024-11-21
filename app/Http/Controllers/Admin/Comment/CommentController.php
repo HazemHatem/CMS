@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Article;
 use App\Http\Requests\Admin\Comment\CommentRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -16,9 +17,12 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
-        $comments = Comment::latest('updated_at')
+        $comments = Comment::with('user:id,name')
+            ->latest('updated_at')
             ->when($request->filled('search'), function ($query) use ($request) {
-                return $query->where('comment', 'like', '%' . $request->search . '%');
+                $query->whereHas('user', function ($q) use ($request) {
+                    $q->where('name', 'like', '%' . $request->search . '%');
+                });
             })
             ->paginate(12)
             ->appends($request->all());
@@ -30,9 +34,8 @@ class CommentController extends Controller
      */
     public function create()
     {
-        $users = User::all();
         $articles = Article::all();
-        return view('Admin.comment.create', compact('users', 'articles'));
+        return view('Admin.comment.create', compact('articles'));
     }
 
     /**
@@ -40,7 +43,9 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        Comment::create($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::guard('admin')->user()->id;
+        Comment::create($data);
         return redirect()->route('Admin.comment.index')->with('success', 'Comment created successfully');
     }
 
@@ -57,9 +62,8 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        $users = User::all();
         $articles = Article::all();
-        return view('Admin.comment.edit', compact('comment', 'users', 'articles'));
+        return view('Admin.comment.edit', compact('comment', 'articles'));
     }
 
     /**
