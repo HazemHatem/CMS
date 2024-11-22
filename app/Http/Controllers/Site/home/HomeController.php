@@ -15,9 +15,14 @@ class HomeController extends Controller
     public function __invoke()
     {
         $categories = Category::all();
-
-        $Most_viewed_article = Article::latest('views')->limit(2)->get();
-        $articles = Article::latest('updated_at')->limit(6)->get();
+        $Most_viewed_article = Article::latest('views')
+            ->where('status', 'published')
+            ->limit(2)
+            ->get();
+        $articles = Article::latest('updated_at')
+            ->where('status', 'published')
+            ->limit(6)
+            ->get();
         return view('web.site.pages.home.index', compact('categories', 'articles', 'Most_viewed_article'));
     }
 }

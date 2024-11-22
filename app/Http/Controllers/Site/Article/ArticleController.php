@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\site\Controler;
+namespace App\Http\Controllers\Site\Article;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
-use App\Models\Category;
-use DB;
 use Illuminate\Http\Request;
 
-class CategoryPost extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-public function index(Request $request)
-{
-     
-}
+    public function index(Request $request)
+    {
+        $articles = Article::latest('updated_at')
+            ->when($request->search, function ($query, $search) {
+                $query->where('title', 'like', '%' . $search . '%');
+            })
+            ->paginate(9)
+            ->appends($request->all());
+        return view('web.site.pages.article.index', compact('articles'));
+    }
 
     /**
-     * ,compact('relatedPosts')
      * Show the form for creating a new resource.
      */
     public function create()
@@ -38,11 +41,9 @@ public function index(Request $request)
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        $articles = Article::where('category_id', $id)->get();
-         return view('web.site.pages.category.index', compact('articles'));
-
+        return view('web.site.pages.article.show', compact('article'));
     }
 
     /**

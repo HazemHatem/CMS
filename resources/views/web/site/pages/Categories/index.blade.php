@@ -5,7 +5,6 @@
 @section('content')
 <section class="LandingPage col-12">
     <!-- start landing -->
-      
     <style>
         .landing {
             background-image: linear-gradient(135deg, rgba(30, 33, 33, 0.82) 1%, rgba(32, 32, 32, 0) 0),
@@ -16,37 +15,27 @@
         }
     </style>
     <section class="landing col-12">
-
         <div class="col-6">
             <span class="title">
                 <h1>Categories</h1>
             </span>
-
         </div>
     </section>
 </section>
 <main class="container col-10">
     <section class="contetn col-12">
         <div class="gallery-container">
-
-        @foreach ($categories as $category )
-        <div class="gallery-item">
-                <a href="{{route('post',$category->id)}}">
+            @foreach ($categories as $category )
+            <div class="gallery-item">
+                <a href="{{route('category.article', $category->id)}}">
                     <div class="image-overlay">
                         <h3 class="title">{{$category->name}}</h3>
-
                     </div>
                     <img src="{{FileHelper::userimage($category->image) }}" class="card-img-top" alt="...">
-
                 </a>
             </div>
-         @endforeach
-          
-    
+            @endforeach
         </div>
-
-
-
     </section>
 </main>
 @endsection
