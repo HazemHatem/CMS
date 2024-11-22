@@ -23,6 +23,11 @@
     @csrf
     <button type="submit" class="nav-link">Logout</button>
 </form>
+<div>
+  <img src="{{FileHelper::userimage(Auth::user()->image)}} }}" alt="">
+</div>
+<p>  {{ Auth::user()->name }}!</p>
+
 @else
 <li class="nav-item">
     <a class="nav-link" href="{{ route('login.index') }}">Login</a>

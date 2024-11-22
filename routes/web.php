@@ -44,13 +44,4 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 });
 
-Route::get('createU',function(){
-    $data=[
-'name'=>'admin',
-'email'=>'admin@app.com',
-'password'=>'00000@Aa',
-'phone'=>'0000011111222',
-'role_id'=>'4',
-    ];
-User::create($data);
-});
+ 
