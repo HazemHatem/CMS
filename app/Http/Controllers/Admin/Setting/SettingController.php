@@ -32,8 +32,12 @@ class SettingController extends Controller
         return view('Admin.Setting.create');
     }
 
+
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Admin\Setting\SettingRequest  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(SettingRequest $request)
     {
