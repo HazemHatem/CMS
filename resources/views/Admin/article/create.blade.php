@@ -59,14 +59,14 @@
 
 
 @push('before-scripts')
-
-<script src="https://cdn.tiny.cloud/1/34ri62ry2ty734gxgcsjh8jio0wq4p89amijenyz64jkp7vj/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/j4oi2sigysy4d2vt6ensqjvkoiisa0xxzan1m9oujlofoi2w/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
-        api: '34ri62ry2ty734gxgcsjh8jio0wq4p89amijenyz64jkp7vj',
-        selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
-        plugins: 'code table lists',
-        toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+        selector: '#content',
+        plugins: 'lists link image table code',
+        toolbar: 'undo redo | bold italic | bullist numlist | link image | code',
+        menubar: false,
+        height: 400,
     });
 </script>
 @endpush
