@@ -5,6 +5,7 @@
 @section('content')
 <section class="LandingPage col-12">
     <!-- start landing -->
+     {{dd($categories)}}
     <style>
         .landing {
             background-image: linear-gradient(135deg, rgba(30, 33, 33, 0.82) 1%, rgba(32, 32, 32, 0) 0),

@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\Site\Auth\LoginController;
 use App\Http\Controllers\Site\Auth\RegisterController;
-use App\Http\Controllers\Site\Category\CategoriesController;
-use App\Http\Controllers\Site\Home\HomeController;
-use App\Http\Controllers\Site\Post\PostController;
+use App\Http\Controllers\site\category\CategoriesController;
+use App\Http\Controllers\site\Controler\CategoryPost;
+use App\Http\Controllers\site\Controler\ControlerController;
+use App\Http\Controllers\site\home\HomeController;
+use App\Http\Controllers\site\post\PostController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Contact\ContactController;
-
+ 
 
 /*
 |--------------------------------------------------------------------------
@@ -22,18 +25,32 @@ use App\Http\Controllers\Site\Contact\ContactController;
 
 
 Route::prefix('CMS')->group(function () {
-
-    Route::get('/', HomeController::class)->name('home');
+    
+    Route::get('/home', HomeController::class)->name('home');
+    Route::get('/post/{id}', PostController::class)->name('post');
     Route::get('/categories',  CategoriesController::class)->name('categories');
+    Route::resource('/category',  CategoryPost::class) ;
     Route::resource('/post', PostController::class);
 
+ 
+Route::get('/login', [LoginController::class, 'login'])->name('login.index');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
-    Route::get('/login', [LoginController::class, 'login'])->name('login.index');
-    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-
-
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+ 
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/register',  [RegisterController::class, 'register'])->name('register.register');
     Route::get('/contact',  [ContactController::class, 'index'])->name('contact.index');
     Route::post('/contact',  [ContactController::class, 'store'])->name('contact.store');
+
+});
+
+Route::get('createU',function(){
+    $data=[
+'name'=>'admin',
+'email'=>'admin@app.com',
+'password'=>'00000@Aa',
+'phone'=>'0000011111222',
+'role_id'=>'4',
+    ];
+User::create($data);
 });

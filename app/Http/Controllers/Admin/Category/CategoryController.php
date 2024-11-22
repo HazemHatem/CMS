@@ -38,8 +38,16 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $data = $request->validated();
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('categories/', 'public');
+        // if ($request->hasFile('image')) {
+        //     $data['image'] = $request->file('image')->store('categories/', 'public');
+        // }
+        if($request->hasFile('image')){
+
+            $file = $request->file('image');
+    
+            $fileName = $file->store('Category/','public');
+    
+            $data['image'] = 'storage/'. $fileName;
         }
         Category::create($data);
         return redirect()->route('Admin.category.index')->with('success', 'Category created successfully');

@@ -43,7 +43,7 @@ class ArticleController extends Controller
         $data = $request->validated();
         $data['author_id'] = Auth::guard('admin')->user()->id;
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('articles/', 'public');
+            $data['image'] = $request->file('image')->store('articles', 'public');
         }
         Article::create($data);
         return redirect()->route('Admin.article.index')->with('success', 'Article created successfully');
