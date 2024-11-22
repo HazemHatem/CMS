@@ -58,17 +58,14 @@
 @endsection
 
 @push('before-scripts')
-
- 
 <script src="https://cdn.tiny.cloud/1/34ri62ry2ty734gxgcsjh8jio0wq4p89amijenyz64jkp7vj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
-        selector: '#content', // حدد الـ textarea التي سيتم تحويلها إلى محرر
-        
-        plugins: 'lists link image table code', // المكونات الإضافية المطلوبة
+        selector: '#content',
+        plugins: 'lists link image table code',
         toolbar: 'undo redo | bold italic | bullist numlist | link image | code',
-        menubar: false, // إخفاء الشريط العلوي (اختياري)
-        height: 400, // ضبط ارتفاع المحرر
+        menubar: false,
+        height: 400,
     });
 </script>
 @endpush
