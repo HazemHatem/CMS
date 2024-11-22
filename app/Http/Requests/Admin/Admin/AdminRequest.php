@@ -27,7 +27,7 @@ class AdminRequest extends FormRequest
             'email' => 'required|email|unique:users,email,' . $userId,
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $userId,
-            'role_id' => 'nullable|numeric|in:3,4',
+            'rule_id' => 'nullable|in:3,4',
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests\API\Author;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthorRequest extends FormRequest
+class AuthorUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,11 @@ class AuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3|max:100',
-            'description' => 'required|string|min:10',
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $this->author->id,
+            'description' => 'nullable|string|min:15',
         ];
     }
 }

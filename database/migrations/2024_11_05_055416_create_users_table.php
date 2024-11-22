@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone')->unique();
+            $table->string('phone')->nullable()->unique();
             $table->string('image')->nullable();
-            $table->foreignId('role_id')->default(1)->constrained('roles')->cascadeOnDelete();
+            $table->string('description')->nullable();
+            $table->foreignId('rule_id')->default(1)->constrained('rules')->cascadeOnDelete();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

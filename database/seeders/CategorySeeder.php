@@ -15,8 +15,12 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::factory()
-            ->count(6)
-            ->has(Article::factory()->count(10))
+            ->count(8)
+            ->has(
+                Article::factory()
+                    ->count(10)
+                    ->hasComments(5)
+            )
             ->create();
     }
 }

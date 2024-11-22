@@ -19,14 +19,12 @@ class ContactController extends Controller
 
     public function __invoke(Request $request)
     {
-        $contacts = Contact::latest('updated_at')->paginate(10);
-        return view('Admin.Contact.index', compact('contacts'));
-    }
-
-    public function search(SearchRequest $request)
-    {
-        $search = $request->validated()['search'];
-        $contacts = Contact::where('name', 'like', '%' . $search . '%')->latest('updated_at')->paginate(10);
+        $contacts = Contact::latest('updated_at')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            })
+            ->paginate(10)
+            ->appends($request->all());
         return view('Admin.Contact.index', compact('contacts'));
     }
 }

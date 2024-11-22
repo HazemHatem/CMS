@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Comments</h3>
-                        @include('Admin.layout.forms.search', ['url' => route('Admin.comment.search')])
+                        @include('Admin.layout.forms.search', ['url' => route('Admin.comment.index')])
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -28,16 +28,12 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $comment->user->name }}</td>
-                                    <td>{{ $comment->article->title }}</td>
+                                    <td><a href="{{route('Admin.article.show', $comment->article->id)}}">{{ $comment->article->title }}</a></td>
                                     <td>{{ Str::words($comment->content, 5) }}</td>
                                     <td>
-                                        <a href="{{ route('Admin.comment.show' , $comment->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('Admin.comment.edit' , $comment->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('Admin.comment.destroy' , $comment->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                        </form>
+                                        @include('Admin.layout.actions.show' , ['route' => 'Admin.comment.show' , 'id' => $comment->id])
+                                        @include('Admin.layout.actions.edit' , ['route' => 'Admin.comment.edit' , 'id' => $comment->id])
+                                        @include('Admin.layout.actions.delete' , ['route' => 'Admin.comment.destroy' , 'id' => $comment->id])
                                     </td>
                                 </tr>
                                 @endforeach

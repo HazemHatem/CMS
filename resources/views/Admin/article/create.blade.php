@@ -45,15 +45,6 @@
                                 @include('Admin.layout.message.error', ['name' => 'category_id'])
                             </div>
                             <div class="form-group">
-                                <label for="author_id">Author</label>
-                                <select name="author_id" class="form-control @error('author_id') is-invalid @enderror" id="author_id">
-                                    @foreach ($authors as $author)
-                                    <option value="{{ $author->id }}">{{ $author->name }}</option>
-                                    @endforeach
-                                </select>
-                                @include('Admin.layout.message.error', ['name' => 'author_id'])
-                            </div>
-                            <div class="form-group">
                                 <label for="exampleInputFile">Image</label>
                                 <div class="input-group">
                                     <div class="custom-file">
@@ -91,6 +82,3 @@
   });
 </script>
  
-
-
-@endpush

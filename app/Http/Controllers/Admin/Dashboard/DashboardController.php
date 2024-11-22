@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Contact;
 use App\Models\Article;
-use App\Models\Author;
 
 class DashboardController extends Controller
 {
@@ -19,10 +18,10 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $users = User::whereIn('role_id', [1, 2])->count();
+        $users = User::where('rule_id', 1)->count();
         $messages = Contact::count();
         $articles = Article::count();
-        $authors = Author::count();
+        $authors = User::where('rule_id', 2)->count();
         return view('Admin.Dashboard.index', compact('users', 'messages', 'articles', 'authors'));
     }
 }

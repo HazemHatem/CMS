@@ -25,8 +25,7 @@ class ArticleRequest extends FormRequest
         return [
             'title' => 'required|string|min:3|max:100',
             'content' => ['required', 'string', new MinWords(400)],
-            'author_id' => 'required|numeric|exists:authors,id',
-            'category_id' => 'required|numeric|exists:categories,id',
+            'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }

@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">All Admins</h3>
-                    @include('Admin.layout.forms.search', ['url' => route('Admin.admin.search')])
+                    @include('Admin.layout.forms.search', ['url' => route('Admin.admin.index')])
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
@@ -20,26 +20,22 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Role</th>
+                                <th>Rule</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($admins as $admin)
                             <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$admin->name}}</td>
-                                <td>{{$admin->email}}</td>
-                                <td>{{$admin->phone}}</td>
-                                <td>{{$admin->role->name}}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $admin->name }}</td>
+                                <td>{{ $admin->email }}</td>
+                                <td>{{ $admin->phone ?? '-' }}</td>
+                                <td>{{ $admin->rule->name }}</td>
                                 <td>
-                                    <a href="{{route('Admin.admin.show', $admin->id)}}" class="btn btn-info mr-2"><i class="fa fa-eye"></i> Show</a>
-                                    <a href="{{route('Admin.admin.edit', $admin->id)}}" class="btn btn-primary mr-2"><i class="fa fa-edit"></i> Edit</a>
-                                    <form action="{{route('Admin.admin.destroy', $admin->id)}}" class="d-inline" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
-                                    </form>
+                                    @include('Admin.layout.actions.show' , ['route' => 'Admin.admin.show' , 'id' => $admin->id])
+                                    @include('Admin.layout.actions.edit' , ['route' => 'Admin.admin.edit' , 'id' => $admin->id])
+                                    @include('Admin.layout.actions.delete' , ['route' => 'Admin.admin.destroy' , 'id' => $admin->id])
                                 </td>
                             </tr>
                             @endforeach

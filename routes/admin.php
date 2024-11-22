@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Article\ArticleController;
 use App\Http\Controllers\Admin\Comment\CommentController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Admin\Rule\RuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,25 +35,19 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('
 
 Route::prefix('Admin')->as('Admin.')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login.index');
-    Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate')->middleware('throttle:10,1');
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
     Route::middleware('admin')->group(function () {
         Route::get('/', DashboardController::class)->name('dashboard');
         Route::resource('category', CategoryController::class);
-        Route::post('/category/search', [CategoryController::class, 'search'])->name('category.search');
         Route::resource('author', AuthorController::class);
-        Route::post('/author/search', [AuthorController::class, 'search'])->name('author.search');
         Route::resource('article', ArticleController::class);
-        Route::post('/article/search', [ArticleController::class, 'search'])->name('article.search');
         Route::resource('comment', CommentController::class);
-        Route::post('/comment/search', [CommentController::class, 'search'])->name('comment.search');
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::resource('user', UserController::class);
-        Route::post('/user/search', [UserController::class, 'search'])->name('user.search');
-        Route::resource('admin', AdminController::class);
-        Route::post('/admin/search', [AdminController::class, 'search'])->name('admin.search');
+        Route::resource('admin', AdminController::class)->middleware('manager');
         Route::get('/contact', ContactController::class)->name('contact');
-        Route::post('/contact/search', [ContactController::class, 'search'])->name('contact.search');
         Route::resource('profile', ProfileController::class);
         Route::patch('/profile/{profile}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
+        Route::resource('rule', RuleController::class);
     });
 });

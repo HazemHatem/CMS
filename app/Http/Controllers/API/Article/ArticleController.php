@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Http\Requests\API\Article\ArticleRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -28,6 +29,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request): JsonResponse
     {
         $data = $request->validated();
+        $data['author_id'] = Auth::guard('api')->user()->id;
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('articles/', 'public');
         }

@@ -4,8 +4,9 @@ namespace App\Http\Controllers\API\Author;
 
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Models\Author;
-use App\Http\Requests\API\Author\AuthorRequest;
+use App\Models\User;
+use App\Http\Requests\Admin\Author\AuthorRequest;
+use App\Http\Requests\API\Author\AuthorUpdateRequest;
 use Illuminate\Support\Facades\Storage;
 
 class AuthorController extends Controller
@@ -15,7 +16,7 @@ class AuthorController extends Controller
      */
     public function index(): JsonResponse
     {
-        $authors = Author::all();
+        $authors = User::where('rule_id', 2)->get();
         return response()->json([
             'success' => true,
             'authors' => $authors
@@ -28,10 +29,11 @@ class AuthorController extends Controller
     public function store(AuthorRequest $request): JsonResponse
     {
         $data = $request->validated();
+        $data['rule_id'] = 2;
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('authors/', 'public');
         }
-        $author = Author::create($data);
+        $author = User::create($data);
         return response()->json([
             'success' => true,
             'message' => 'Author created successfully',
@@ -42,7 +44,7 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Author $author): JsonResponse
+    public function show(User $author): JsonResponse
     {
         return response()->json([
             'success' => true,
@@ -53,7 +55,7 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AuthorRequest $request, Author $author): JsonResponse
+    public function update(AuthorUpdateRequest $request, User $author): JsonResponse
     {
         $data = $request->validated();
         if ($request->hasFile('image')) {
@@ -71,7 +73,7 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Author $author): JsonResponse
+    public function destroy(User $author): JsonResponse
     {
         $author->delete();
         return response()->json([
@@ -80,7 +82,7 @@ class AuthorController extends Controller
         ]);
     }
 
-    private function deleteAuthorImage(Author $author): void
+    private function deleteAuthorImage(User $author): void
     {
         if ($author->image) {
             Storage::disk('public')->delete($author->image);

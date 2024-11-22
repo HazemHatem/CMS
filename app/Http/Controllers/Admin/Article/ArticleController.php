@@ -6,18 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Article\ArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
-use App\Models\Author;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\Admin\Search\SearchRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::latest('updated_at')->paginate(12);
+        $articles = Article::latest('updated_at')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where('title', 'like', '%' . $request->search . '%');
+            })
+            ->paginate(12)
+            ->appends($request->all());
         return view('Admin.article.index', compact('articles'));
     }
 
@@ -27,8 +32,7 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $authors = Author::all();
-        return view('Admin.article.create', compact('categories', 'authors'));
+        return view('Admin.article.create', compact('categories'));
     }
 
     /**
@@ -37,6 +41,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         $data = $request->validated();
+        $data['author_id'] = Auth::guard('admin')->user()->id;
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('articles', 'public');
         }
@@ -59,8 +64,7 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $categories = Category::all();
-        $authors = Author::all();
-        return view('Admin.article.edit', compact('article', 'categories', 'authors'));
+        return view('Admin.article.edit', compact('article', 'categories'));
     }
 
     /**
@@ -71,7 +75,6 @@ class ArticleController extends Controller
         $data = $request->validated();
         if ($request->hasFile('image')) {
             $this->deleteArticleImage($article);
-
             $data['image'] = $request->file('image')->store('articles/', 'public');
         }
         $article->update($data);
@@ -92,13 +95,5 @@ class ArticleController extends Controller
         if ($article->image) {
             Storage::disk('public')->delete($article->image);
         }
-    }
-
-
-    public function search(SearchRequest $request)
-    {
-        $search = $request->validated()['search'];
-        $articles = Article::where('title', 'like', '%' . $search . '%')->latest('updated_at')->paginate(12);
-        return view('Admin.article.index', compact('articles'));
     }
 }

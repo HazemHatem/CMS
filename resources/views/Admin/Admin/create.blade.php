@@ -35,11 +35,11 @@
                                 @include('Admin.layout.message.error', ['name' => 'password'])
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="role_id" value="4" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" name="rule_id" value="4" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Manager
                                 </label>
-                                @include('Admin.layout.message.error', ['name' => 'role_id'])
+                                @include('Admin.layout.message.error', ['name' => 'rule_id'])
                             </div>
                         </div>
                         <div class="card-footer">

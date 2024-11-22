@@ -18,7 +18,19 @@ class UserSeeder extends Seeder
             "email" => "hhazm6745@gmail.com",
             "password" => "Hazem@2005",
             "phone" => "01092492013",
-            "role_id" => 4
+            "rule_id" => 4
         ]);
+
+        User::factory()->count(10)->create();
+
+        User::factory()
+            ->count(5)
+            ->admin()
+            ->create();
+
+        User::factory()
+            ->count(10)
+            ->author()
+            ->create();
     }
 }

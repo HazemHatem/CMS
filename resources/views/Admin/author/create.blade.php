@@ -20,8 +20,23 @@
                                 @include('Admin.layout.message.error', ['name' => 'name'])
                             </div>
                             <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email') }}" placeholder="Enter email">
+                                @include('Admin.layout.message.error', ['name' => 'email'])
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" value="{{ old('phone') }}" placeholder="Enter phone">
+                                @include('Admin.layout.message.error', ['name' => 'phone'])
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}" placeholder="Password">
+                                @include('Admin.layout.message.error', ['name' => 'password'])
+                            </div>
+                            <div class="form-group">
                                 <label for="description">Description</label>
-                                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" id="description" value="{{ old('description') }}" placeholder="Enter description">
+                                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="Enter description" value="{{ old('description') }}" cols="3"></textarea>
                                 @include('Admin.layout.message.error', ['name' => 'description'])
                             </div>
                             <div class="form-group">
@@ -32,7 +47,7 @@
                                         <label class="custom-file-label" for="exampleInputFile">Update image</label>
                                     </div>
                                 </div>
-                                @include('Admin.partials.error' , ['name' => 'image'])
+                                @include('Admin.layout.message.error' , ['name' => 'image'])
                             </div>
                         </div>
                         <div class="card-footer">

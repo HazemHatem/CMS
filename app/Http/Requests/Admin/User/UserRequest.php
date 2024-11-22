@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class UserRequest extends FormRequest
 {
@@ -22,13 +21,13 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $userId = $this->profile->id;
+        $userId = $this->user->id;
         return [
             'name' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $userId,
             'email' => 'required|email|unique:users,email,' . $userId,
-            'role_id' => 'nullable|numeric|in:1,2',
+            'rule_id' => 'required|exists:rules,id',
         ];
     }
 }

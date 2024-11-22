@@ -21,7 +21,9 @@
                                 </tr>
                                 <tr>
                                     <th>Article</th>
-                                    <td>{{ $comment->article->title }}</td>
+                                    <td>
+                                        <a href="{{route('Admin.article.show', $comment->article->id)}}">{{$comment->article->title}}</a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Content</th>

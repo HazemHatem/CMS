@@ -7,16 +7,25 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Article;
 use App\Http\Requests\Admin\Comment\CommentRequest;
-use App\Http\Requests\Admin\Search\SearchRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $comments = Comment::latest('updated_at')->paginate(12);
+        $comments = Comment::with('user:id,name')
+            ->latest('updated_at')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->whereHas('user', function ($q) use ($request) {
+                    $q->where('name', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->paginate(12)
+            ->appends($request->all());
         return view('Admin.comment.index', compact('comments'));
     }
 
@@ -25,9 +34,8 @@ class CommentController extends Controller
      */
     public function create()
     {
-        $users = User::all();
         $articles = Article::all();
-        return view('Admin.comment.create', compact('users', 'articles'));
+        return view('Admin.comment.create', compact('articles'));
     }
 
     /**
@@ -35,7 +43,9 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        Comment::create($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::guard('admin')->user()->id;
+        Comment::create($data);
         return redirect()->route('Admin.comment.index')->with('success', 'Comment created successfully');
     }
 
@@ -52,9 +62,8 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        $users = User::all();
         $articles = Article::all();
-        return view('Admin.comment.edit', compact('comment', 'users', 'articles'));
+        return view('Admin.comment.edit', compact('comment', 'articles'));
     }
 
     /**
@@ -73,12 +82,5 @@ class CommentController extends Controller
     {
         $comment->delete();
         return redirect()->route('Admin.comment.index')->with('success', 'Comment deleted successfully');
-    }
-
-    public function search(SearchRequest $request)
-    {
-        $search = $request->validated()['search'];
-        $comments = Comment::where('comment', 'like', '%' . $search . '%')->latest('updated_at')->paginate(12);
-        return view('Admin.comment.index', compact('comments'));
     }
 }
