@@ -54,12 +54,14 @@
         @foreach ($articles as $article )
 <div class="post col-sm-12 col-md-5 ">
 
-<img src="{{ FileHelper::userimage($article->image) }}" alt="">
+<img src="{{FileHelper::userimage($article->image) }}" alt="">
+
 <div class="post_body col-12">
     <span class="title_category col-3">
         <h6>{{$article->title}}</h6>
     </span>
 
+    <a href="{{route('post',$article->id)}}">
 
     <div class="body_">
         <div class="col-12 title_post">
@@ -69,7 +71,7 @@
         <div class="owner col-12">
             <span class="col-12">
                 <span class=" img_name gap-2">
-                    <img src="{{ FileHelper::userimage($article->author->image) }}" class="card-img-top" alt="...">
+                    <img src="{{FileHelper::userimage($article->author->image) }}" class="card-img-top" alt="...">
 
                     <p>{{ $article->author->name }}</p>
                 </span>
@@ -80,6 +82,8 @@
             </span>
         </div>
     </div>
+</a>
+
 </div>
 </div>
 
@@ -113,13 +117,17 @@
           @foreach ( $allPosts as $Post )
                     <div class="col-sm-12 col-md-6 col-lg-12">
                         <div class="card h-100">
+    <a href="{{route('post',$article->id)}}">
+
                             <div class="image-container">
                                 <img src="{{FileHelper::userimage($article->image)}}" class="card-img-top" alt="...">
 
                             </div>
+</a>
+                            
                             <div class="card-body">
                                 <h5 class="card-title">{{$Post->title}}</h5>
-                                <p class="card-text">{{ FileHelper::truncateDescription($article->content, 10) }}</p>
+                                <p class="card-text">{{FileHelper::truncateDescription($article->content, 10) }}</p>
                             </div>
                             <div class="card-footer">
                                 <div class="img_name col-6">
@@ -131,6 +139,7 @@
                                     <p>{{$article->created_at}}</p>
                                 </span>
                             </div>
+
                         </div>
                     </div>
                     @endforeach 

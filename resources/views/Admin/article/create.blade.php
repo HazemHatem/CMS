@@ -57,16 +57,18 @@
 
 @endsection
 
-
 @push('before-scripts')
 
-<script src="https://cdn.tiny.cloud/1/34ri62ry2ty734gxgcsjh8jio0wq4p89amijenyz64jkp7vj/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+ 
+<script src="https://cdn.tiny.cloud/1/34ri62ry2ty734gxgcsjh8jio0wq4p89amijenyz64jkp7vj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
-        api: '34ri62ry2ty734gxgcsjh8jio0wq4p89amijenyz64jkp7vj',
-        selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
-        plugins: 'code table lists',
-        toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+        selector: '#content', // حدد الـ textarea التي سيتم تحويلها إلى محرر
+        
+        plugins: 'lists link image table code', // المكونات الإضافية المطلوبة
+        toolbar: 'undo redo | bold italic | bullist numlist | link image | code',
+        menubar: false, // إخفاء الشريط العلوي (اختياري)
+        height: 400, // ضبط ارتفاع المحرر
     });
 </script>
 @endpush
