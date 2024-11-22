@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Auth\RegisterRequest;
 use App\Http\Requests\Admin\Admin\AdminRequest;
+use App\Models\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -48,7 +49,8 @@ class AdminController extends Controller
 
     public function edit(User $admin)
     {
-        return view('Admin.Admin.edit', compact('admin'));
+        $rules = Rule::all();
+        return view('Admin.Admin.edit', compact('admin', 'rules'));
     }
 
     public function update(AdminRequest $request, User $admin)

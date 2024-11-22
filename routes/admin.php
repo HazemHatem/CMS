@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Comment\CommentController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\Rule\RuleController;
+use App\Http\Controllers\Admin\Setting\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,6 @@ Route::prefix('Admin')->as('Admin.')->group(function () {
         Route::resource('profile', ProfileController::class);
         Route::patch('/profile/{profile}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
         Route::resource('rule', RuleController::class);
+        Route::resource('setting', SettingController::class);
     });
 });

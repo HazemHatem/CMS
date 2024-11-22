@@ -9,16 +9,14 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Edit Category</h3>
+                        <h3 class="card-title">Edit Rule</h3>
                     </div>
-                    <form action="{{ route('Admin.category.update', $rule->id) }}" method="POST">
+                    <form action="{{ route('Admin.rule.update', $rule->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $rule->name }}" placeholder="Enter name">
-                                @include('Admin.layout.message.error', ['name' => 'name'])
+                                @include('Admin.layout.forms.input', ['name' => 'name' , 'type' => 'text' , 'value' => $rule->name])
                             </div>
                         </div>
                         <div class="card-footer">

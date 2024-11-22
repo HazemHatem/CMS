@@ -16,24 +16,13 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputFile">Image</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Update image</label>
-                                    </div>
-                                </div>
-                                @include('Admin.layout.message.error', ['name' => 'image'])
+                                @include('Admin.layout.forms.image')
                             </div>
                             <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ $article->title }}" placeholder="Enter title">
-                                @include('Admin.layout.message.error', ['name' => 'title'])
+                                @include('Admin.layout.forms.input', ['name' => 'title' , 'type' => 'text' , 'value' => $article->title])
                             </div>
                             <div class="form-group">
-                                <label for="content">Content</label>
-                                <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" placeholder="Enter content">{{ $article->content }}</textarea>
-                                @include('Admin.layout.message.error', ['name' => 'content'])
+                                @include('Admin.layout.forms.input', ['name' => 'content' , 'type' => 'text' , 'value' => $article->content])
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>

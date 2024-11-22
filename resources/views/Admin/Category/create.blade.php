@@ -15,24 +15,13 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" placeholder="Enter name">
-                                @include('Admin.layout.message.error', ['name' => 'name'])
+                                @include('Admin.layout.forms.input', ['name' => 'name' , 'type' => 'text' , 'value' => old('name')])
                             </div>
                             <div class="form-group">
-                                <label for="description">Description</label>
-                                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" id="description" value="{{ old('description') }}" placeholder="Enter description">
-                                @include('Admin.layout.message.error', ['name' => 'description'])
+                                @include('Admin.layout.forms.input', ['name' => 'description' , 'type' => 'text' , 'value' => old('description')])
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputFile">Image</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Update image</label>
-                                    </div>
-                                </div>
-                                @include('Admin.layout.message.error', ['name' => 'image'])
+                                @include('Admin.layout.forms.image')
                             </div>
                         </div>
                         <div class="card-footer">

@@ -15,24 +15,16 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}" placeholder="Enter name">
-                                @include('Admin.layout.message.error', ['name' => 'name'])
+                                @include('Admin.layout.forms.input' , ['name' => 'name' , 'type' => 'text' , 'value' => old('name')])
                             </div>
                             <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}" placeholder="Enter email">
-                                @include('Admin.layout.message.error', ['name' => 'email'])
+                                @include('Admin.layout.forms.input' , ['name' => 'email' , 'type' => 'email' , 'value' => old('email')])
                             </div>
                             <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" name="phone" class="form-control" id="phone" value="{{ old('phone') }}" placeholder="Enter phone">
-                                @include('Admin.layout.message.error', ['name' => 'phone'])
+                                @include('Admin.layout.forms.input' , ['name' => 'phone' , 'type' => 'text' , 'value' => old('phone')])
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}" placeholder="Password">
-                                @include('Admin.layout.message.error', ['name' => 'password'])
+                                @include('Admin.layout.forms.input' , ['name' => 'password' , 'type' => 'password' , 'value' => old('password')])
                             </div>
                         </div>
                         <div class="card-footer">

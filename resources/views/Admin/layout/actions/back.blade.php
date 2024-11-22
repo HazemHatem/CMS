@@ -1,0 +1,1 @@
+<a href="{{route($route)}}" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>

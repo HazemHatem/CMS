@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Rule;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Rule\RuleRequest;
+use App\Models\User;
 
 class RuleController extends Controller
 {
@@ -45,7 +46,8 @@ class RuleController extends Controller
      */
     public function show(Rule $rule)
     {
-        return view('Admin.Rule.show', compact('rule'));
+        $users = User::where('rule_id', $rule->id)->get();
+        return view('Admin.Rule.show', compact('rule', 'users'));
     }
 
     /**

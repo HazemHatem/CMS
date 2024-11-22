@@ -220,6 +220,30 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">SETTINGS</li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link {{request()->routeIs('Admin.setting.*') ? 'active' : ''}}">
+                        <i class="bi bi-gear-fill"></i>
+                        <p>
+                            Settings
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('Admin.setting.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>All Settings</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('Admin.setting.create')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create Setting</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-header">AUTH</li>
                 <li class="nav-item">
                     <a href="{{route('Admin.logout')}}" class="nav-link">

@@ -1,6 +1,6 @@
 @extends('Admin.app')
 
-@section('title' , $category->name)
+@section('title' , 'Add Setting')
 
 @section('content')
 <section class="content">
@@ -9,20 +9,16 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Edit Category</h3>
+                        <h3 class="card-title">Add Setting</h3>
                     </div>
-                    <form action="{{ route('Admin.category.update', $category->id) }}" method="POST">
+                    <form action="{{ route('Admin.setting.store') }}" method="POST">
                         @csrf
-                        @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                @include('Admin.layout.forms.input', ['name' => 'name' , 'type' => 'text' , 'value' => $category->name])
+                                @include('Admin.layout.forms.input', ['name' => 'key' , 'type' => 'text' , 'value' => old('key')])
                             </div>
                             <div class="form-group">
-                                @include('Admin.layout.forms.input', ['name' => 'description' , 'type' => 'text' , 'value' => $category->description])
-                            </div>
-                            <div class="form-group">
-                                @include('Admin.layout.forms.image')
+                                @include('Admin.layout.forms.input', ['name' => 'value' , 'type' => 'text' , 'value' => old('value')])
                             </div>
                         </div>
                         <div class="card-footer">

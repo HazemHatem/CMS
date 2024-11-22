@@ -40,13 +40,11 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer">
-                        <a href="{{route('Admin.comment.index')}}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
-                        <form action="{{route('Admin.comment.destroy', $comment->id)}}" method="POST" class="d-inline">
-                            @method('delete')
-                            @csrf
-                            <button type="submit" class="btn btn-danger float-right"><i class="fa fa-trash"></i> Delete</button">
-                        </form>
+                    <div class="card-footer d-flex">
+                        @include('Admin.layout.actions.back', ['route' => 'Admin.comment.index'])
+                        <div class="ml-auto">
+                            @include('Admin.layout.actions.delete', ['route' => 'Admin.comment.destroy', 'id' => $comment->id])
+                        </div>
                     </div>
                 </div>
             </div>

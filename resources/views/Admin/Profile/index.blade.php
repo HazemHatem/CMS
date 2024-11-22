@@ -19,29 +19,16 @@
                                 <div class="text-center m-2 p-2">
                                     <img class="profile-user-img img-fluid img-circle" src=" {{ FileHelper::userimage(Auth::guard('admin')->user()->image) }}" alt="{{ Auth::guard('admin')->user()->name }}">
                                 </div>
-                                <label for="exampleInputFile">Image</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" name="image" class="custom-file-input" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                    </div>
-                                </div>
-                                @include('Admin.layout.message.error', ['name' => 'image'])
+                                @include('Admin.layout.forms.image')
                             </div>
                             <div class="form-group mb-3">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter name" value="{{ Auth::guard('admin')->user()->name }}">
-                                @include('Admin.layout.message.error', ['name' => 'name'])
+                                @include('Admin.layout.forms.input' , ['name' => 'name' , 'type' => 'text' , 'value' => Auth::guard('admin')->user()->name])
                             </div>
                             <div class="form-group mb-3">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email" value="{{ Auth::guard('admin')->user()->email }}">
-                                @include('Admin.layout.message.error', ['name' => 'email'])
+                                @include('Admin.layout.forms.input' , ['name' => 'email' , 'type' => 'email' , 'value' => Auth::guard('admin')->user()->email])
                             </div>
                             <div class="form-group mb-3">
-                                <label for="phone">Phone</label>
-                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Enter phone" value="{{ Auth::guard('admin')->user()->phone }}">
-                                @include('Admin.layout.message.error', ['name' => 'phone'])
+                                @include('Admin.layout.forms.input' , ['name' => 'phone' , 'type' => 'text' , 'value' => Auth::guard('admin')->user()->phone])
                             </div>
                             <div class="text-center mb-3">
                                 <button type="save" class="btn btn-primary">Save</button>
