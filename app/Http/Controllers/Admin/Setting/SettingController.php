@@ -9,8 +9,12 @@ use App\Models\Setting;
 
 class SettingController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of the settings.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\View
      */
     public function index(Request $request)
     {
@@ -24,8 +28,11 @@ class SettingController extends Controller
         return view('Admin.Setting.index', compact('settings'));
     }
 
+
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new setting.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
