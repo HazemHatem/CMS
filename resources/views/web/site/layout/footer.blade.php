@@ -36,7 +36,10 @@
 
 
     <script src="{{asset('site/Style/js/WOW/dist/wow.min.js')}}"></script>
+  @stack('before-scripts')
+
     <script>
+
       new WOW().init();
     </script>
   </body>

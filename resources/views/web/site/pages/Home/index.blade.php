@@ -4,14 +4,14 @@
 
 <section class="LandingPage col-12">
     <!-- start landing -->
-
+ 
     <style>
         .landing {
             background-image: linear-gradient(135deg, rgba(30, 33, 33, 0.82) 1%, rgba(32, 32, 32, 0.14) 98%),
             url("{{asset('site/Style/image/img/landing.jpg')}}");
 
         }
-    </style>
+     </style>
     <section class="landing col-12">
 
 
@@ -33,12 +33,11 @@
     <div class="categories col-12 ">
         <!-- sm 10 -->
         <ul class="col-sm-10 col-lg-7">
-            <button class="btn_2 col-12">Nature</button>
-            <button class="btn_2 col-12">Photography</button>
-            <button class="btn_2 col-12">Relaxation</button>
-            <button class="btn_2 col-12">Vacation</button>
-            <button class="btn_2 col-12">Travel</button>
-            <button class="btn_2 col-12">Adventure</button>
+          @foreach ($categories as $category )
+ 
+          <button class="btn_2 col-12"><a href="{{route('category.show',$category->id)}}">{{$category->name}}</a></button>
+             
+          @endforeach
         </ul>
     </div>
 </section>
@@ -52,66 +51,40 @@
 
 
         <section class="featured">
-            <div class="post col-sm-12 col-md-5 ">
+        @foreach ($articles as $article )
+<div class="post col-sm-12 col-md-5 ">
 
-                <img src="{{asset('site/Style/image/img/Artecal1.jpg')}}" alt="">
-                <div class="post_body col-12">
-                    <span class="title_category col-3">
-                        <h6>Photography</h6>
-                    </span>
+<img src="{{ FileHelper::userimage($article->image) }}" alt="">
+<div class="post_body col-12">
+    <span class="title_category col-3">
+        <h6>{{$article->title}}</h6>
+    </span>
 
 
-                    <div class="body_">
-                        <div class="col-12 title_post">
-                            <h3>The Road Ahead</h3>
-                            <p>The road ahead might be paved - it might not be.</p>
-                        </div>
-                        <div class="owner col-12">
-                            <span class="col-12">
-                                <span class=" img_name gap-2">
-                                    <img src="{{asset('site/Style/image/img/oo.jpg')}}" class="card-img-top" alt="...">
+    <div class="body_">
+        <div class="col-12 title_post">
+            <h3>{{$article->status}}</h3>
+            <p>The road ahead might be paved - it might not be.</p>
+        </div>
+        <div class="owner col-12">
+            <span class="col-12">
+                <span class=" img_name gap-2">
+                    <img src="{{ FileHelper::userimage($article->author->image) }}" class="card-img-top" alt="...">
 
-                                    <p>Mat Vogels</p>
-                                </span>
-                                <div class="post_date">
-                                    <p>September 25, 2015 </p>
+                    <p>{{ $article->author->name }}</p>
+                </span>
+                <div class="post_date">
+                    <p>{{$article->created_at}} </p>
 
-                                </div>
-                            </span>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="post col-sm-12 col-md-5 ">
+            </span>
+        </div>
+    </div>
+</div>
+</div>
 
-                <img src="{{asset('site/Style/image/img/Artecal1.jpg')}}" alt="">
-                <div class="post_body col-12">
-                    <span class="title_category col-3">
-                        <h6>Photography</h6>
-                    </span>
-
-
-                    <div class="body_">
-                        <div class="col-12 title_post">
-                            <h3>The Road Ahead</h3>
-                            <p>The road ahead might be paved - it might not be.</p>
-                        </div>
-                        <div class="owner col-12">
-                            <span class="col-12">
-                                <span class=" img_name gap-2">
-                                    <img src="{{asset('site/Style/image/img/oo.jpg')}}" class="card-img-top" alt="...">
-
-                                    <p>Mat Vogels</p>
-                                </span>
-                                <div class="post_date">
-                                    <p>September 25, 2015 </p>
-
-                                </div>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+@endforeach
+          
         </section>
 
     </div>
@@ -128,148 +101,41 @@
 
         <div class="container col-12">
             <div class="row  col-12">
-                <div class="title2">
+               
+            
+            <div class="title2">
 
                     <h1 class="col-3">Most Recent</h1>
                 </div>
 
 
                 <div class="col-12   row-2s">
+          @foreach ( $allPosts as $Post )
                     <div class="col-sm-12 col-md-6 col-lg-12">
                         <div class="card h-100">
                             <div class="image-container">
-                                <img src="{{asset('site/Style/image/img/cat.jpg')}}" class="card-img-top" alt="...">
+                                <img src="{{FileHelper::userimage($article->image)}}" class="card-img-top" alt="...">
 
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                                <h5 class="card-title">{{$Post->title}}</h5>
+                                <p class="card-text">{{ FileHelper::truncateDescription($article->content, 10) }}</p>
                             </div>
                             <div class="card-footer">
                                 <div class="img_name col-6">
-                                    <img src="{{asset('site/Style/image/img/oo.jpg')}}" class="card-img-top" alt="...">
+                                    <img src="{{FileHelper::userimage($article->author->image)}}" class="card-img-top" alt="...">
 
-                                    <p>mat Vogels</p>
+                                    <p>{{$article->author->name}}</p>
                                 </div>
                                 <span class="date">
-                                    <p>2/2/2000</p>
+                                    <p>{{$article->created_at}}</p>
                                 </span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-12">
-                        <div class="card h-100">
-                            <div class="image-container">
-                                <img src="{{asset('site/Style/image/img/cat.jpg')}}" class="card-img-top" alt="...">
-
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="img_name col-6">
-                                    <img src="{{asset('site/Style/image/img/oo.jpg')}}" class="card-img-top" alt="...">
-
-                                    <p>mat Vogels</p>
-                                </div>
-                                <span class="date">
-                                    <p>2/2/2000</p>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-12">
-                        <div class="card h-100">
-                            <div class="image-container">
-                                <img src="{{asset('site/Style/image/img/cat.jpg')}}" class="card-img-top" alt="...">
-
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="img_name col-6">
-                                    <img src="{{asset('site/Style/image/img/oo.jpg')}}" class="card-img-top" alt="...">
-
-                                    <p>mat Vogels</p>
-                                </div>
-                                <span class="date">
-                                    <p>2/2/2000</p>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-12">
-                        <div class="card h-100">
-                            <div class="image-container">
-
-
-                                <img src="{{asset('site/Style/image/img/cat.jpg')}}" class="card-img-top" alt="...">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="img_name col-6">
-                                    <img src="{{asset('site/Style/image/img/oo.jpg')}}" class="card-img-top" alt="...">
-
-                                    <p>mat Vogels</p>
-                                </div>
-                                <span class="date">
-                                    <p>2/2/2000</p>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-12">
-                        <div class="card h-100">
-                            <div class="image-container">
-                                <img src="{{asset('site/Style/image/img/cat.jpg')}}" class="card-img-top" alt="...">
-
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="img_name col-6">
-                                    <img src="{{asset('site/Style/image/img/oo.jpg')}}" class="card-img-top" alt="...">
-
-                                    <p>mat Vogels</p>
-                                </div>
-                                <span class="date">
-                                    <p>2/2/2000</p>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-12">
-                        <div class="card h-100">
-                            <div class="image-container">
-                                <img src="{{asset('site/Style/image/img/cat.jpg')}}" class="card-img-top" alt="...">
-
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="img_name col-6">
-                                    <img src="{{asset('site/Style/image/img/oo.jpg')}}" class="card-img-top" alt="...">
-
-                                    <p>mat Vogels</p>
-                                </div>
-                                <span class="date">
-                                    <p>2/2/2000</p>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach 
                 </div>
+              
             </div>
 
 

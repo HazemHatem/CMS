@@ -28,7 +28,7 @@ class ArticleRequest extends FormRequest
             'author_id' => 'required|numeric|exists:authors,id',
             'category_id' => 'required|numeric|exists:categories,id',
             'status' => 'required|string|in:published,unpublished,draft',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image' => 'nullable',
         ];
     }
 }
