@@ -50,6 +50,7 @@ class AdminController extends Controller
     public function edit(User $admin)
     {
         $rules = Rule::all();
+
         return view('Admin.Admin.edit', compact('admin', 'rules'));
     }
 
