@@ -45,7 +45,7 @@
         <section class="featured">
             @foreach ($Most_viewed_article as $article)
             <div class="post col-sm-12 col-md-5 ">
-                <img src="{{ FileHelper::userimage($article->image) }}" alt="">
+                <img src="{{FileHelper::userimage($article->image) }}" alt="">
                 <div class="post_body col-12">
                     <span class="title_category col-3">
                         <h6>{{$article->category->name}}</h6>
@@ -58,7 +58,7 @@
                             <div class="owner col-12">
                                 <span class="col-12">
                                     <span class=" img_name gap-2">
-                                        <img src="{{ FileHelper::userimage($article->author->image) }}"
+                                        <img src="{{FileHelper::userimage($article->author->image) }}"
                                             class="card-img-top" alt="...">
                                         <p>{{ $article->author->name }}</p>
                                     </span>
