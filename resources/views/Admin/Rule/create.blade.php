@@ -15,9 +15,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" placeholder="Enter name">
-                                @include('Admin.layout.message.error', ['name' => 'name'])
+                                @include('Admin.layout.forms.input', ['name' => 'name' , 'type' => 'text' , 'value' => old('name')])
                             </div>
                         </div>
                         <div class="card-footer">

@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use Str;
+use Illuminate\Support\Str;
 
 class FileHelper
 {
@@ -11,7 +11,7 @@ class FileHelper
         return isset($path) ? asset('storage/' . $path) : asset('site/images/user.png');
     }
     public static function truncateDescription($description, $words = 10)
-{
-    return Str::words($description, $words, '...');
-}
+    {
+        return Str::words($description, $words, '...');
+    }
 }

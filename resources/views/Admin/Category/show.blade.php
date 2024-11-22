@@ -49,13 +49,11 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer">
-                        <a href="{{route('Admin.category.index')}}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
-                        <form action="{{route('Admin.category.destroy', $category->id)}}" method="POST" class="d-inline">
-                            @method('delete')
-                            @csrf
-                            <button type="submit" class="btn btn-danger float-right"><i class="fa fa-trash"></i> Delete</button">
-                        </form>
+                    <div class="card-footer d-flex">
+                        @include('Admin.layout.actions.back', ['route' => 'Admin.category.index'])
+                        <div class="ml-auto">
+                            @include('Admin.layout.actions.delete', ['route' => 'Admin.category.destroy', 'id' => $category->id])
+                        </div>
                     </div>
                 </div>
             </div>

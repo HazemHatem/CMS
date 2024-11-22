@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Admin;
+namespace App\Http\Requests\Admin\Setting;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminRequest extends FormRequest
+class SettingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,13 +21,9 @@ class AdminRequest extends FormRequest
      */
     public function rules(): array
     {
-        $userId = $this->admin->id;
         return [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $userId,
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $userId,
-            'rule_id' => 'required|exists:rules,id',
+            'key' => 'required|string|max:100',
+            'value' => 'required|string|max:255',
         ];
     }
 }

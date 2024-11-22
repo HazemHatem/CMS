@@ -16,9 +16,7 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="content">Content</label>
-                                <input type="text" name="content" class="form-control @error('content') is-invalid @enderror" id="content" value="{{ $comment->content }}" placeholder="Enter content">
-                                @include('Admin.layout.message.error', ['name' => 'content'])
+                                @include('Admin.layout.forms.input', ['name' => 'content' , 'type' => 'text' , 'value' => $comment->content])
                             </div>
                             <div class="form-group">
                                 <label for="article_id">Article</label>

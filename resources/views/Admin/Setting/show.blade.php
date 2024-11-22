@@ -1,6 +1,6 @@
 @extends('Admin.app')
 
-@section('title' , $rule->name)
+@section('title' , $setting->name)
 
 @section('content')
 
@@ -10,40 +10,34 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Rule Details</h3>
+                        <h3 class="card-title">Setting Details</h3>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
-                                    <th style="width: 10px">Name</th>
-                                    <td>{{ $rule->name }}</td>
+                                    <th style="width: 10px">Key</th>
+                                    <td>{{ $setting->key }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Users</th>
-                                    <td>
-                                        <ul class="list-group">
-                                            @foreach ($users as $user)
-                                            <li class="list-group-item"><a href="{{route('Admin.user.show', $user->id)}}">{{ $user->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </td>
+                                    <th>Value</th>
+                                    <td>{{ $setting->value }}</td>
                                 </tr>
                                 <tr>
                                     <th>Created At</th>
-                                    <td>{{ $rule->created_at }}</td>
+                                    <td>{{ $setting->created_at }}</td>
                                 </tr>
                                 <tr>
                                     <th>Updated At</th>
-                                    <td>{{ $rule->updated_at }}</td>
+                                    <td>{{ $setting->updated_at }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="card-footer d-flex">
-                        @include('Admin.layout.actions.back' , ['route' => 'Admin.rule.index'])
+                        @include('Admin.layout.actions.back' , ['route' => 'Admin.setting.index'])
                         <div class="ml-auto">
-                            @include('Admin.layout.actions.delete', ['route' => 'Admin.rule.destroy' , 'id' => $rule->id])
+                            @include('Admin.layout.actions.delete', ['route' => 'Admin.setting.destroy' , 'id' => $setting->id])
                         </div>
                     </div>
                 </div>

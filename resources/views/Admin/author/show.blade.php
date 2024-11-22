@@ -57,13 +57,11 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer">
-                        <a href="{{route('Admin.author.index')}}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
-                        <form action="{{route('Admin.author.destroy', $author->id)}}" method="POST" class="d-inline">
-                            @method('delete')
-                            @csrf
-                            <button type="submit" class="btn btn-danger float-right"><i class="fa fa-trash"></i> Delete</button">
-                        </form>
+                    <div class="card-footer d-flex">
+                        @include('Admin.layout.actions.back', ['route' => 'Admin.author.index'])
+                        <div class="ml-auto">
+                            @include('Admin.layout.actions.delete', ['route' => 'Admin.author.destroy', 'id' => $author->id])
+                        </div>
                     </div>
                 </div>
             </div>

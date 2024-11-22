@@ -14,40 +14,23 @@
                     <div class="box-body">
 
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $admin->name }}" placeholder="Enter name">
-                            @include('Admin.layout.message.error', ['name' => 'name'])
+                            @include('Admin.layout.forms.input', ['name' => 'name', 'type' => 'text', 'value' => $admin->name])
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}" placeholder="Enter email">
-                            @include('Admin.layout.message.error', ['name' => 'email'])
+                            @include('Admin.layout.forms.input', ['name' => 'email', 'type' => 'email', 'value' => $admin->email])
                         </div>
 
                         <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="{{ $admin->phone }}" placeholder="Enter phone">
-                            @include('Admin.layout.message.error', ['name' => 'phone'])
+                            @include('Admin.layout.forms.input', ['name' => 'phone', 'type' => 'text', 'value' => $admin->phone])
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputFile">Image</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" name="image" class="custom-file-input" id="exampleInputFile">
-                                    <label class="custom-file-label" for="exampleInputFile">Update image</label>
-                                </div>
-                            </div>
-                            @include('Admin.layout.message.error', ['name' => 'image'])
+                            @include('Admin.layout.forms.image')
                         </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="rule_id" value="4" id="flexCheckDefault" @if($admin->rule->name == 'manager') checked @endif>
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Manager
-                            </label>
-                            @include('Admin.layout.message.error', ['name' => 'rule_id'])
+                        <div class="form-group">
+                            @include('Admin.layout.forms.rule', ['value' => $admin->rule_id])
                         </div>
                     </div>
                     <div class="box-footer mt-3">
