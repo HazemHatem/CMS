@@ -14,4 +14,19 @@ class FileHelper
     {
         return Str::words($description, $words, '...');
     }
+
+    public static function authorimage(string $path = null)
+    {
+        return isset($path) ? asset('storage/' . $path) : asset('site/Style/image/img/oo.jpg');
+    }
+
+    public static function articleimage(string $path = null)
+    {
+        return isset($path) ? asset('storage/' . $path) : asset('site/Style/image/post.jpg');
+    }
+
+    public static function categoryimage(string $path = null)
+    {
+        return isset($path) ? asset('storage/' . $path) : asset('site/Style/image/categories/landing.jpg');
+    }
 }

@@ -1,5 +1,7 @@
 @extends('web.app')
 
+@section('title' , $article->title)
+
 
 @section('content')
 <style>

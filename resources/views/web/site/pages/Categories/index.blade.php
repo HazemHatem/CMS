@@ -1,5 +1,7 @@
 @extends('web.app')
 
+@section('title' , 'Categories')
+
 <!-- End landing -->
 
 @section('content')
@@ -31,7 +33,7 @@
                     <div class="image-overlay">
                         <h3 class="title">{{$category->name}}</h3>
                     </div>
-                    <img src="{{FileHelper::userimage($category->image) }}" class="card-img-top" alt="...">
+                    <img src="{{FileHelper::categoryimage($category->image) }}" class="card-img-top" alt="...">
                 </a>
             </div>
             @endforeach

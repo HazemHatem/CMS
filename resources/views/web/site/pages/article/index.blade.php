@@ -1,5 +1,6 @@
 @extends('web.app')
 
+@section('title' , 'Articles')
 <!-- End landing -->
 
 @section('content')
@@ -41,7 +42,7 @@
                 <div class="card h-100">
                     <a href="{{route('article.show', $Post->id)}}">
                         <div class="image-container">
-                            <img src="{{FileHelper::userimage($Post->image)}}" class="card-img-top"
+                            <img src="{{FileHelper::articleimage($Post->image)}}" class="card-img-top"
                                 alt="...">
                         </div>
                         <div class="card-body">
@@ -50,7 +51,7 @@
                     </a>
                     <div class="card-footer">
                         <div class="img_name col-6">
-                            <img src="{{FileHelper::userimage($Post->author->image)}}" class="card-img-top" alt="...">
+                            <img src="{{FileHelper::authorimage($Post->author->image)}}" class="card-img-top" alt="...">
                             <p>{{$Post->author->name}}</p>
                         </div>
                         <span class="date">

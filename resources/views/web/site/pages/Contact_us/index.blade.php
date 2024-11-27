@@ -1,7 +1,6 @@
 @extends('web.app')
 
-
-
+@section('title' , 'Contact Us')
 
 @section('content')
 
@@ -27,6 +26,12 @@
             padding-top: 184px;
             background-position: 0px 0px, 50% 50%;
             background-size: auto, cover;
+        }
+
+        #submit {
+            color: black;
+            display: block;
+            margin: auto;
         }
     </style>
     <!-- start landing -->
@@ -73,21 +78,47 @@
                         </div>
                     </div>
                     <div class="left col-12">
-                        <form action="">
+                        <form action="{{ route('contact.store') }}" method="POST">
+                            @csrf
                             <div class="form-groupe">
                                 <h3 class="col-12">Send a Request</h3>
-
                                 <div class="col-12">
-                                    <label for="Name:">name</label>
-                                    <input type="text" placeholder="Enter Your name" class="form-control">
+                                    @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    <label for="name">Name:</label>
+                                    <input type="text" name="name" id="name" placeholder="Enter Your name" class="form-control">
                                 </div>
                                 <div class="col-12">
-                                    <label for="Email Address:">Email Address:</label>
-                                    <input type="text" placeholder="Enter Your Email " class="form-control">
+                                    @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    <label for="email">Email Address:</label>
+                                    <input type="email" name="email" id="email" placeholder="Enter Your Email " class="form-control">
                                 </div>
                                 <div class="col-12">
-                                    <label for="Message:">Message:</label>
-                                    <textarea name="" id="" rows="4" placeholder="Say what you need to say" class="form-control col-12"></textarea>
+                                    @error('phone')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    <label for="phone">Phone Number:</label>
+                                    <input type="text" name="phone" id="phone" placeholder="Enter Your Phone Number" class="form-control">
+                                </div>
+                                <div class="col-12">
+                                    @error('subject')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    <label for="subject">Subject:</label>
+                                    <input type="text" name="subject" id="subject" placeholder="Enter Your Subject" class="form-control">
+                                </div>
+                                <div class="col-12">
+                                    @error('message')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    <label for="message">Message:</label>
+                                    <textarea name="message" id="message" rows="4" placeholder="Say what you need to say" class="form-control col-12"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success" id="submit">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -113,4 +144,13 @@
 <!-- End content -->
 @push('contact-css')
 <link rel="stylesheet" href="{{ asset('site/style/css/contact/index.css') }}">
+@endpush
+
+@push('scripts')
+<script>
+    var success = "{{ session('success') }}";
+    if (success) {
+        alert(success);
+    }
+</script>
 @endpush

@@ -50,7 +50,7 @@
 
     <!-- start logo -->
     <div class="logo col-4">
-        <h1 style="color: white;   display: block;">{{ env('APP_NAME') }}</h1>
+        <a class="h1" href="{{route("home")}}" style="color: white;   display: block;">{{ env('APP_NAME') }}</a>
 
     </div>
     <!--end  logo -->

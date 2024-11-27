@@ -33,6 +33,7 @@
 
 </footer>
 
+@stack('scripts')
 
 
 </body>
