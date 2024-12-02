@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Contact\ContactController;
 use App\Http\Controllers\Site\Article\ArticleController;
 use App\Http\Controllers\Site\Category\CategoryController;
+use App\Http\Controllers\Site\Comment\CommentController;
 
 
 /*
@@ -22,7 +23,6 @@ use App\Http\Controllers\Site\Category\CategoryController;
 
 
 Route::prefix('CMS')->group(function () {
-
     Route::get('/home', HomeController::class)->name('home');
     Route::resource('/article',  ArticleController::class);
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
@@ -32,5 +32,6 @@ Route::prefix('CMS')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/register',  [RegisterController::class, 'register'])->name('register.register');
     Route::get('/contact',  [ContactController::class, 'index'])->name('contact.index');
-    Route::post('/contact',  [ContactController::class, 'store'])->name('contact.store');
+    Route::post('/contact/store',  [ContactController::class, 'store'])->name('contact.store');
+    Route::post('/comment/store',  [CommentController::class, 'store'])->name('comment.store');
 });

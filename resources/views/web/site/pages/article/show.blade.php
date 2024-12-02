@@ -5,6 +5,7 @@
 
 @push('custom-css')
 <link rel="stylesheet" href="{{ asset('site/Style/css/post/index.css') }}">
+<link rel="stylesheet" href="{{ asset('site/Style/css/comment/index.css') }}">
 @endpush
 
 @section('content')
@@ -20,7 +21,6 @@
 </section>
 
 
-<!-- End landing -->
 
 <main class="container col-11">
     <div class="recent col-11">
@@ -60,4 +60,23 @@
             </div>
         </div>
     </div>
+    <div id="comments-section">
+        <h3>Comments</h3>
+        <div id="comments-list">
+            @foreach ($article->comments as $comment)
+            <div class="comment">
+                <strong>{{ $comment->user->name }}</strong>
+                <p>{{ $comment->content }}</p>
+            </div>
+            @endforeach
+        </div>
+        <h4>Add a Comment</h4>
+        <form id="comment-form" action="{{ route('comment.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="article_id" value="{{ $article->id }}">
+            @include('web.site.layout.forms.message', ['name' => 'content', 'value' => old('content')])
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </main>
+@endsection
