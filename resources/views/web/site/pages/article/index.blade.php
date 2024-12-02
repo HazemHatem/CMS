@@ -3,29 +3,12 @@
 @section('title' , 'Articles')
 <!-- End landing -->
 
+@push('custom-css')
+<link rel="stylesheet" href="{{ asset('site/Style/css/category/index.css') }}">
+@endpush
+
 @section('content')
 <section class="LandingPage col-12">
-    <!-- start landing -->
-    <style>
-        .landing {
-            background-image: linear-gradient(135deg, rgba(30, 33, 33, 0.82) 1%, rgba(32, 32, 32, 0) 0),
-            url("{{asset('site/Style/image/categories/landing.jpg')}}");
-            height: 45vh;
-            background-position: 0px 0px, 50% 50%;
-            background-size: auto, cover;
-        }
-
-        .pagination .page-link {
-            background-color: #0000008c;
-            border-color: black;
-            margin-top: 3rem;
-        }
-
-        .text-muted {
-            margin-top: 3rem;
-            margin-right: 1rem;
-        }
-    </style>
     <section class="landing col-12">
         <div class="col-6">
             <span class="title">
@@ -62,17 +45,7 @@
             </div>
             @endforeach
         </div>
-        @if ( $articles->hasPages() )
-        <div class="pagination">
-            {{ $articles->links() }}
-        </div>
-        @endif
+        @include('web.site.layout.pagination.pagination', ['data' => $articles])
     </section>
 </main>
 @endsection
-
-
-
-@push('custom-css')
-<link rel="stylesheet" href="{{ asset('site/Style/css/category/index.css') }}">
-@endpush

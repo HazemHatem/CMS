@@ -3,22 +3,17 @@
 @section('title' , $article->title)
 
 
+@push('custom-css')
+<link rel="stylesheet" href="{{ asset('site/Style/css/post/index.css') }}">
+@endpush
+
 @section('content')
-<style>
-    .landing {
-        background-image: linear-gradient(135deg, rgba(30, 33, 33, 0.82) 1%, rgba(32, 32, 32, 0) 0),
-        url("{{asset('site/Style/image/categories/landing.jpg')}}");
-        height: 45vh;
-        background-position: 0px 0px, 50% 50%;
-        background-size: auto, cover;
-    }
-</style>
 <section class="LandingPage col-12">
     <!-- start landing -->
     <section class="landing col-12">
         <div class="col-6">
             <span class="title">
-                <h1>post</h1>
+                <h1>{{ $article->title }}</h1>
             </span>
         </div>
     </section>
@@ -66,7 +61,3 @@
         </div>
     </div>
 </main>
-
-@push('custom-css')
-<link rel="stylesheet" href="{{ asset('site/Style/css/post/index.css') }}">
-@endpush

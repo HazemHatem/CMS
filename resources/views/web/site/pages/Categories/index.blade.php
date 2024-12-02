@@ -2,20 +2,12 @@
 
 @section('title' , 'Categories')
 
-<!-- End landing -->
+@push('custom-css')
+<link rel="stylesheet" href="{{ asset('site/Style/css/category/index.css') }}">
+@endpush
 
 @section('content')
 <section class="LandingPage col-12">
-    <!-- start landing -->
-    <style>
-        .landing {
-            background-image: linear-gradient(135deg, rgba(30, 33, 33, 0.82) 1%, rgba(32, 32, 32, 0) 0),
-            url("{{asset('site/Style/image/categories/landing.jpg')}}");
-            height: 45vh;
-            background-position: 0px 0px, 50% 50%;
-            background-size: auto, cover;
-        }
-    </style>
     <section class="landing col-12">
         <div class="col-6">
             <span class="title">
@@ -38,12 +30,7 @@
             </div>
             @endforeach
         </div>
+        @include('web.site.layout.pagination.pagination', ['data' => $categories])
     </section>
 </main>
 @endsection
-
-
-
-@push('custom-css')
-<link rel="stylesheet" href="{{ asset('site/Style/css/category/index.css') }}">
-@endpush

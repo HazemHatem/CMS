@@ -7,13 +7,6 @@
 <section class="LandingPage col-12">
     <!-- start landing -->
 
-    <style>
-        .landing {
-            background-image: linear-gradient(135deg, rgba(30, 33, 33, 0.82) 1%, rgba(32, 32, 32, 0.14) 98%),
-            url("{{asset('site/Style/image/img/landing.jpg')}}");
-
-        }
-    </style>
     <section class="landing col-12">
         <div class="col-6">
             <span class="title">
@@ -126,7 +119,3 @@
     </div>
 </main>
 @endsection
-
-@push('home-css')
-<link rel="stylesheet" href="{{ asset('site/Style/css/home/index.css') }}">
-@endpush

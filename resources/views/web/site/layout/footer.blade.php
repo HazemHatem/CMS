@@ -1,11 +1,3 @@
-<!-- End content -->
-<style>
-    .footer {
-        background-image: linear-gradient(180deg, rgba(35, 47, 56, 0.47), rgba(35, 47, 56, 0.31) 99%),
-        url("{{asset('site/Style/image/img/footer.jpg')}}");
-
-    }
-</style>
 <footer class="footer col-12">
     <div class="container">
         <div class="row col-6 ">
@@ -15,7 +7,7 @@
                 <h5>Stay in Touch</h5>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Enter Your Email Address" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Subscribe</button>
                 </div>
             </div>
         </div>

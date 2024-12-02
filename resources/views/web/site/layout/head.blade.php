@@ -26,7 +26,6 @@
 
     <link rel="stylesheet" href="{{asset('site/Style/css/home/style.css')}}" />
     @stack('custom-css')
-    @stack('home-css')
     @stack('contact-css')
 
 
