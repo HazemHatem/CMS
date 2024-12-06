@@ -33,6 +33,10 @@
                                     <td>{{ $admin->email }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Description</th>
+                                    <td>{{ $admin->description ?? '-' }}</td>
+                                </tr>
+                                <tr>
                                     <th>Role</th>
                                     <td>{{ $admin->rule->name }}</td>
                                 </tr>

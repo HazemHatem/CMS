@@ -1,6 +1,6 @@
 @extends('Admin.app')
 
-@section('title' , $setting->name)
+@section('title' , $setting->key)
 
 @section('content')
 <section class="content">

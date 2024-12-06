@@ -45,11 +45,13 @@ Route::prefix('Admin')->as('Admin.')->group(function () {
         Route::resource('comment', CommentController::class);
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::resource('user', UserController::class);
-        Route::resource('admin', AdminController::class)->middleware('manager');
         Route::get('/contact', ContactController::class)->name('contact');
         Route::resource('profile', ProfileController::class);
         Route::patch('/profile/{profile}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
-        Route::resource('rule', RuleController::class);
         Route::resource('setting', SettingController::class);
+        Route::middleware('manager')->group(function () {
+            Route::resource('admin', AdminController::class);
+            Route::resource('rule', RuleController::class);
+        });
     });
 });

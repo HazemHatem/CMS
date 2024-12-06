@@ -3,7 +3,6 @@
 @section('title' , $article->title)
 
 @section('content')
-
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -23,6 +22,18 @@
                                 <tr>
                                     <th style="width: 10px">Title</th>
                                     <td>{{ $article->title }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Rating</th>
+                                    <td>
+                                        @for($i=1; $i<=5; $i++)
+                                            @if($i <=$rating)
+                                            <i class="fas fa-star text-warning"></i>
+                                            @else
+                                            <i class="fas fa-star"></i>
+                                            @endif
+                                            @endfor
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Category</th>

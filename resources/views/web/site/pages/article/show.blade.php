@@ -29,6 +29,9 @@
                 <div class="title2">
                     <h1 class="col-12">{{ $article->title }}</h1>
                     <p> {{date('F j, Y', strtotime($article->created_at))}} | {{ $article->category->name }} </p>
+                    <div class="text-center mb-2">
+                        @include('web.site.layout.Rating.rating', ['article'=>$article])
+                    </div>
                 </div>
                 <div class="col-10   row-2s">
                     <div class="paragraph">

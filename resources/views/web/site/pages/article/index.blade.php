@@ -29,6 +29,9 @@
                                 alt="...">
                         </div>
                         <div class="card-body">
+                            <div class="text-center mb-2">
+                                @include('web.site.layout.Rating.rating', ['article'=>$Post])
+                            </div>
                             <h5 class="card-title">{{$Post->title}}</h5>
                         </div>
                     </a>

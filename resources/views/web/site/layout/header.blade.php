@@ -18,35 +18,31 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route("contact.index")}}">Contact-us</a>
             </li>
-
             <li class="nav-item">
-
-                @if (Auth::check())
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="nav-link">Logout</button>
-                </form>
-                <div>
-                    <img src="{{FileHelper::userimage(Auth::user()->image)}} }}" alt="">
-                </div>
-                <p> {{ Auth::user()->name }}!</p>
-
+                @if (Auth::user())
+                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                 @else
-            <li class="nav-item">
                 <a class="nav-link" href="{{ route('login.index') }}">Login</a>
+                @endif
             </li>
-            @endif
-
+            <li class="nav-item d-flex">
+                @if (Auth::user())
+                @if (Auth::user()->rule->name == 'author')
+                <a class="nav-link text-primary" href="{{ route('Author.dashboard.index') }}">
+                    {{ Auth::user()->name }}
+                    <img src="{{ FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
+                </a>
+                @else
+                <a class="nav-link text-primary" href="{{ route('profile.index') }}">
+                    {{ Auth::user()->name }}
+                    <img src="{{ FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
+                </a>
+                @endif
+                @endif
             </li>
-
         </ul>
-
-
-
     </nav>
     <!-- end nav -->
-
-
 
     <!-- start logo -->
     <div class="logo col-4">

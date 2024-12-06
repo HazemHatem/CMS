@@ -56,6 +56,6 @@ class LoginController extends Controller
         Auth::guard()->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect()->route('login.index');
+        return redirect()->route('home');
     }
 }

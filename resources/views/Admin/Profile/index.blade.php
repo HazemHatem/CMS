@@ -30,6 +30,9 @@
                             <div class="form-group mb-3">
                                 @include('Admin.layout.forms.input' , ['name' => 'phone' , 'type' => 'text' , 'value' => Auth::guard('admin')->user()->phone])
                             </div>
+                            <div class="form-group mb-3">
+                                @include('Admin.layout.forms.message', ['name' => 'description' , 'value' => Auth::guard('admin')->user()->description])
+                            </div>
                             <div class="text-center mb-3">
                                 <button type="save" class="btn btn-primary">Save</button>
                             </div>
@@ -40,40 +43,13 @@
                             @csrf
                             @method('PATCH')
                             <div class="form-group mb-3">
-                                <label for="current_password">Current Password</label>
-                                <div class="input-group">
-                                    <input type="password" name="current_password" class="form-control" id="current_password" placeholder="Enter current password">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-warning" type="button" onclick="toggleCurrentPassword()">
-                                            <i class="fas fa-eye" id="togglecurrentIcon"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                @include('Admin.layout.message.error', ['name' => 'current_password'])
+                                @include('Admin.layout.forms.password', ['name' => 'current_password', 'label' => 'Current Password' , 'id' => 'togglecurrentIcon', 'onclick' => 'toggleCurrentPassword()'])
                             </div>
                             <div class="form-group mb-3">
-                                <label for="password">Password</label>
-                                <div class="input-group">
-                                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-warning" type="button" onclick="togglePassword()">
-                                            <i class="fas fa-eye" id="toggleIcon"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                @include('Admin.layout.message.error', ['name' => 'password'])
+                                @include('Admin.layout.forms.password', ['name' => 'password', 'label' => 'Password' , 'id' => 'toggleIcon', 'onclick' => 'togglePassword()'])
                             </div>
                             <div class="form-group mb-3">
-                                <label for="password_confirmation">Confirm Password</label>
-                                <div class="input-group">
-                                    <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirm password">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-warning" type="button" onclick="togglePasswordConfirmation()">
-                                            <i class="fas fa-eye" id="toggleConfirmationIcon"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                @include('Admin.layout.message.error', ['name' => 'password_confirmation'])
+                                @include('Admin.layout.forms.password', ['name' => 'password_confirmation', 'label' => 'Confirm Password' , 'id' => 'toggleConfirmationIcon', 'onclick' => 'togglePasswordConfirmation()'])
                             </div>
                             <div class="text-center mb-3">
                                 <button type="submit" class="btn btn-primary">Reset</button>

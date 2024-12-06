@@ -154,6 +154,12 @@ body {
     margin-top: 3rem;
 }
 
+.pagination .page-link:hover {
+    background-color: blue;
+    border-color: black;
+    margin-top: 3rem;
+}
+
 .text-muted {
     margin-top: 3rem;
     margin-right: 1rem;

@@ -38,4 +38,9 @@ class Article extends Model
     {
         $this->increment('views');
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }

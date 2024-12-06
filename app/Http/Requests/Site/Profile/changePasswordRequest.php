@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Profile;
+namespace App\Http\Requests\Site\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
-class ProfileRequest extends FormRequest
+class changePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +23,8 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $this->profile->id,
-            'email' => 'required|email|unique:users,email,' . $this->profile->id,
-            'description' => 'nullable|string|min:15',
+            'current_password' => 'required|current_password',
+            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols(), 'confirmed'],
         ];
     }
 }
