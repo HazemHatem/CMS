@@ -39,8 +39,33 @@ class Article extends Model
         $this->increment('views');
     }
 
+    public function averageRating()
+    {
+        return $this->ratings()->avg('rating') ?? 0;
+    }
+
     public function ratings()
     {
         return $this->hasMany(Rating::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function countlikes()
+    {
+        return $this->likes()->count('type', 'like');
+    }
+
+    public function countdislikes()
+    {
+        return $this->likes()->count('type', 'dislike');
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }

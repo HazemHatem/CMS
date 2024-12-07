@@ -10,6 +10,9 @@ use App\Http\Controllers\Site\Category\CategoryController;
 use App\Http\Controllers\Site\Comment\CommentController;
 use App\Http\Controllers\Site\Profile\ProfileController;
 use App\Http\Controllers\Site\Author\Dashboard\DashboardController;
+use App\Http\Controllers\Site\Like\LikeController;
+use App\Http\Controllers\Site\Rating\RatingController;
+use App\Http\Controllers\Site\Wishlist\WishlistController;
 
 
 /*
@@ -37,9 +40,12 @@ Route::prefix('CMS')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::post('/comment/store',  [CommentController::class, 'store'])->name('comment.store');
+        Route::post('/articles/{article}/toggle-like', [LikeController::class, 'toggleLike'])->name('articles.toggle-like')->middleware('auth');
+        Route::post('/articles/{article}/rate', [RatingController::class, 'rateArticle'])->name('articles.rate')->middleware('auth');
         Route::resource('/profile',  ProfileController::class);
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::patch('/profile/{profile}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
+        Route::resource('/wishlist', WishlistController::class);
     });
 
     Route::prefix('Author')->as('Author.')->group(function () {

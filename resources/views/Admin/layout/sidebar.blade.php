@@ -220,6 +220,12 @@
                                 <p>Profile</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('Admin.wishlist.index') }}" class="nav-link">
+                                <i class="bi bi-heart-fill"></i>
+                                <p>Wishlist</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-header">SETTINGS</li>

@@ -30,7 +30,25 @@
                     <h1 class="col-12">{{ $article->title }}</h1>
                     <p> {{date('F j, Y', strtotime($article->created_at))}} | {{ $article->category->name }} </p>
                     <div class="text-center mb-2">
-                        @include('web.site.layout.Rating.rating', ['article'=>$article])
+                        <div class="mb-2 d-flex">
+                            @include('web.site.layout.Rating.rating', ['article'=>$article])
+                            @include('web.site.layout.forms.wishlist', ['Post' => $article])
+                        </div>
+                        <form action="{{ route('articles.rate', $article->id) }}" class="rate-article" method="POST">
+                            @csrf
+                            <h5 class="mt-1">Your rating of the article:</h5>
+                            <button type="submit" class="bg-light d-inline ms-2">
+                                @for ($i = 5; $i >= 1; $i--)
+                                <input type="radio" name="rating" id="star-{{ $i }}" value="{{ $i }}"
+                                    @if ($userRating && $userRating->rating == $i) checked @endif>
+                                <label for="star-{{ $i }}" class="fa fa-star"></label>
+                                @endfor
+                            </button>
+                        </form>
+                    </div>
+                    <div>
+                        @include('web.site.layout.forms.like', ['icon' => 'fas fa-thumbs-up', 'type' => 'like'])
+                        @include('web.site.layout.forms.like', ['icon' => 'fas fa-thumbs-down', 'type' => 'dislike'])
                     </div>
                 </div>
                 <div class="col-10   row-2s">

@@ -1,10 +1,11 @@
-@php
-$rating = round($article->ratings()->avg('rating'));
-@endphp
-@for($i=1; $i<=5; $i++)
-    @if($i <=$rating)
-    <i class="fas fa-star text-warning"></i>
-    @else
-    <i class="fas fa-star"></i>
-    @endif
-    @endfor
+<div class="mb-2">
+    @for ($i = 1; $i <= 5; $i++)
+        @if ($i <=floor($article->averageRating()))
+        <i class="fa fa-star" style="color: gold;"></i>
+        @elseif ($i - $article->averageRating() < 1)
+            <i class="fa fa-star-half-alt" style="color: gold;"></i>
+            @else
+            <i class="fa fa-star" style="color: black;"></i>
+            @endif
+            @endfor
+</div>

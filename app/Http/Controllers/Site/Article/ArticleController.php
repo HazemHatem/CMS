@@ -43,7 +43,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('web.site.pages.article.show', compact('article'));
+        $userRating = $article->ratings()->where('user_id', auth()->id())->first();
+
+        return view('web.site.pages.article.show', compact('article', 'userRating'));
     }
 
     /**

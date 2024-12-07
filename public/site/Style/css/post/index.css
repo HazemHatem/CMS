@@ -94,3 +94,26 @@ width: 100%;
     font-size: clamp(0.75rem,2vw,15px);
 
 }
+
+.rate-article {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rate-article input {
+    display: none;
+}
+
+.rate-article label {
+    font-size: 32px;
+    color: lightgray;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.rate-article input:checked~label,
+.rate-article label:hover,
+.rate-article label:hover~label {
+    color: gold;
+}

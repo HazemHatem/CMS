@@ -19,6 +19,9 @@
                 <a class="nav-link" href="{{route("contact.index")}}">Contact-us</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{route("wishlist.index")}}">Wishlist</a>
+            </li>
+            <li class="nav-item">
                 @if (Auth::user())
                 <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                 @else
@@ -29,6 +32,11 @@
                 @if (Auth::user())
                 @if (Auth::user()->rule->name == 'author')
                 <a class="nav-link text-primary" href="{{ route('Author.dashboard.index') }}">
+                    {{ Auth::user()->name }}
+                    <img src="{{ FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
+                </a>
+                @elseif (Auth::user()->rule->name == 'admin' || Auth::user()->rule->name == 'manager')
+                <a class="nav-link text-primary" href="{{ route('Admin.dashboard') }}">
                     {{ Auth::user()->name }}
                     <img src="{{ FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
                 </a>
