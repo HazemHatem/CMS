@@ -1,17 +1,12 @@
 @extends('web.app')
 
+@section('title' , 'Home')
+
 @section('content')
 
 <section class="LandingPage col-12">
     <!-- start landing -->
 
-    <style>
-        .landing {
-            background-image: linear-gradient(135deg, rgba(30, 33, 33, 0.82) 1%, rgba(32, 32, 32, 0.14) 98%),
-            url("{{asset('site/Style/image/img/landing.jpg')}}");
-
-        }
-    </style>
     <section class="landing col-12">
         <div class="col-6">
             <span class="title">
@@ -23,7 +18,6 @@
         </div>
     </section>
     <!-- End landing -->
- 
     <div class="categories col-12 ">
         <!-- sm 10 -->
         <ul class="col-sm-10 col-lg-7">
@@ -45,7 +39,7 @@
         <section class="featured">
             @foreach ($Most_viewed_article as $article)
             <div class="post col-sm-12 col-md-5 ">
-                <img src="{{FileHelper::userimage($article->image) }}" alt="">
+                <img src="{{FileHelper::articleimage($article->image) }}" alt="">
                 <div class="post_body col-12">
                     <span class="title_category col-3">
                         <h6>{{$article->category->name}}</h6>
@@ -58,7 +52,7 @@
                             <div class="owner col-12">
                                 <span class="col-12">
                                     <span class=" img_name gap-2">
-                                        <img src="{{FileHelper::userimage($article->author->image) }}"
+                                        <img src="{{FileHelper::authorimage($article->author->image) }}"
                                             class="card-img-top" alt="...">
                                         <p>{{ $article->author->name }}</p>
                                     </span>
@@ -97,16 +91,19 @@
                         <div class="card h-100">
                             <a href="{{route('article.show', $Post->id)}}">
                                 <div class="image-container">
-                                    <img src="{{FileHelper::userimage($Post->image)}}" class="card-img-top"
+                                    <img src="{{FileHelper::articleimage($Post->image)}}" class="card-img-top"
                                         alt="...">
                                 </div>
                                 <div class="card-body">
+                                    <div class="text-center mb-2">
+                                        @include('web.site.layout.Rating.rating', ['article'=>$Post])
+                                    </div>
                                     <h5 class="card-title">{{$Post->title}}</h5>
                                 </div>
                             </a>
                             <div class="card-footer">
                                 <div class="img_name col-6">
-                                    <img src="{{FileHelper::userimage($Post->author->image)}}" class="card-img-top" alt="...">
+                                    <img src="{{FileHelper::authorimage($Post->author->image)}}" class="card-img-top" alt="...">
                                     <p>{{$Post->author->name}}</p>
                                 </div>
                                 <span class="date">
@@ -125,7 +122,3 @@
     </div>
 </main>
 @endsection
-
-@push('home-css')
-<link rel="stylesheet" href="{{ asset('site/Style/css/home/index.css') }}">
-@endpush

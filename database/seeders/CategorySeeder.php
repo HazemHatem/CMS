@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 use App\Models\Article;
+use App\Models\Rating;
 
 class CategorySeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class CategorySeeder extends Seeder
                 Article::factory()
                     ->count(10)
                     ->hasComments(5)
+                    ->hasRatings(5),
             )
             ->create();
     }

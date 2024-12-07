@@ -14,8 +14,8 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $settings = [
-            ['key' => 'site_name', 'value' => 'CMS'],
-            ['key' => 'site_email', 'value' => 'hhazm6745@gmail.com'],
+            ['key' => 'name', 'value' => 'CMS'],
+            ['key' => 'email', 'value' => 'hhazm6745@gmail.com'],
             ['key' => 'default_language', 'value' => 'en'],
             ['key' => 'maintenance_mode', 'value' => 'false'],
         ];

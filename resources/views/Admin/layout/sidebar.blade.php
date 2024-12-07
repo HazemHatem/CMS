@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{route('Admin.dashboard')}}" class="brand-link">
+    <a href="{{route('home')}}" class="brand-link">
         <img src="{{asset('dashboard/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{ env('APP_NAME') }}</span>
     </a>
@@ -10,7 +10,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{asset('dashboard/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{ FileHelper::userimage(Auth::guard('admin')->user()->image) }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="{{ route('Admin.profile.index') }}" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
@@ -148,6 +148,7 @@
                         </li>
                     </ul>
                 </li>
+                @if (Gate::forUser(Auth::guard('admin')->user())->check('manager'))
                 <li class="nav-header">ADMINS</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link {{request()->routeIs('Admin.admin.*') ? 'active' : ''}}">
@@ -196,6 +197,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
                 <li class="nav-header">PAGES</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link {{request()->routeIs('Admin.contact') ? 'active' : ''}}">
@@ -216,6 +218,12 @@
                             <a href="{{ route('Admin.profile.index') }}" class="nav-link">
                                 <i class="bi bi-person-circle"></i>
                                 <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('Admin.wishlist.index') }}" class="nav-link">
+                                <i class="bi bi-heart-fill"></i>
+                                <p>Wishlist</p>
                             </a>
                         </li>
                     </ul>

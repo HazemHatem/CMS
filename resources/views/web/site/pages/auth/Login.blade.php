@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('site/Style/css/libs/bootstrap/css/bootstrap.css')}}" />
 
     <link rel="stylesheet" href="{{asset('site/style/css/login/index.css')}}">
-    <title>Login</title>
+    <title>{{ env('APP_NAME') }}| Login</title>
 
 </head>
 

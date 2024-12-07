@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Site\Profile;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Http\Requests\Site\Profile\ProfileRequest;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Site\Profile\changePasswordRequest;
 
 class ProfileController extends Controller
 {
@@ -12,54 +15,30 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return view('web.site.pages.profile.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function update(ProfileRequest $request, User $profile)
     {
-        //
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $this->deleteUserImage($profile);
+            $data['image'] = $request->file('image')->store('users/', 'public');
+        }
+        $profile->update($data);
+        return redirect()->back()->with('success', 'Profile updated successfully');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function deleteUserImage(User $profile)
     {
-        //
+        if ($profile->image) {
+            Storage::disk('public')->delete($profile->image);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function changePassword(changePasswordRequest $request, User $profile)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $profile->update($request->validated());
+        return redirect()->back()->with('success', 'Password updated successfully');
     }
 }

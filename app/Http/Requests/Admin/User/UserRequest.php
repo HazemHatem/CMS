@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $userId,
             'email' => 'required|email|unique:users,email,' . $userId,
             'rule_id' => 'required|exists:rules,id',
+            'description' => 'nullable|string|min:15',
         ];
     }
 }

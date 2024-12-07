@@ -42,11 +42,12 @@ class ArticleController extends Controller
      * Display the specified resource.
      */
     public function show(Article $article)
-    { 
+    {
+        $userRating = $article->ratings()->where('user_id', auth()->id())->first();
         $article->incrementViews();
-        return view('web.site.pages.article.show', compact('article'));
-    }  
- 
+        return view('web.site.pages.article.show', compact('article', 'userRating') );
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

@@ -34,7 +34,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             if ($this->authorizeAccess()) {
-                return redirect()->intended('/Admin');
+                return redirect()->route('Admin.dashboard');
             }
 
             $this->performLogout($request);
@@ -69,8 +69,6 @@ class LoginController extends Controller
     protected function performLogout($request)
     {
         Auth::guard('admin')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
     }
 
     /**

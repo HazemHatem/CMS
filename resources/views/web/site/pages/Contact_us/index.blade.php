@@ -1,7 +1,10 @@
 @extends('web.app')
 
+@section('title' , 'Contact Us')
 
-
+@push('contact-css')
+<link rel="stylesheet" href="{{ asset('site/style/css/contact/index.css') }}">
+@endpush
 
 @section('content')
 
@@ -9,26 +12,6 @@
 
 
 <section class="LandingPage col-12">
-
-
-    <style>
-        .landing {
-            background-image: linear-gradient(135deg, rgba(30, 33, 33, 0.82) 1%, rgba(32, 32, 32, 0.14) 98%),
-            url("{{asset('site/Style/image/contact/land.jpg')}}");
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            align-content: flex-start;
-            flex-wrap: wrap;
-            flex-direction: row;
-            position: relative;
-            max-height: 300px;
-            padding-top: 184px;
-            background-position: 0px 0px, 50% 50%;
-            background-size: auto, cover;
-        }
-    </style>
     <!-- start landing -->
     <section class="landing col-12">
 
@@ -66,28 +49,34 @@
 
                         </div>
                         <div class="button">
-                            <a href=""><i class="fa-brands fa-twitter"></i> Follow us on Twitter</a>
-                            <a href=""><i class="fa-brands fa-facebook"></i>Like us on facebook</a>
-                            <a href=""><i class="fa-brands fa-instagram"></i>Follow us on instagram</a>
+                            <a href="https://x.com/" target="_blank"><i class="fa-brands fa-twitter"></i> Follow us on Twitter</a>
+                            <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i>Like us on facebook</a>
+                            <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i>Follow us on instagram</a>
 
                         </div>
                     </div>
                     <div class="left col-12">
-                        <form action="">
+                        <form action="{{ route('contact.store') }}" method="POST">
+                            @csrf
                             <div class="form-groupe">
                                 <h3 class="col-12">Send a Request</h3>
-
                                 <div class="col-12">
-                                    <label for="Name:">name</label>
-                                    <input type="text" placeholder="Enter Your name" class="form-control">
+                                    @include('web.site.layout.forms.input', ['name' => 'name' , 'type' => 'text' , 'value' => old('name')])
                                 </div>
                                 <div class="col-12">
-                                    <label for="Email Address:">Email Address:</label>
-                                    <input type="text" placeholder="Enter Your Email " class="form-control">
+                                    @include('web.site.layout.forms.input', ['name' => 'email' , 'type' => 'email' , 'value' => old('email')])
                                 </div>
                                 <div class="col-12">
-                                    <label for="Message:">Message:</label>
-                                    <textarea name="" id="" rows="4" placeholder="Say what you need to say" class="form-control col-12"></textarea>
+                                    @include('web.site.layout.forms.input', ['name' => 'phone' , 'type' => 'text' , 'value' => old('phone')])
+                                </div>
+                                <div class="col-12">
+                                    @include('web.site.layout.forms.input', ['name' => 'subject' , 'type' => 'text' , 'value' => old('subject')])
+                                </div>
+                                <div class="col-12">
+                                    @include('web.site.layout.forms.message', ['name' => 'message' , 'value' => old('message')])
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success" id="submit">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -103,14 +92,9 @@
         </div>
     </div>
 </main>
-
-
-
-<!-- start content -->
-
-
 @endsection
-<!-- End content -->
-@push('contact-css')
-<link rel="stylesheet" href="{{ asset('site/style/css/contact/index.css') }}">
+
+
+@push('scripts')
+@include('web.site.layout.message.success')
 @endpush

@@ -33,6 +33,10 @@
                                     <td>{{ $user->email }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Description</th>
+                                    <td>{{ $user->description ?? '-' }}</td>
+                                </tr>
+                                <tr>
                                     <th>Created At</th>
                                     <td>{{ $user->created_at }}</td>
                                 </tr>

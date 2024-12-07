@@ -25,7 +25,7 @@
                                 @include('Admin.layout.forms.input', ['name' => 'phone' , 'type' => 'text' , 'value' => $author->phone])
                             </div>
                             <div class="form-group">
-                                @include('Admin.layout.forms.input', ['name' => 'description' , 'type' => 'text' , 'value' => $author->description])
+                                @include('Admin.layout.forms.message', ['name' => 'description' , 'value' => $author->description])
                             </div>
                             <div class="form-group">
                                 @include('Admin.layout.forms.image')

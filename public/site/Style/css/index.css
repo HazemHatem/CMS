@@ -1,34 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,200&display=swap');
 
 :root {
-  --green: #27ae60;
-  --black: #dd783f;
-  --light-color: #666;
-  --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    --green: #27ae60;
+    --black: #dd783f;
+    --light-color: #666;
+    --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
 }
 
 * {
-  font-family: 'Nunito', sans-serif;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  border: none;
-  text-decoration: none;
-  outline: none;
-  text-transform: capitalize;
-  transition: all linear .2s;
+    font-family: 'Nunito', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    text-transform: capitalize;
+    transition: all linear .2s;
 }
 
 html {
- 
-  overflow-x: hidden;
-  scroll-padding-top: 5.5rem;
-  scroll-behavior: smooth;
+
+    overflow-x: hidden;
+    scroll-padding-top: 5.5rem;
+    scroll-behavior: smooth;
 
 }
 
-/* 
-  grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
+/*
+grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
  */
 body {
     background-color: #f7f7f7;
@@ -40,9 +40,14 @@ body {
     justify-content: space-between;
     align-items: center;
     overflow: hidden;
-  
+
 }
- 
+
+.footer {
+    background-image: linear-gradient(180deg, rgba(35, 47, 56, 0.47), rgba(35, 47, 56, 0.31) 99%),
+    url("../image/img/footer.jpg");
+}
+
 
 .btns {
     margin-top: 1rem;
@@ -53,12 +58,14 @@ body {
     border-radius: .5rem;
     cursor: pointer;
     padding: 10px;
-  
-  }
-  .btns:hover {
+
+}
+
+.btns:hover {
     background: var(--green);
     letter-spacing: .1rem;
-  }
+}
+
 .btn_2 {
     margin-top: 1rem;
     display: inline-block;
@@ -68,13 +75,14 @@ body {
     border-radius: .5rem;
     cursor: pointer;
     padding: 20px;
-  
-  }
-  
-  .btn_2:hover {
-    background: var(--green);
-   }
 
+}
+
+.btn_2:hover {
+    background: var(--green);
+}
+
+<<<<<<< HEAD
   .categories ul{
   grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
   padding: 16px; 
@@ -92,3 +100,9 @@ body {
     }
   
   
+=======
+.categories ul {
+    grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
+    padding: 16px;
+}
+>>>>>>> 9f6ae67b8dac4219cd24280b40589c5b95b82c66

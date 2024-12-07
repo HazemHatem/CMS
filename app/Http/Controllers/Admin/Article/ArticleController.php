@@ -55,7 +55,8 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $article->incrementViews();
-        return view('Admin.article.show', compact('article'));
+        $rating = round($article->ratings()->avg('rating'));
+        return view('Admin.article.show', compact('article', 'rating'));
     }
 
     /**

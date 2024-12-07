@@ -26,6 +26,10 @@
                         </div>
 
                         <div class="form-group">
+                            @include('Admin.layout.forms.message', ['name' => 'description', 'value' => $admin->description])
+                        </div>
+
+                        <div class="form-group">
                             @include('Admin.layout.forms.image')
                         </div>
 

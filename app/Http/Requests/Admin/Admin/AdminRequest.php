@@ -28,6 +28,7 @@ class AdminRequest extends FormRequest
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $userId,
             'rule_id' => 'required|exists:rules,id',
+            'description' => 'required|string|min:15',
         ];
     }
 }
