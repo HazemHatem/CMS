@@ -30,22 +30,22 @@ use App\Http\Controllers\Site\Wishlist\WishlistController;
 
 Route::prefix('CMS')->group(function () {
     Route::get('/home', HomeController::class)->name('home');
-    Route::resource('/article',  ArticleController::class);
+    Route::resource('/article', ArticleController::class);
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/{category}/article', [CategoryController::class, 'article'])->name('category.article');
     Route::get('/login', [LoginController::class, 'login'])->name('login.index');
     Route::get('/user/{id}', [ProfileAutherController::class, 'index'])->name('user.profile');
 
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-    Route::get('/register',  [RegisterController::class, 'register'])->name('register.register');
-    Route::get('/contact',  [ContactController::class, 'index'])->name('contact.index');
-    Route::post('/contact/store',  [ContactController::class, 'store'])->name('contact.store');
+    Route::get('/register', [RegisterController::class, 'register'])->name('register.register');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 
     Route::middleware('auth')->group(function () {
-        Route::post('/comment/store',  [CommentController::class, 'store'])->name('comment.store');
+        Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
         Route::post('/articles/{article}/toggle-like', [LikeController::class, 'toggleLike'])->name('articles.toggle-like')->middleware('auth');
         Route::post('/articles/{article}/rate', [RatingController::class, 'rateArticle'])->name('articles.rate')->middleware('auth');
-        Route::resource('/profile',  ProfileController::class);
+        Route::resource('/profile', ProfileController::class);
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::patch('/profile/{profile}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
         Route::resource('/wishlist', WishlistController::class);

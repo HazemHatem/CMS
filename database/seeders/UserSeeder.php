@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             "password" => "Aa@11111",
             "image"=>"https://th.bing.com/th/id/R.36a637acd327c76357628dca25f838de?rik=KEv28AfFiyqYjA&pid=ImgRaw&r=0",
             "phone" => "01092492013",
-            "rule_id" => 2
+            "rule_id" => 1
         ]);
 
         User::factory()->count(10)->create();
