@@ -33,17 +33,17 @@
                 @if (Auth::user()->rule->name == 'author')
                 <a class="nav-link text-primary" href="{{ route('Author.dashboard.index') }}">
                     {{ Auth::user()->name }}
-                    <img src="{{ FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
+                    <img src="{{FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
                 </a>
                 @elseif (Auth::user()->rule->name == 'admin' || Auth::user()->rule->name == 'manager')
                 <a class="nav-link text-primary" href="{{ route('Admin.dashboard') }}">
                     {{ Auth::user()->name }}
-                    <img src="{{ FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
+                    <img src="{{FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
                 </a>
                 @else
                 <a class="nav-link text-primary" href="{{ route('profile.index') }}">
                     {{ Auth::user()->name }}
-                    <img src="{{ FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
+                    <img src="{{FileHelper::userimage(Auth::user()->image) }}" class="rounded-circle ms-1" style="width: 40px; height: 40px;" alt="{{ Auth::user()->name }}">
                 </a>
                 @endif
                 @endif

@@ -54,7 +54,7 @@
             <div style="width: 400px; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; overflow: hidden;">
                 <!-- صورة المستخدم -->
                 <div style="background-color: #007bff; padding: 20px; text-align: center;">
-                    <img src="{{ FileHelper::userimage(Auth::user()->image) }}" alt="User Profile"
+                    <img src="{{FileHelper::userimage(Auth::user()->image) }}" alt="User Profile"
                         style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #fff;">
                 </div>
 
