@@ -1,25 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Site\Article;
+namespace App\Http\Controllers\Site\ProfileAuther;
 
 use App\Http\Controllers\Controller;
-use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class profileAutherController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index($id)
     {
-        $articles = Article::latest('updated_at')
-            ->when($request->search, function ($query, $search) {
-                $query->where('title', 'like', '%' . $search . '%');
-            })
-            ->paginate(9)
-            ->appends($request->all());
-        return view('web.site.pages.article.index', compact('articles'));
+        $user = User::with('articles')->findOrFail($id);
+        return view('web.site.pages.user.profile' ,compact('user'));
     }
 
     /**
@@ -41,12 +36,11 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
-    { 
-        $article->incrementViews();
-        return view('web.site.pages.article.show', compact('article'));
-    }  
- 
+    public function show(string $id)
+    {
+        //
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

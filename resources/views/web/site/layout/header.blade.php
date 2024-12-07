@@ -18,26 +18,27 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route("contact.index")}}">Contact-us</a>
             </li>
+            <li class="nav-item profile">
+    @if (Auth::check())
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="nav-link">Logout</button>
+        </form>
+        <div>
+        <a href="{{ route('user.profile', ['id' => Auth::user()->id]) }}">
+        <img src="{{  Auth::user()->image }}" alt="User Profile" style="width: 50px; height: 50px; border-radius: 50%;">
+            </a>
+        </div>
+        <a href="{{ route('user.profile', ['id' => Auth::user()->id]) }}"> <!-- رابط ملف المستخدم -->
+            <p>{{ Auth::user()->name }}!</p>
+        </a>
+    @else
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('login.index') }}">Login</a>
+        </li>
+    @endif
+</li>
 
-            <li class="nav-item">
-
-                @if (Auth::check())
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="nav-link">Logout</button>
-                </form>
-                <div>
-                    <img src="{{FileHelper::userimage(Auth::user()->image)}} }}" alt="">
-                </div>
-                <p> {{ Auth::user()->name }}!</p>
-
-                @else
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('login.index') }}">Login</a>
-            </li>
-            @endif
-
-            </li>
 
         </ul>
 

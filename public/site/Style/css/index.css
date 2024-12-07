@@ -82,6 +82,13 @@ body {
 
 
 
-
+.profile{    display: flex
+  ;
+      align-items: flex-end;
+      gap: 1rem;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
   
   

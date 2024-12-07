@@ -15,10 +15,11 @@ class UserSeeder extends Seeder
     {
         User::factory()->create([
             "name" => "Hazem Hatem",
-            "email" => "hhazm6745@gmail.com",
-            "password" => "Hazem@2005",
+            "email" => "admin@email.com",
+            "password" => "Aa@11111",
+            "image"=>"https://th.bing.com/th/id/R.36a637acd327c76357628dca25f838de?rik=KEv28AfFiyqYjA&pid=ImgRaw&r=0",
             "phone" => "01092492013",
-            "rule_id" => 4
+            "rule_id" => 2
         ]);
 
         User::factory()->count(10)->create();

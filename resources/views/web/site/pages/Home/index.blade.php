@@ -23,19 +23,7 @@
         </div>
     </section>
     <!-- End landing -->
-
-    <div>
-        <h1>ِAhmed solve prplem calle</h1>
-        <h1>ِAhmed solve prplem calle</h1>
-        <h1>ِAhmed solve prplem calle</h1>
-        <h1>ِAhmed solve prplem calle</h1>
-        <h1>ِAhmed solve prplem calle</h1>
-        <h1>ِAhmed solve prplem calle</h1>
-        <h1>ِAhmed solve prplem calle</h1>
-        <h1>ِAhmed solve prplem calle</h1>
-        <h1>ِAhmed solve prplem calle</h1>
-        <h1>ِAhmed solve prplem calle</h1>
-    </div>
+ 
     <div class="categories col-12 ">
         <!-- sm 10 -->
         <ul class="col-sm-10 col-lg-7">
