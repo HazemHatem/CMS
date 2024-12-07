@@ -3,7 +3,6 @@
 use App\Http\Controllers\Site\Auth\LoginController;
 use App\Http\Controllers\Site\Auth\RegisterController;
 use App\Http\Controllers\site\Home\HomeController;
-use App\Http\Controllers\Site\ProfileAuther\profileAutherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Contact\ContactController;
 use App\Http\Controllers\Site\Article\ArticleController;
@@ -34,8 +33,6 @@ Route::prefix('CMS')->group(function () {
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/{category}/article', [CategoryController::class, 'article'])->name('category.article');
     Route::get('/login', [LoginController::class, 'login'])->name('login.index');
-    Route::get('/user/{id}', [ProfileAutherController::class, 'index'])->name('user.profile');
-
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
     Route::get('/register',  [RegisterController::class, 'register'])->name('register.register');
     Route::get('/contact',  [ContactController::class, 'index'])->name('contact.index');
