@@ -39,7 +39,7 @@ class AdminController extends Controller
 
         User::create($data);
 
-        return redirect()->route('Admin.admin.index')->with('success', 'Admin created successfully');
+        // return redirect()->route('Admin.admin.index')->with('success', 'Admin created successfully');
     }
 
     public function show(User $admin)

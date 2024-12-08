@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\Site\Author\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Site\Article\ArticleController;
+use App\Http\Requests\Site\Articale\ArtisalRequest;
+ 
+ use App\Models\Article;
+use App\Models\Category;
+use Auth;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -20,15 +26,23 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::all();
+        return view('web.site.pages.author.dashboard.create',compact('categories'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArtisalRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['author_id'] = Auth::guard('admin')->user()->id;
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('articles', 'public');
+        }
+        Article::create($data);
+        return redirect()->route('Admin.article.index')->with('success', 'Article created successfully');
     }
 
     /**

@@ -30,6 +30,7 @@
         }
 
         .contetn {
+            position: relative;
             display: flex;
             gap: 1rem;
             flex-direction: row;
@@ -105,11 +106,21 @@
             @endif
         </div>
     </section>
+    
+<div class="fixed-div col-2">
+<a href="{{route('Author.dashboard.create')}}">
+<div class=" click-1"><i class="fa-solid fa-plus"></i></div>
+
+</a>
+<div class=" click-2"><i class="fa-solid fa-arrow-up"></i></div>
+</div>
 </main>
+
 @endsection
 
 
 <!-- End landing -->
 @push('custom-css')
 <link rel="stylesheet" href="{{ asset('site/Style/css/category/index.css') }}">
+<link rel="stylesheet" href="{{ asset('site/Style/css/author/index.css') }}">
 @endpush
