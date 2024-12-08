@@ -1,6 +1,6 @@
-@extends('admin.app')
+@extends('web.site.pages.author.app')
 
-@section('title' , 'Articles')
+@section('title', 'Post')
 
 @section('content')
 <section class="content">
@@ -10,8 +10,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Articles</h3>
-                        @include('Admin.layout.forms.search', ['url' => route('Admin.article.index')])
+                        @include('Admin.layout.forms.search', ['url' => route('Author.post.index')])
                     </div>
+                    @if ( $articles->isEmpty() )
+                    <span class="text-center alert alert-danger" style="width: 100%;font-size: 20px">No articles found.</span>
+                    @else
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
@@ -19,8 +22,6 @@
                                     <th>#</th>
                                     <th>Title</th>
                                     <th>Category</th>
-                                    <th>Author</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -29,13 +30,11 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $article->title }}</td>
-                                    <td><a href="{{route('Admin.category.show', $article->category->id)}}">{{ $article->category->name }}</a></td>
-                                    <td><a href="{{route('Admin.author.show', $article->author->id)}}">{{ $article->author->name }}</a></td>
-                                    <td>{!! $article->status() !!}</td>
+                                    <td>{{ $article->category->name }}</td>
                                     <td>
-                                        @include('Admin.layout.actions.show' , ['route' => 'Admin.article.show' , 'id' => $article->id])
-                                        @include('Admin.layout.actions.edit' , ['route' => 'Admin.article.edit' , 'id' => $article->id])
-                                        @include('Admin.layout.actions.delete' , ['route' => 'Admin.article.destroy' , 'id' => $article->id])
+                                        @include('Admin.layout.actions.show' , ['route' => 'article.show' , 'id' => $article->id])
+                                        @include('Admin.layout.actions.edit' , ['route' => 'Author.post.edit' , 'id' => $article->id])
+                                        @include('Admin.layout.actions.delete' , ['route' => 'Author.post.destroy' , 'id' => $article->id])
                                     </td>
                                 </tr>
                                 @endforeach
@@ -43,6 +42,7 @@
                         </table>
                     </div>
                     @include('Admin.layout.pagination.pagination' , ['data' => $articles])
+                    @endif
                 </div>
             </div>
         </div>

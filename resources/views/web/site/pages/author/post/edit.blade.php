@@ -1,4 +1,4 @@
-@extends('Admin.app')
+@extends('web.site.pages.author.app')
 
 @section('title' , $article->title)
 
@@ -11,7 +11,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Edit Article</h3>
                     </div>
-                    <form action="{{ route('Admin.article.update', $article->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('Author.post.update', $article->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -23,15 +23,6 @@
                             </div>
                             <div class="form-group">
                                 @include('Admin.layout.forms.input', ['name' => 'content' , 'type' => 'text' , 'value' => $article->content])
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
-                                    <option value="draft" {{ $article->status == 'draft' ? 'selected' : '' }}>Draft</option>
-                                    <option value="published" {{ $article->status == 'published' ? 'selected' : '' }}>Published</option>
-                                    <option value="unpublished" {{ $article->status == 'unpublished' ? 'selected' : '' }}>Unpublished</option>
-                                </select>
-                                @include('Admin.layout.message.error', ['name' => 'status'])
                             </div>
                             <div class="form-group">
                                 <label for="category_id">Category</label>

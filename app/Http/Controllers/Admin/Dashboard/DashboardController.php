@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $messages = Contact::count();
         $articles = Article::count();
         $authors = User::where('rule_id', 2)->count();
-        $articles_new = Article::latest('updated_at')->limit(5)->get();
+        $articles_new = Article::latest('created_at')->limit(5)->get();
         $articles_popular = Article::latest('views')->limit(5)->get();
         return view('Admin.Dashboard.index', compact('users', 'messages', 'articles', 'authors', 'articles_new', 'articles_popular'));
     }

@@ -1,7 +1,9 @@
-@extends('web.app')
+@extends('web.site.pages.author.app')
 
+@section('title' , 'Profile')
 
 @section('content')
+<<<<<<< HEAD
 <section class="LandingPage col-12">
     <!-- start landing -->
     <style>
@@ -70,16 +72,67 @@
                     <div style="margin-top: 20px;">
 
                         <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+=======
+<section class="content mt-5 mb-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ Auth::user()->name }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('profile.update', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+>>>>>>> f769e41b118a0afec514fd1008a62a6bb303dc30
                             @csrf
-                            <button type="submit"
-                                style="background-color: #dc3545; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; font-size: 0.9rem; cursor: pointer;">
-                                تسجيل الخروج
-                            </button>
+                            @method('PUT')
+                            <div class="form-group mb-3">
+                                <div class="text-center m-2 p-2">
+                                    <img class="profile-user-img img-fluid img-circle" src=" {{ FileHelper::userimage(Auth::user()->image) }}" alt="{{ Auth::user()->name }}">
+                                </div>
+                                @include('Admin.layout.forms.image')
+                            </div>
+                            <div class="form-groupe">
+                                <div class="col-12 mb-3">
+                                    @include('web.site.layout.forms.input' , ['name' => 'name' , 'type' => 'text' , 'value' => Auth::user()->name])
+                                </div>
+                                <div class="col-12 mb-3">
+                                    @include('web.site.layout.forms.input' , ['name' => 'email' , 'type' => 'email' , 'value' => Auth::user()->email])
+                                </div>
+                                <div class="col-12 mb-3">
+                                    @include('web.site.layout.forms.input' , ['name' => 'phone' , 'type' => 'text' , 'value' => Auth::user()->phone])
+                                </div>
+                                <div class="col-12 mb-3">
+                                    @include('web.site.layout.forms.message', ['name' => 'description', 'value' => Auth::user()->description])
+                                </div>
+                                <div class="text-center mb-3">
+                                    <button type="submit" class="btn btn-success" id="submit">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-body bg-light">
+                        <form action="{{ route('profile.change-password', Auth::id()) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <div class="form-group mb-3">
+                                @include('Admin.layout.forms.password', ['name' => 'current_password', 'label' => 'Current Password' , 'id' => 'togglecurrentIcon', 'onclick' => 'toggleCurrentPassword()'])
+                            </div>
+                            <div class="form-group mb-3">
+                                @include('Admin.layout.forms.password', ['name' => 'password', 'label' => 'Password' , 'id' => 'toggleIcon', 'onclick' => 'togglePassword()'])
+                            </div>
+                            <div class="form-group mb-3">
+                                @include('Admin.layout.forms.password', ['name' => 'password_confirmation', 'label' => 'Confirm Password' , 'id' => 'toggleConfirmationIcon', 'onclick' => 'togglePasswordConfirmation()'])
+                            </div>
+                            <div class="text-center mb-3">
+                                <button type="submit" class="btn btn-primary">Reset</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         <div class="articel col-12 ">
 
             @if(Auth::user()->articles->isEmpty())
@@ -123,4 +176,14 @@
 @push('custom-css')
 <link rel="stylesheet" href="{{ asset('site/Style/css/category/index.css') }}">
 <link rel="stylesheet" href="{{ asset('site/Style/css/author/index.css') }}">
+=======
+    </div>
+</section>
+@endsection
+
+
+@push('before-scripts')
+@include('Admin.layout.message.success')
+<script src="{{ asset('dashboard/js/showpassword.js') }}"></script>
+>>>>>>> f769e41b118a0afec514fd1008a62a6bb303dc30
 @endpush

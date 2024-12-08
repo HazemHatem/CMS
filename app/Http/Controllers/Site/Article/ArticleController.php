@@ -14,6 +14,7 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $articles = Article::latest('updated_at')
+            ->where('status', 'published')
             ->when($request->search, function ($query, $search) {
                 $query->where('title', 'like', '%' . $search . '%');
             })
@@ -43,9 +44,10 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        abort_if($article->status != 'published', 404);
         $userRating = $article->ratings()->where('user_id', auth()->id())->first();
         $article->incrementViews();
-        return view('web.site.pages.article.show', compact('article', 'userRating') );
+        return view('web.site.pages.article.show', compact('article', 'userRating'));
     }
 
     /**

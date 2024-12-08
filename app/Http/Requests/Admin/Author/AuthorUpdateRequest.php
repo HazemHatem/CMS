@@ -24,10 +24,10 @@ class AuthorUpdateRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $this->author->id,
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $this->author->id,
             'description' => 'nullable|string|min:15',
             'rule_id' => 'required|exists:rules,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }
 }

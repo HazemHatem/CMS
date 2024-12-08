@@ -15,6 +15,7 @@ use App\Http\Controllers\Site\Author\Dashboard\DashboardController;
 use App\Http\Controllers\Site\Like\LikeController;
 use App\Http\Controllers\Site\Rating\RatingController;
 use App\Http\Controllers\Site\Wishlist\WishlistController;
+use App\Http\Controllers\Site\Author\Post\PostController;
 
 
 /*
@@ -53,7 +54,12 @@ Route::prefix('CMS')->group(function () {
 });
     
     Route::prefix('Author')->as('Author.')->group(function () {
+<<<<<<< HEAD
         Route::resource('/dashboard', DashboardController::class);
  
         
+=======
+        Route::get('/dashboard', DashboardController::class)->name('dashboard.index');
+        Route::resource('/post', PostController::class);
+>>>>>>> f769e41b118a0afec514fd1008a62a6bb303dc30
     });

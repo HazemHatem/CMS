@@ -68,4 +68,15 @@ class Article extends Model
     {
         return $this->hasMany(Wishlist::class);
     }
+
+    public function status()
+    {
+        if ($this->status == 'draft') {
+            return "<span class='badge bg-warning'>Draft</span>";
+        } elseif ($this->status == 'published') {
+            return "<span class='badge bg-success'>Published</span>";
+        } else {
+            return "<span class='badge bg-danger'>Unpublished</span>";
+        }
+    }
 }

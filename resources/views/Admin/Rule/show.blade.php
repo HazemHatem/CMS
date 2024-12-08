@@ -17,7 +17,7 @@
                             <tbody>
                                 <tr>
                                     <th style="width: 10px">Name</th>
-                                    <td>{{ $rule->name }}</td>
+                                    <td>{!! $rule->rule() !!}</td>
                                 </tr>
                                 <tr>
                                     <th>Users</th>

@@ -11,7 +11,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Edit Category</h3>
                     </div>
-                    <form action="{{ route('Admin.category.update', $category->id) }}" method="POST">
+                    <form action="{{ route('Admin.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">

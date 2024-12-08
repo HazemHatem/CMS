@@ -10,16 +10,17 @@ use App\Http\Requests\Site\Articale\ArtisalRequest;
 use App\Models\Category;
 use Auth;
 use Illuminate\Http\Request;
-
+    
 class DashboardController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Handle the incoming request.
      */
-    public function index()
+    public function __invoke(Request $request)
     {
         return view('web.site.pages.author.dashboard.index');
     }
+<<<<<<< HEAD
 
     /**
      * Show the form for creating a new resource.
@@ -76,4 +77,6 @@ class DashboardController extends Controller
     {
         //
     }
+=======
+>>>>>>> f769e41b118a0afec514fd1008a62a6bb303dc30
 }
