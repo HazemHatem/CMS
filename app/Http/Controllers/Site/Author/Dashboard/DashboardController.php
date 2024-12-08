@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Site\Author\Dashboard;
 
 use App\Http\Controllers\Controller;
+ 
 use Illuminate\Http\Request;
-
+    
 class DashboardController extends Controller
 {
     /**
@@ -13,5 +14,6 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         return view('web.site.pages.author.dashboard.index');
-    }
+    } 
+
 }

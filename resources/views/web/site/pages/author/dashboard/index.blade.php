@@ -2,7 +2,7 @@
 
 @section('title' , 'Profile')
 
-@section('content')
+@section('content') 
 <section class="content mt-5 mb-5">
     <div class="container-fluid">
         <div class="row">
@@ -13,11 +13,11 @@
                     </div>
                     <div class="card-body">
                         <form action="{{ route('profile.update', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                             @csrf
                             @method('PUT')
                             <div class="form-group mb-3">
                                 <div class="text-center m-2 p-2">
-                                    <img class="profile-user-img img-fluid img-circle" src=" {{ FileHelper::userimage(Auth::user()->image) }}" alt="{{ Auth::user()->name }}">
+                                    <img class="profile-user-img img-fluid img-circle" src=" {{FileHelper::userimage(Auth::user()->image) }}" alt="{{ Auth::user()->name }}">
                                 </div>
                                 @include('Admin.layout.forms.image')
                             </div>
@@ -61,6 +61,8 @@
                 </div>
             </div>
         </div>
+ 
+      
     </div>
 </section>
 @endsection
@@ -69,4 +71,4 @@
 @push('before-scripts')
 @include('Admin.layout.message.success')
 <script src="{{ asset('dashboard/js/showpassword.js') }}"></script>
-@endpush
+ @endpush
