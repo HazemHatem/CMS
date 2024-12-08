@@ -20,6 +20,9 @@
 <main class="container col-10">
     <section class="contetn col-12">
         <div class="col-12   row-2s">
+            @if ($articles->isEmpty())
+            <span class="text-center alert alert-danger" style="width: 100%;font-size: 20px">No articles found.</span>
+            @else
             @foreach ($articles as $Post)
             <div class="col-sm-12 col-md-6 col-lg-12">
                 <div class="card h-100">
@@ -48,8 +51,14 @@
                 </div>
             </div>
             @endforeach
+            @endif
         </div>
         @include('web.site.layout.pagination.pagination', ['data' => $articles])
     </section>
 </main>
 @endsection
+
+
+@push('scripts')
+@include('web.site.layout.message.success')
+@endpush

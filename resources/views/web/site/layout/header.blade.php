@@ -55,7 +55,12 @@
     <!-- start logo -->
     <div class="logo col-4">
         <a class="h1" href="{{route("home")}}" style="color: white;   display: block;">{{ env('APP_NAME') }}</a>
-
+        <!-- form search -->
+        <form class="d-flex" action="{{route('article.index')}}" method="GET">
+            <input class="form-control" id="search" type="search" name="search" placeholder="Search" aria-label="Search" style="height: 37px;">
+            <button class="btn btn-outline-success" id="searchbtn" type="submit" style="height: 37px;"><i class="fas fa-search"></i></button>
+        </form>
+        <!-- end form search -->
     </div>
     <!--end  logo -->
 

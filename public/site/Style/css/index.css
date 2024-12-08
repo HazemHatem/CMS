@@ -82,27 +82,24 @@ body {
     background: var(--green);
 }
 
-<<<<<<< HEAD
-  .categories ul{
-  grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
-  padding: 16px; 
-  }
+.categories ul{
+grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
+padding: 16px;
+}
 
 
 
 .profile{    display: flex
-  ;
-      align-items: flex-end;
-      gap: 1rem;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
-  
-  
-=======
-.categories ul {
-    grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
-    padding: 16px;
+;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
->>>>>>> 9f6ae67b8dac4219cd24280b40589c5b95b82c66
+
+
+#search,
+#searchbtn{
+    background-color: rgba(255, 255, 255, 0.4);
+}

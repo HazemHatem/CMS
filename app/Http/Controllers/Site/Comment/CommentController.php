@@ -21,6 +21,6 @@ class CommentController extends Controller
         $data = $request->validated();
         $data['user_id'] = Auth::id();
         Comment::create($data);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Comment added successfully');
     }
 }
