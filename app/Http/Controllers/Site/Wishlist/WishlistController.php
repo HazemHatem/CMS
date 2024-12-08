@@ -22,12 +22,12 @@ class WishlistController extends Controller
         $data = $request->validated();
         $data['user_id'] = Auth::user()->id;
         Wishlist::create($data);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Article added to wishlist successfully');
     }
 
     public function destroy(Wishlist $wishlist)
     {
         $wishlist->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Article removed from wishlist successfully');
     }
 }

@@ -53,3 +53,8 @@
     </section>
 </main>
 @endsection
+
+
+@push('scripts')
+@include('web.site.layout.message.success')
+@endpush
