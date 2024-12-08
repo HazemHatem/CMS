@@ -17,7 +17,7 @@
                             @method('PUT')
                             <div class="form-group mb-3">
                                 <div class="text-center m-2 p-2">
-                                    <img class="profile-user-img img-fluid img-circle" src=" {{ FileHelper::userimage(Auth::user()->image) }}" alt="{{ Auth::user()->name }}">
+                                    <img class="profile-user-img img-fluid img-circle" src=" {{FileHelper::userimage(Auth::user()->image) }}" alt="{{ Auth::user()->name }}">
                                 </div>
                                 @include('Admin.layout.forms.image')
                             </div>
@@ -61,6 +61,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 </section>
 @endsection
