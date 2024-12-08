@@ -20,7 +20,7 @@
     <section class="contetn col-12">
         <div class="col-12   row-2s">
             @if ($wishlist->isEmpty())
-            <span class="text-center alert alert-danger" style="width: 100%;">No articles found.</span>
+            <span class="text-center alert alert-danger" style="width: 100%;font-size: 20px">No articles found.</span>
             @else
             @foreach ($wishlist as $article)
             <div class="col-sm-12 col-md-6 col-lg-12">
