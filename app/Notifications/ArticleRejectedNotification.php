@@ -26,16 +26,14 @@ class ArticleRejectedNotification extends Notification
     {
         return (new MailMessage)
             ->subject('Article rejected')
-            ->line('The article has been rejected: ' . $this->article->title)
-            ->action('عرض المقال', url('/articles/' . $this->article->id));
+            ->line('The article has been rejected: ' . $this->article->title);
     }
 
     public function toDatabase($notifiable)
     {
         return [
             'title' => $this->article->title,
-            'message' => 'تم رفض المقال: ' . $this->article->title,
-            'url' => '/articles/' . $this->article->id,
+            'message' => 'The article has been rejected: ' . $this->article->title,
         ];
     }
 }
