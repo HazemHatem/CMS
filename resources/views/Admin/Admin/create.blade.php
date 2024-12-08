@@ -10,12 +10,7 @@
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Add Admin</h3>
-                        <h3 class="card-title">Add Admin</h3>
-                        <h3 class="card-title">Add Admin</h3>
-                        <h3 class="card-title">Add Admin</h3>
-                        <h3 class="card-title">Add Admin</h3>
-                        <h3 class="card-title">Add Admin</h3>
-                        <h3 class="card-title">Add Admin</h3>
+                        
                     </div>
                     <form action="{{ route('Admin.admin.store') }}" method="POST">
                         @csrf
