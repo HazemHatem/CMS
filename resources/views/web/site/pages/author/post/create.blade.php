@@ -1,6 +1,6 @@
-@extends('Admin.app')
+@extends('web.site.pages.author.app')
 
-@section('title' , $article->title)
+@section('title' , 'Add Article')
 
 @section('content')
 <section class="content">
@@ -9,38 +9,29 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Edit Article</h3>
+                        <h3 class="card-title">Add Article</h3>
                     </div>
-                    <form action="{{ route('Admin.article.update', $article->id) }}" method="POST" enctype="multipart/form-data">
+
+                    <form action="{{ route('Author.post.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                @include('Admin.layout.forms.image')
+                                @include('Admin.layout.forms.input', ['name' => 'title' , 'type' => 'text' , 'value' => old('title')])
                             </div>
                             <div class="form-group">
-                                @include('Admin.layout.forms.input', ['name' => 'title' , 'type' => 'text' , 'value' => $article->title])
-                            </div>
-                            <div class="form-group">
-                                @include('Admin.layout.forms.input', ['name' => 'content' , 'type' => 'text' , 'value' => $article->content])
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
-                                    <option value="draft" {{ $article->status == 'draft' ? 'selected' : '' }}>Draft</option>
-                                    <option value="published" {{ $article->status == 'published' ? 'selected' : '' }}>Published</option>
-                                    <option value="unpublished" {{ $article->status == 'unpublished' ? 'selected' : '' }}>Unpublished</option>
-                                </select>
-                                @include('Admin.layout.message.error', ['name' => 'status'])
+                                @include('Admin.layout.forms.input', ['name' => 'content' , 'type' => 'text' , 'value' => old('content')])
                             </div>
                             <div class="form-group">
                                 <label for="category_id">Category</label>
                                 <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" id="category_id">
                                     @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ $article->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @include('Admin.layout.message.error', ['name' => 'category_id'])
+                            </div>
+                            <div class="form-group">
+                                @include('Admin.layout.forms.image')
                             </div>
                         </div>
                         <div class="card-footer">
@@ -52,8 +43,9 @@
         </div>
     </div>
 </section>
-@endsection
 
+
+@endsection
 
 @push('before-scripts')
 <script src="https://cdn.tiny.cloud/1/34ri62ry2ty734gxgcsjh8jio0wq4p89amijenyz64jkp7vj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>

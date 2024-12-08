@@ -55,7 +55,7 @@
                                 </tr>
                                 <tr>
                                     <th>Status</th>
-                                    <td>{{ $article->status }}</td>
+                                    <td>{!! $article->status() !!}</td>
                                 </tr>
                                 <tr>
                                     <th>Views</th>

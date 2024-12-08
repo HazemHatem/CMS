@@ -25,7 +25,7 @@
                                 @foreach($rules as $rule)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $rule->name }}</td>
+                                    <td>{!! $rule->rule() !!}</td>
                                     <td>
                                         @include('Admin.layout.actions.show' , ['route' => 'Admin.rule.show' , 'id' => $rule->id])
                                         @include('Admin.layout.actions.edit' , ['route' => 'Admin.rule.edit' , 'id' => $rule->id])

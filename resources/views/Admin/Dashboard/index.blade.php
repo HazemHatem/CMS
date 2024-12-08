@@ -96,7 +96,7 @@
                                             <td>{{ $article->title }}</td>
                                             <td><a href="{{route('Admin.category.show', $article->category->id)}}">{{ $article->category->name }}</a></td>
                                             <td><a href="{{route('Admin.author.show', $article->author->id)}}">{{ $article->author->name }}</a></td>
-                                            <td>{{ $article->status }}</td>
+                                            <td>{!! $article->status() !!}</td>
                                             <td>
                                                 @include('Admin.layout.actions.show' , ['route' => 'Admin.article.show' , 'id' => $article->id])
                                                 @include('Admin.layout.actions.edit' , ['route' => 'Admin.article.edit' , 'id' => $article->id])
@@ -142,7 +142,7 @@
                                             <td>{{ $article->title }}</td>
                                             <td><a href="{{route('Admin.category.show', $article->category->id)}}">{{ $article->category->name }}</a></td>
                                             <td><a href="{{route('Admin.author.show', $article->author->id)}}">{{ $article->author->name }}</a></td>
-                                            <td>{{ $article->status }}</td>
+                                            <td>{!! $article->status() !!}</td>
                                             <td>
                                                 @include('Admin.layout.actions.show' , ['route' => 'Admin.article.show' , 'id' => $article->id])
                                                 @include('Admin.layout.actions.edit' , ['route' => 'Admin.article.edit' , 'id' => $article->id])

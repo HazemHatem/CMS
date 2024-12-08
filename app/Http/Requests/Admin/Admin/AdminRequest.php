@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Admin;
 
+use App\Models\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminRequest extends FormRequest
@@ -27,6 +28,7 @@ class AdminRequest extends FormRequest
             'email' => 'required|email|unique:users,email,' . $userId,
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'phone' => 'required|numeric|digits_between:10,15|unique:users,phone,' . $userId,
+            // 'phone' => ['required', 'numeric', 'digits_between:10,15', Rule::unique('users')->ignore($userId)],
             'rule_id' => 'required|exists:rules,id',
             'description' => 'required|string|min:15',
         ];
