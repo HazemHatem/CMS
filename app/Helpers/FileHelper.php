@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class FileHelper
 {

@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\Admin\AdminController;
 use App\Http\Controllers\Site\Auth\LoginController;
 use App\Http\Controllers\Site\Auth\RegisterController;
 use App\Http\Controllers\site\Home\HomeController;
-use App\Http\Controllers\test;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Contact\ContactController;
 use App\Http\Controllers\Site\Article\ArticleController;
@@ -50,7 +49,6 @@ Route::prefix('CMS')->group(function () {
         Route::patch('/profile/{profile}/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
         Route::resource('/wishlist', WishlistController::class);
     });
-    Route::resource('/tttt', test::class);
 });
 
 Route::prefix('Author')->as('Author.')->group(function () {
